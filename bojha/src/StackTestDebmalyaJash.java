@@ -1,3 +1,6 @@
+/*
+ * This is not the ideal solution.
+ */
 public class StackTestDebmalyaJash {
 	public static void main(String... s) throws Exception {
 		
