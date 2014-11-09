@@ -1,5 +1,6 @@
 /*
  * This is not the ideal solution.
+ * GetElement from Stack implementation.
  */
 public class StackTestDebmalyaJash {
 	public static void main(String... s) throws Exception {
