@@ -13,7 +13,8 @@ public class NamingConvention {
 			if (ch == '_') {
 				if (i < len - 1) {
 					ch = variableName.charAt(i + 1);
-					ch = (char) (ch + 26);
+					ch = Character.toUpperCase(ch);
+					i++;
 				}
 			}
 			camelCase.append(ch);
