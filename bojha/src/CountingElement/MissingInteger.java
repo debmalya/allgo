@@ -17,28 +17,34 @@ public class MissingInteger {
 			int size = A.length;
 			if (size > 0) {
 				for (int i = 0; i < size; i++) {
-					uniqueSortedSet.add(A[i]);
+					if (A[i] > 0) {
+						uniqueSortedSet.add(A[i]);
+					}
 				}
 
 				Iterator<Integer> uniqueIterator = uniqueSortedSet.iterator();
 				Integer previous = null;
 				Integer minimum = null;
 				Integer current = null;
-				
+
 				while (uniqueIterator.hasNext()) {
-				   current = uniqueIterator.next();
+					current = uniqueIterator.next();
 					if (minimum == null) {
 						minimum = current - 1;
 					}
-					if (previous != null && Math.abs(((long)current - (long)previous)) > 1) {
-						if (previous + 1 < 0) {
+					if (previous != null
+							&& Math.abs(((long) current - (long) previous)) > 1) {
+						if (previous + 1 < 0 || previous == Integer.MAX_VALUE) {
 							previous = 0;
 						}
 						return previous + 1;
 					}
 					previous = current;
 				}
-				if (current < 0) {
+				if (current == null) {
+					current = 0;
+				}
+				if  (current < 0 || current == Integer.MAX_VALUE){
 					current = 0;
 				}
 				return current + 1;
