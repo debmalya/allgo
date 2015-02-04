@@ -42,7 +42,7 @@ public class TapeEquilibrium {
 			int size = A.length;
 			for (int i = 0; i < size; i++) {
 				if (i > 0) {
-					A[i] = A[i - 1] + A[i];
+					A[i] = Math.abs(A[i - 1]) + Math.abs(A[i]);
 				}
 			}
 
