@@ -85,6 +85,7 @@ class Permutation {
 			
 			used[i]=false;
 			out.setLength(out.length()-1);
+//			out.delete(0,out.length()-1);
 			
 		}
 	}

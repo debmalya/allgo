@@ -16,6 +16,15 @@ public class PermCheckTest {
 				
 		r = perm.solution(new int[]{4, 1, 3, 2});
 		Assert.assertTrue( r + " KO",r == 1);
+		
+		r = perm.solution(new int[]{4, 3, 1});
+		Assert.assertTrue( r + " KO",r == 0);
+		
+		r = perm.solution(new int[]{1, 1000000000});
+		Assert.assertTrue( r + " KO",r == 0);
+		
+		r = perm.solution(new int[]{1, });
+		Assert.assertTrue( r + " KO",r == 0);
 	}
 
 }
