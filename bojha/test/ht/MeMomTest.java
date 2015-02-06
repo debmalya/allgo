@@ -83,7 +83,7 @@ public class MeMomTest {
                 Assert.assertEquals("2 1 4", seatingArrangement);
                 Assert.assertTrue("2 1 4".equals(seatingArrangement));
                 
-                bus = me.new Bus(new String[]{"20000 5","2","3","1 3 5"});
+                bus = me.new Bus(new String[]{"20000 5","2","3","1 2 3"});
                 bus.process();
 		Assert.assertNotNull(bus);
 //                bus.printOccupancy();
