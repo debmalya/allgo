@@ -5,8 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
-import junit.framework.Assert;
-
+import org.junit.Assert;
 import org.junit.Test;
 
 
@@ -26,7 +25,6 @@ public class TimeZoneUtilsTest
     Date kolkataDate = validateDateTime (kolkataTime);
     
     Assert.assertTrue (melbourneDate.after (kolkataDate));
-    System.out.println ("myDate :" + myDate + " melbourne time " + melbourneTime+" kolkata time "+ kolkataTime);
     
   }
 
