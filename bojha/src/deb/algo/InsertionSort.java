@@ -8,9 +8,11 @@ public class InsertionSort
     for (int i = 1; i < values.length; i++)
     {
 
-      for (int j = i; j > 0; j--)
+     
+     
+      for ( int j = i; j > 0; j--)
       {
-
+        
         if (values[j - 1].compareTo (values[j]) > 0)
         {
 
@@ -20,6 +22,7 @@ public class InsertionSort
 
         }
       }
+    
     }
     return values;
   }
