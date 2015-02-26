@@ -10,6 +10,8 @@ public class MovingNQueens
 
   public String[] rearrange(int[] queenRows, int[] queenCols) {
     String[] results = new String[queenRows.length*8];
+    
+    boolean[] rowOccupancy = new boolean[queenRows.length*8];
     return results;
   }
   
