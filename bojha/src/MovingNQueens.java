@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -123,6 +124,13 @@ public class MovingNQueens {
 		System.err.println("moving index :" + movingIndex);
 
 		// now arrange queens which needs to be moved.
+		for (int i = 0; i < movingIndex.size(); i++) {
+			int row = queenRows[i];
+			int col = queenCols[i];
+			// get all the cols for this row
+			
+
+		}
 
 		return results.toArray(new String[0]);
 	}
