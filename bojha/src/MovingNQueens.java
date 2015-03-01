@@ -1,7 +1,50 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.SortedSet;
+import java.util.TreeSet;
+
 public class MovingNQueens {
 
 	public MovingNQueens() {
-		// TODO Auto-generated constructor stub
+		Scanner scanner = null;
+		System.err.println("Hello Deb");
+		try  {
+			scanner = new Scanner(System.in);
+            int noOfQueens = scanner.nextInt();
+            
+            int[] queenRows = new int[noOfQueens];            
+            
+            for (int i = 0; i < noOfQueens; i++) {
+            	queenRows[i] =  scanner.nextInt();
+            }
+            
+            noOfQueens = scanner.nextInt();
+            int[] queenCols = new int[noOfQueens];
+            
+            for (int i = 0; i < noOfQueens; i++) {
+            	queenCols[i] =  scanner.nextInt();
+            }
+            
+            String[] ret = rearrange(queenRows, queenCols);
+            
+            System.out.println(ret.length);
+            
+            for (int i = 0; i < ret.length; i++) {
+            	System.out.println(ret[i]);
+            }
+            
+           System.out.flush();
+            
+        } catch (Throwable th) {
+            System.err.println("ERR :" + th.getMessage());
+        } finally {
+        	if (scanner != null) {
+        		scanner.close();
+        	}
+        }
 	}
 
 	/**
@@ -25,11 +68,31 @@ public class MovingNQueens {
 	 *  Time limit is 10 seconds       
 	 * 
 	 */
-	public String[] rearrange(int[] queenRows, int[] queenCols) {
-		String[] results = new String[queenRows.length * 8];
-
-		boolean[] rowOccupancy = new boolean[queenRows.length * 8];
-		return results;
+	public static String[] rearrange(int[] queenRows, int[] queenCols) {
+		
+		
+		System.err.println("queenRows :" + queenRows.length+ " queenCols :" + queenCols.length);
+		
+		int noOfQueens = queenRows.length;
+		
+		Map<Integer,List<Integer>> rowMap = new HashMap<Integer,List<Integer>>();
+		
+		List<String> results = new ArrayList<String>(noOfQueens);		
+		SortedSet<Integer> queenPositions = new TreeSet<Integer>();
+		
+		for (int i = 0; i < noOfQueens; i++) {
+			List<Integer> colOccupiedInTheRow = rowMap.get(queenRows[i]);
+			
+			if (colOccupiedInTheRow==null) {
+				colOccupiedInTheRow = new ArrayList<Integer>();
+			}
+			colOccupiedInTheRow.add(queenCols[i]);
+			rowMap.put(queenRows[i], colOccupiedInTheRow);	
+		
+		}
+		System.err.println(rowMap);
+		
+		return results.toArray(new String[0]);
 	}
 
 	/**
