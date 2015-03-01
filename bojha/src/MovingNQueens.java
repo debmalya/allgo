@@ -1,13 +1,10 @@
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
 
 public class MovingNQueens {
 
@@ -82,6 +79,7 @@ public class MovingNQueens {
 		Map<Integer, List<Integer>> colMap = new HashMap<Integer, List<Integer>>();
 
 		List<String> results = new ArrayList<String>(noOfQueens);
+		Set<Integer> movingIndex = new HashSet<Integer>(noOfQueens);
 		// SortedSet<Integer> queenPositions = new TreeSet<Integer>();
 		int preferred_row = -1;
 		int preferred_col = -1;
@@ -98,28 +96,33 @@ public class MovingNQueens {
 				rowOccupiedInTheCol = new ArrayList<Integer>();
 			}
 
-			rowOccupiedInTheCol.add(queenRows[i]);
-			colOccupiedInTheRow.add(queenCols[i]);
+			// check whether multiple queens in the row.
+			int row = queenRows[i];
+			int col = queenCols[i];
+			if (colOccupiedInTheRow.size() > 0) {
+				// need to move this queen.
+				movingIndex.add(i);
+
+			}
+
+			if (rowOccupiedInTheCol.size() > 0) {
+				// need to move this queen
+				movingIndex.add(i);
+
+			}
+
+			rowOccupiedInTheCol.add(row);
+			colOccupiedInTheRow.add(col);
 
 			rowMap.put(queenRows[i], colOccupiedInTheRow);
 			colMap.put(queenCols[i], rowOccupiedInTheCol);
 
 		}
-		System.err.println(rowMap);
+		System.err.println("rowMap :" + rowMap);
+		System.err.println("colMap :" + colMap);
+		System.err.println("moving index :" + movingIndex);
 
-		if (!rowMap.isEmpty()) {
-			Set<Entry<Integer, List<Integer>>> rowSet = rowMap.entrySet();
-			Iterator<Entry<Integer, List<Integer>>> rowSetIterator = rowSet
-					.iterator();
-
-			while (rowSetIterator.hasNext()) {
-				Entry<Integer, List<Integer>> nextEntry = rowSetIterator.next();
-				if (nextEntry.getValue().size() > 1) {
-
-				}
-			}
-
-		}
+		// now arrange queens which needs to be moved.
 
 		return results.toArray(new String[0]);
 	}
