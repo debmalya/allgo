@@ -10,42 +10,7 @@ import java.util.Set;
 public class MovingNQueens {
 
 	public MovingNQueens() {
-		Scanner scanner = null;
-		System.err.println("Hello Deb");
-		try {
-			scanner = new Scanner(System.in);
-			int noOfQueens = scanner.nextInt();
-
-			int[] queenRows = new int[noOfQueens];
-
-			for (int i = 0; i < noOfQueens; i++) {
-				queenRows[i] = scanner.nextInt();
-			}
-
-			noOfQueens = scanner.nextInt();
-			int[] queenCols = new int[noOfQueens];
-
-			for (int i = 0; i < noOfQueens; i++) {
-				queenCols[i] = scanner.nextInt();
-			}
-
-			String[] ret = rearrange(queenRows, queenCols);
-
-			System.out.println(ret.length);
-
-			for (int i = 0; i < ret.length; i++) {
-				System.out.println(ret[i]);
-			}
-
-			System.out.flush();
-
-		} catch (Throwable th) {
-			System.err.println("ERR :" + th.getMessage());
-		} finally {
-			if (scanner != null) {
-				scanner.close();
-			}
-		}
+		
 	}
 
 	/**
@@ -139,7 +104,42 @@ public class MovingNQueens {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	  Scanner scanner = null;
+      System.err.println("Hello Deb");
+      try {
+          scanner = new Scanner(System.in);
+          int noOfQueens = scanner.nextInt();
+
+          int[] queenRows = new int[noOfQueens];
+
+          for (int i = 0; i < noOfQueens; i++) {
+              queenRows[i] = scanner.nextInt();
+          }
+
+          noOfQueens = scanner.nextInt();
+          int[] queenCols = new int[noOfQueens];
+
+          for (int i = 0; i < noOfQueens; i++) {
+              queenCols[i] = scanner.nextInt();
+          }
+
+          String[] ret = rearrange(queenRows, queenCols);
+
+          System.out.println(ret.length);
+
+          for (int i = 0; i < ret.length; i++) {
+              System.out.println(ret[i]);
+          }
+
+          System.out.flush();
+
+      } catch (Throwable th) {
+          System.err.println("ERR :" + th.getMessage());
+      } finally {
+          if (scanner != null) {
+              scanner.close();
+          }
+      }
 
 	}
 

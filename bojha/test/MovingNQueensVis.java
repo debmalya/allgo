@@ -209,7 +209,7 @@ public class MovingNQueensVis {
     BufferedReader br;
     // ----------------------------------------------------------------------------------
     String[] rearrange(int[] queenRows, int[] queenCols) throws IOException {
-    	/*
+    	
         int i,j;
         String[] ret = new String[0];
         if (exec != null)
@@ -229,8 +229,8 @@ public class MovingNQueensVis {
             for (i = 0; i < Nret; ++i)
                 ret[i] = br.readLine();
         }
-        */
-    	String[] ret = MovingNQueens.rearrange(queenRows, queenCols);
+        
+//    	String[] ret = MovingNQueens.rearrange(queenRows, queenCols);
         return ret;
     }
     // ----------------------------------------------------------------------------------
