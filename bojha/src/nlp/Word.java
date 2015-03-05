@@ -1,9 +1,12 @@
 package nlp;
 
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.List;
 
 public class Word {
 	int totalCount;
-	Map<Integer,Integer> positionMap = new TreeMap<Integer,Integer>();
+	/**
+	 * This will have position in the sentence / length of the sentence.
+	 * Normally entities are either first part or in last part of the sentence.
+	 */
+	List<Float> positionList;
 }
