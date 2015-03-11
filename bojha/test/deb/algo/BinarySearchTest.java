@@ -12,6 +12,7 @@ public class BinarySearchTest {
 		BinarySearch search = new BinarySearch();
 		Assert.assertFalse(search.isExists(values, 79, 0, values.length - 1));
 		Assert.assertTrue(search.isExists(values, 10, 0, values.length - 1));
+		Assert.assertTrue(search.isExists(values, 80, 0, values.length - 1));
 	}
 
 }
