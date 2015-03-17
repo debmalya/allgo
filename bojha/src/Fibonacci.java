@@ -1,35 +1,49 @@
-public class Fibonacci {
-	public int[] getFibonacci(int n) {
-		if ( n < 0) {
-			throw new IllegalArgumentException("parameter can not be less than 0, Passed parameter is " + n);
-		}
-		// An array of size n.
-		int[] values = null;
-		
-			values = new int[n];
-			for (int i = 0; i < n; i++) {
-				values[i] = fibonacci(i);
-			}
-		
+/**
+ Write a function that takes a number n and returns an array containing a Fibonacci sequence of length n. 
+ If there are multiple ways to do something prefer the simpler way. 
+ Here is more information on Fibonacci sequences including the formula: http://en.wikipedia.org/wiki/Fibonacci_number
+ */
+import java.math.BigInteger;
 
-		return values;
-	}
+public class Fibonacci
+{
 
-	/**
-	 * 
-	 * @param n
-	 *            - term number.
-	 * @return fibonacci value for nth term.
-	 */
-	public int fibonacci(int n) {
-		if (n < 0) {
-			return (int) Math.pow(-1, (n + 1)) * fibonacci(Math.abs(n));
-		} else if (n == 1 || n == 2) {
-			return 1;
-		} else if (n == 0) {
-			return 0;
-		}
-		return fibonacci(n - 1) + fibonacci(n - 2);
+  /**
+   * @param n
+   *          - number of fibonacci numbers like to get.
+   * @return n number of fibonacci numbers. e.g. if value of n = 3 it will
+   *         return an array of values 0,1,1 if value of n = 4 it will return an
+   *         array of values 0,1,1,2 if value of n = 5 it will return an array
+   *         of values 0,1,1,2,3
+   */
+  public BigInteger[] getFibonacci (int n)
+  {
+    // Create an array of size n.
+    BigInteger[] values = null;
+    if (n >= 0)
+    {
+      // array size can not be negative.
+      values = new BigInteger[n];
+      for (int i = 0; i < n; i++)
+      {
+        if (i == 1 || i == 2)
+        {
+          values[i] = BigInteger.ONE;
+        }
+        else
+          if (i == 0)
+          {
+            values[i] = BigInteger.ZERO;
+          }
+          else
+          {
+            values[i] = values[i - 1].add (values[i - 2]);
+          }
+      }
+    }
+    return values;
+  }
 
-	}
+
+
 }
