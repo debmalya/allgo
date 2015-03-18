@@ -72,4 +72,12 @@ public class StringUtilityTest
     assertFalse(utility.isAnagram ("listen", "silena"));
   }
   
+  @Test
+  public void testPalindromic() {
+    StringUtility utility = new StringUtility ();
+    assertTrue(utility.isPalindrom ("madam"));
+    assertTrue(utility.isPalindrom ("900009"));
+    assertFalse(utility.isPalindrom ("910009"));
+  }
+  
 }
