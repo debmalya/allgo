@@ -34,32 +34,17 @@ public class MathUtil
 
   public static long gcd (long a, long b)
   {
-    if (b == 0)
-    {
-      return a;
-    }
-    else
-      if (a == 0)
-      {
-        return b;
-      }
-      else
-        if (a > b)
-        {
-          if (a % b == 0)
-          {
-            return b;
-          }
-          return gcd (a, a % b);
-        }
-        else
-        {
-          if (b % a == 0)
-          {
-            return a;
-          }
-          return gcd (b % a, b);
-        }
+	  long max = Math.max(a, b);
+		if (a == 0 || b == 0 || a == b) {
+			return max;
+		}  else {			
+			long min = Math.min(a, b);
+			if (max % min == 0) {
+				return min;
+			}
+			
+			return gcd(max,max % min);
+		}
   }
   
   public int getNumberOfFipsRequired(int number1,int number2) {
