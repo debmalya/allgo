@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 public class Company
 {
@@ -53,24 +54,26 @@ public class Company
 
 
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString ()
     {
-      StringBuilder aboutMe = new StringBuilder();
+      StringBuilder aboutMe = new StringBuilder ();
       aboutMe.append ("id :");
       aboutMe.append (id);
-      aboutMe.append(" name :");
-      aboutMe.append(name);
-      aboutMe.append(" Reports :");
-      aboutMe.append(reports);
-      
+      aboutMe.append (" name :");
+      aboutMe.append (name);
+      aboutMe.append (" Reports :");
+      aboutMe.append (reports);
+
       return aboutMe.toString ();
     }
-    
-    
+
+
   }
 
 
@@ -124,7 +127,7 @@ public class Company
    */
   private static Employee getCommonBoss (Employee ceo, Employee firstEmployee, Employee secondEmployee)
   {
-    
+
     Employee firstEmployeeBoss = getBoss (ceo, firstEmployee);
     Employee secondEmployeeBoss = getBoss (ceo, secondEmployee);
 
@@ -202,7 +205,7 @@ public class Company
     Employee peter = new Company.Employee (4, "Peter");
     peter.addReport (milton);
     peter.addReport (nina);
-    
+
 
     Employee bob = new Company.Employee (5, "Bob");
 
@@ -225,18 +228,43 @@ public class Company
     manager = Company.closestCommonManager (ceo, nina, porter);
     // dom
     assert (manager.getName ().equals ("Dom"));
-    System.out.println (dom);
+
 
     manager = Company.closestCommonManager (ceo, nina, samir);
     // bill
     assert (manager.getName ().equals ("Bill"));
-    System.out.println (ceo);
+    // System.out.println (ceo);
 
     manager = Company.closestCommonManager (ceo, peter, nina);
     // Peter
     assert (manager.getName ().equals ("Peter"));
 
-    System.out.println ("Game Over");
+    printHierarchy (ceo);
+//    printHierarchy (dom);
+//    printHierarchy (samir);
+//    printHierarchy (michael);
+    System.out.println ("\nGame Over");
+
+  }
+
+
+
+  private static void printHierarchy (Employee ceo)
+  {
+    List<Employee> reportList = ceo.getReports ();
+    Stack<Employee> employeeStack = new Stack<Employee> ();
+    if (reportList.size () > 0)
+    {
+      System.out.println ("\n"+ ceo.getName () + " manager of ");
+      for (int i = 0; i < reportList.size (); i++)
+      {
+        System.out.print (reportList.get (i).name + "\t");
+        employeeStack.push (reportList.get (i));
+      }
+      while (!employeeStack.empty ()) {
+        printHierarchy(employeeStack.pop ());
+      }
+    }
 
   }
 
