@@ -1,6 +1,6 @@
 import static org.junit.Assert.assertEquals;
-import junit.framework.Assert;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 
@@ -21,7 +21,7 @@ public class MathUtilTest
   }
 
 
-
+  
   @Test
   public void testLcd ()
   {
@@ -51,5 +51,6 @@ public class MathUtilTest
       Assert.assertTrue(value + " should be divisible by " + i , value % i == 0);
     }
   }
+  
 
 }
