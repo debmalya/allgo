@@ -1,32 +1,26 @@
+import java.math.BigInteger;
 import java.util.Scanner;
+import java.util.Stack;
 
 public class ZeroOne {
+	
+	private static BigInteger divisor = new BigInteger("2");
 
 	public static void main(String[] args) {
 		Scanner scanner = null;
 		try {
 			scanner = new Scanner(System.in);
-			int n = scanner.nextInt();
+			String num = scanner.nextLine();
 			
-			String str = Long.toBinaryString(n);
-			long value = Long.valueOf(str);
-			if (value % n == 0) {
-				System.out.println(value);
-				System.exit(0);
-			}
+			BigInteger input = new BigInteger(num);
+			long value = Long.parseLong(toBinaryString(input));
+			long originalNum = value;
 			
-			long original = n;
-			while (true) {								
-				
-				original++;
-				str = Long.toBinaryString(original);
-				value = Long.valueOf(str);
-				if (value % n == 0) {
-					System.out.println(value);
-					break;
-				}
-
+			while (value % originalNum != 0) {
+				input = input.add(BigInteger.ONE);
+				value = Long.parseLong(toBinaryString(input));				
 			}
+			System.out.println(value);
 		} catch (Exception exc) {
 			exc.printStackTrace();
 		} finally {
@@ -36,5 +30,28 @@ public class ZeroOne {
 		}
 
 	}
+	
+
+	 /**
+	   * Convert to a binary string.
+	   * @param num
+	   * @return binary string.
+	   */
+	  private static String toBinaryString(BigInteger num) {
+		  Stack<Integer> values = new Stack<Integer>();
+		  
+		  
+		  while (num.compareTo(BigInteger.ONE) > 0) {
+			  values.add(num.mod(divisor).intValue());
+			  num = num.divide(divisor);
+		  }
+		  values.add(num.intValue());
+		  
+		  StringBuilder returnValue = new StringBuilder();
+		  while (!values.isEmpty()) {
+			  returnValue.append(values.pop());
+		  }
+		  return returnValue.toString();
+	  }
 
 }
