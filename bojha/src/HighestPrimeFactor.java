@@ -67,9 +67,9 @@ public class HighestPrimeFactor {
 			while (eachValue > 1) {
 				while (eachValue % divisor == 0) {
 					eachValue /= divisor;
-//					if (uniqueSet.add(divisor)) {
+					if (uniqueSet.add(divisor)) {
 						result *= divisor;
-//					}
+					}
 				}
 				if (eachValue > 1) {
 					divisor += 1;

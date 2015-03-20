@@ -1,3 +1,5 @@
+import java.util.Stack;
+
 
 public class MathUtil
 {
@@ -56,5 +58,63 @@ public class MathUtil
       }
     }
     return count;
+  }
+  
+  public long getHighestPalindrome(int numLength) {
+	  long result = 1L;
+	  long number = 0L;
+	  int count = 0;
+	  
+	  while (count < numLength) {
+		  number *=10;
+		  number += 9;
+		  count++;
+	  }
+	  
+	  long multiplier = number;
+	  while (true) {
+		  result = multiplier*number;
+		  if (isPalindrom(String.valueOf(result))) {
+			  break;
+		  }
+		  number--;
+	  }
+	  
+	  return result;
+  }
+  
+  /**
+   * To check whether the string is palindromic  or not.
+   * 
+   * @param str to be checked.
+   * @return true if palindrom, false otherwise.
+   */
+  public boolean isPalindrom(String str) {
+    int len = str.length ();
+    for (int i = 0; i < len /2 ; i++)
+      if (str.charAt (i)!= str.charAt (len -i -1)) {
+        return false;
+      }
+    return true;
+  }
+  /**
+   * Convert to a binary string.
+   * @param num
+   * @return
+   */
+  public String toBinaryString(long num) {
+	  Stack<Long> values = new Stack<Long>();
+	  
+	  while (num > 1) {
+		  values.add(num % 2);
+		  num /= 2;
+	  }
+	  values.add(num);
+	  
+	  StringBuilder returnValue = new StringBuilder();
+	  while (!values.isEmpty()) {
+		  returnValue.append(values.pop());
+	  }
+	  return returnValue.toString();
   }
 } 

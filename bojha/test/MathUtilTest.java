@@ -34,22 +34,18 @@ public class MathUtilTest
 
 
 
+
+  
   @Test
-  public void testGetSmallest ()
-  {
-    long value = MathUtil.getSmallestMultiple (10);
-
-    for (int i = 2; i < 11; i++)
-    {
-      Assert.assertTrue(value + " should be divisible by " + i , value % i == 0);
-    }
-    
-    value = MathUtil.getSmallestMultiple (20);
-
-    for (int i = 2; i < 21; i++)
-    {
-      Assert.assertTrue(value + " should be divisible by " + i , value % i == 0);
-    }
+  public void testGetBinary() {
+	  MathUtil util = new MathUtil();
+	  Assert.assertTrue("1".equals(util.toBinaryString(1)));
+	  Assert.assertTrue("10".equals(util.toBinaryString(2)));
+	  Assert.assertTrue("11".equals(util.toBinaryString(3)));
+	  Assert.assertTrue("100".equals(util.toBinaryString(4)));
+	  Assert.assertTrue("101".equals(util.toBinaryString(5)));
+	  Assert.assertTrue("110".equals(util.toBinaryString(6)));
+	  Assert.assertTrue("111".equals(util.toBinaryString(7)));
   }
   
 
