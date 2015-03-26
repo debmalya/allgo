@@ -57,7 +57,8 @@ public class MathUtil {
 	 * 
 	 * Find the largest palindrome made from the product of two 3-digit numbers.
 	 * 
-	 * @param numLength - digits in the multiplier (2,3,....)
+	 * @param numLength
+	 *            - digits in the multiplier (2,3,....)
 	 * @return highest palindrome
 	 */
 	public long getHighestPalindrome(int numLength) {
@@ -70,25 +71,24 @@ public class MathUtil {
 			number *= 10;
 			number += 9;
 			count++;
-			
-			
+
 		}
-		lowerLimit = (int)(number / 10) + 1;
-//		System.out.println(" number " + number+" lowerLimit " + lowerLimit);
+		lowerLimit = (int) (number / 10) + 1;
+		// System.out.println(" number " + number+" lowerLimit " + lowerLimit);
 		long multiplier = number;
 		while (true) {
 			result = multiplier * number;
 			if (isPalindrom(String.valueOf(result))) {
-				System.out.println(number+ " X " + multiplier);
+				System.out.println(number + " X " + multiplier);
 				break;
 			}
-			
+
 			number--;
 			if (number < lowerLimit) {
-				number = --multiplier;	
-				System.out.println(number+ " Y " + multiplier);
+				number = --multiplier;
+				System.out.println(number + " Y " + multiplier);
 			}
-			
+
 		}
 
 		return result;
@@ -130,5 +130,17 @@ public class MathUtil {
 			returnValue.append(values.pop());
 		}
 		return returnValue.toString();
+	}
+
+	/**
+	 * By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can
+	 * see that the 6th prime is 13.
+	 * 
+	 * What is the 10 001st prime number?
+	 * @param primeCount 
+	 */
+	public long getPrime(int primeCount) {
+		long prime = 2L;
+		return prime;
 	}
 }
