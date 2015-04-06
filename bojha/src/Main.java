@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Write a program implementing event handlers associated with operations executed on stacks and queues. 
+ * Every line in the input is a distinct command. Every command informs about a type of operation and about index (from range 0..9) of stack or queue on which the operation should be executed. Each stack and queue may contain at most 10 elements (which are numbers from range 0..1000).
+ * At the beginning no stacks or queues are present.
  */
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -12,10 +12,12 @@ import java.util.Stack;
 import java.util.concurrent.ArrayBlockingQueue;
 
 /**
- *
+ * 
  * @author debmalya jash
  */
 public class Main {
+
+	private static final String BLANK = "";
 
 	/**
 	 * Error message for empty queue and pop command is executed.
@@ -81,6 +83,7 @@ public class Main {
 	 * Delete stack and all of its contents.
 	 */
 	private static final String DELETE_STACK = "delete_s";
+
 	/**
 	 * Pop in the stack.
 	 */
@@ -134,37 +137,47 @@ public class Main {
 	private static Scanner scanner = new Scanner(System.in);
 
 	public static void main(String... args) {
+		List<String> results = new ArrayList<>();
+		String result = "";
 
-		while (true) {
-			try {
-//				scanner = new Scanner(System.in);
-				String command = scanner.nextLine();
-				String result = executeCommand(command);
-				if (!"".equals(result)) {
-					System.out.println(result);
+		// take all inputs.
+		String command = "";
+		try {
+			while (scanner.hasNextLine()) {
+				command = scanner.nextLine();
+				if (command != null && !BLANK.equals(command)) {
+					result = executeCommand(command);
+					if (!BLANK.equals(result)) {
+						results.add(result);
+					}
+				} else {
+					break;
 				}
-
-			} catch (Throwable th) {
-//				th.printStackTrace();
-				System.out.println(ERROR_WRONG_COMMAND);
-			} finally {
-//				if (scanner != null) {
-//					scanner.close();
-//					scanner = null;
-//				}
 			}
 
+			for (int i = 0; i < results.size(); i++) {
+				System.out.println(results.get(i));
+			}
+		} catch (Throwable th) {
+			System.out.println(ERROR_WRONG_COMMAND);
+		} finally {
+			if (scanner != null) {
+				scanner.close();
+			}
 		}
 	}
 
-    /**
+	/**
 	 * This will execute command and return result.
-	 * @param command to be executed.
+	 * 
+	 * @param command
+	 *            to be executed.
 	 * @return execution result.
 	 */
-	public static String executeCommand(String command) throws NumberFormatException{
+	public static String executeCommand(String command)
+			throws NumberFormatException {
 		String[] eachOptions = command.split(" ");
-		String result = "";
+		String result = BLANK;
 		if (null != eachOptions[0]) // new_s
 
 			switch (eachOptions[0]) {
@@ -241,7 +254,7 @@ public class Main {
 					&& stacks[stackIndex] != null
 					&& stacks[stackIndex].size() < MAX_NUMBER_OF_ELEMENT) {
 				stacks[stackIndex].push(queues[queueIndex].remove());
-				return "";
+				return BLANK;
 			} else {
 				return notInitialized();
 			}
@@ -274,7 +287,7 @@ public class Main {
 					&& queues[destinationQueueIndex].size() < MAX_NUMBER_OF_ELEMENT) {
 				queues[destinationQueueIndex].add(queues[sourceQueueIndex]
 						.remove());
-				return "";
+				return BLANK;
 			} else {
 				return notInitialized();
 			}
@@ -303,12 +316,11 @@ public class Main {
 		int queueIndex = Integer.parseInt(eachOptions[2]);
 		if (stackIndex > -1 && stackIndex < 10 && queueIndex > -1
 				&& queueIndex < 10) {
-			if (stacks[stackIndex] != null
-					&& !stacks[stackIndex].isEmpty()) {
+			if (stacks[stackIndex] != null && !stacks[stackIndex].isEmpty()) {
 				if (queues[queueIndex] != null
 						&& queues[queueIndex].size() < MAX_NUMBER_OF_ELEMENT) {
 					queues[queueIndex].add(stacks[stackIndex].pop());
-					return "";
+					return BLANK;
 				} else {
 					return notInitialized();
 				}
@@ -347,7 +359,7 @@ public class Main {
 			String result = aboutMe.toString();
 			String[] all = result.split(" ");
 			aboutMe.delete(0, aboutMe.length());
-			for (int i = all.length - 1; i > -1; i--){
+			for (int i = all.length - 1; i > -1; i--) {
 				aboutMe.append(all[i]);
 				aboutMe.append(" ");
 			}
@@ -375,7 +387,7 @@ public class Main {
 		int stackIndex = Integer.parseInt(eachOptions[1]);
 		if (stackIndex > -1 && stackIndex < 10) {
 			stacks[stackIndex] = new Stack<Integer>();
-			return "";
+			return BLANK;
 		} else {
 			// Stack index is not in range 0..9
 			return invalidIndex();
@@ -401,7 +413,7 @@ public class Main {
 				return ERROR_STACK_IS_FULL;
 			} else {
 				stacks[stackIndex].push(number);
-				return "";
+				return BLANK;
 			}
 		} else {
 			return notInitialized();
@@ -425,7 +437,7 @@ public class Main {
 				return ERROR_STACK_IS_EMPTY;
 			} else {
 				stacks[stackIndex].pop();
-				return "";
+				return BLANK;
 			}
 		} else {
 			return notInitialized();
@@ -444,7 +456,7 @@ public class Main {
 		if (stacks[stackIndex] != null) {
 			stacks[stackIndex].clear();
 			stacks[stackIndex] = null;
-			return "";
+			return BLANK;
 		} else {
 			return notInitialized();
 		}
@@ -503,7 +515,7 @@ public class Main {
 
 			}
 			stacks[destinationStack].push(stacks[sourceStack].pop());
-			return "";
+			return BLANK;
 		} else {
 			return ERROR_WRONG_COMMAND;
 		}
@@ -522,7 +534,7 @@ public class Main {
 		if (queueIndex > -1 && queueIndex < 10) {
 			queues[queueIndex] = new ArrayBlockingQueue<Integer>(
 					MAX_NUMBER_OF_ELEMENT);
-			return "";
+			return BLANK;
 		} else {
 			return invalidIndex();
 		}
@@ -533,7 +545,7 @@ public class Main {
 	 * 
 	 * @param eachOptions
 	 *            command with all options
-	 *
+	 * 
 	 * @throws NumberFormatException
 	 */
 	private static String enqueue(String[] eachOptions)
@@ -546,7 +558,7 @@ public class Main {
 					return ERROR_QUEUE_IS_FULL;
 				} else {
 					queues[queueIndex].offer(number);
-					return "";
+					return BLANK;
 				}
 			} else {
 				return notInitialized();
@@ -571,7 +583,7 @@ public class Main {
 					return ERROR_QUEUE_IS_EMPTY;
 				} else {
 					queues[queueIndex].poll();
-					return "";
+					return BLANK;
 				}
 			} else {
 				return notInitialized();
@@ -594,7 +606,7 @@ public class Main {
 		if (queueIndex > -1 && queueIndex < 10) {
 			queues[queueIndex].clear();
 			queues[queueIndex] = null;
-			return "";
+			return BLANK;
 		} else {
 			return invalidIndex();
 		}
@@ -617,14 +629,12 @@ public class Main {
 	}
 
 	@Override
-	protected void finalize() throws Throwable {		
+	protected void finalize() throws Throwable {
 		super.finalize();
 		if (scanner != null) {
 			scanner.close();
-			
+
 		}
 	}
 
-	
 }
-
