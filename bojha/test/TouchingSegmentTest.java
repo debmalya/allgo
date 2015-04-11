@@ -12,8 +12,8 @@ public class TouchingSegmentTest {
 		Assert.assertEquals(5, result);
 		
 		result = TouchingSegment.getNumberOfLines(new String[] { "1 2",
-				"1 3", "2 3", "1 4", "1 5","10 5"  });
-		Assert.assertEquals(5, result);
+				"1 3", "2 3", "1 4", "1 5","5 10"  });
+		Assert.assertEquals(6, result);
 		
 		result = TouchingSegment.getNumberOfLines(new String[] { "1 2",
 				"1 3", "2 3", "1 4", "1 5" });

@@ -61,6 +61,7 @@ public class TouchingSegment {
 				
 			}
 		}
+		System.out.println(straightLineSet + " " + lineNo);
 		return result;
 	}
 
