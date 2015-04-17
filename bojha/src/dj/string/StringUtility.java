@@ -1,6 +1,8 @@
 package dj.string;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -282,4 +284,45 @@ public class StringUtility
 
     return ' ';
   }
+
+
+
+  /**
+   * Return first unique character of a string. If there is no duplicate
+   * character return ' '.
+   * 
+   * @p
+   */
+  public char getFristUniqueCharacter (String value)
+  {
+    if (value != null)
+    {
+      Set<Character> characters = new HashSet<Character> ();
+      List<Character> uniqueuCharacters = new ArrayList<Character> ();
+
+      for (int i = 0; i < value.length (); i++)
+      {
+        Character eachChar = value.charAt (i);
+        if (characters.add (eachChar))
+        {
+          // character first found
+          uniqueuCharacters.add (eachChar);
+        }
+        else
+        {
+          // duplicate character
+          uniqueuCharacters.remove (eachChar);
+        }
+      }
+      if (uniqueuCharacters.size () > 0)
+      {
+        return uniqueuCharacters.get (0);
+      }
+    }
+
+
+    return ' ';
+  }
+
+
 }

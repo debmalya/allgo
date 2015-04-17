@@ -1,6 +1,7 @@
 package dj.string;
 
 import static org.junit.Assert.*;
+import junit.framework.Assert;
 
 import org.junit.Test;
 
@@ -80,4 +81,24 @@ public class StringUtilityTest
     assertFalse(utility.isPalindrom ("910009"));
   }
   
+  @Test
+  public void testGetFirstDuplicateCharacter() {
+    StringUtility utility = new StringUtility ();
+    char actual = utility.getFristDuplicateCharacter ("Banana");
+    Assert.assertEquals ('a', actual);
+    
+    actual = utility.getFristDuplicateCharacter ("Raju");
+    Assert.assertEquals (' ', actual);
+  }
+  
+  
+  @Test
+  public void testGetFirstUniqueCharacter() {
+    StringUtility utility = new StringUtility ();
+    char actual = utility.getFristUniqueCharacter ("Banana");
+    Assert.assertEquals ('B', actual);
+    
+    actual = utility.getFristUniqueCharacter ("RRaajju");
+    Assert.assertEquals ('u', actual);
+  }
 }
