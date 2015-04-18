@@ -1,6 +1,8 @@
 package dj.string;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -74,7 +76,7 @@ public class StringUtility
    *          to be reversed.
    * @return reversed string.
    */
-  public String reverse (String str)
+  public String reverse0 (String str)
   {
     if (str == null)
     {
@@ -86,6 +88,35 @@ public class StringUtility
     for (int i = str.length () - 1; i > -1; i--)
     {
       reversed[str.length () - i - 1] = str.charAt (i);
+    }
+    return String.valueOf (reversed);
+  }
+
+
+
+  /**
+   * Write a code to reverse a C-Style String. (C-String means that "abcd' is
+   * represented as five characters, including null characters.
+   * 
+   * @param string
+   *          to be reversed.
+   * @return reversed string.
+   */
+  public String reverse (String str)
+  {
+    if (str == null)
+    {
+      throw new IllegalArgumentException ("Passed null string");
+    }
+
+    str = str.replace ("\n", "");
+    char[] reversed = new char[str.length ()];
+    int j = str.length () - 1;
+    for (int i = 0; i < j; i++, j--)
+    {
+      char temp = str.charAt (j);
+      reversed[j] = str.charAt (i);
+      reversed[i] = temp;
     }
     return String.valueOf (reversed);
   }
@@ -126,14 +157,14 @@ public class StringUtility
           }
         }
       }
-      if (!isDuplicate || withoutDuplicate.indexOf (String.valueOf(str.charAt (i))) == -1)
+      if (!isDuplicate || withoutDuplicate.indexOf (String.valueOf (str.charAt (i))) == -1)
       {
-        withoutDuplicate.append(str.charAt (i));
+        withoutDuplicate.append (str.charAt (i));
       }
 
 
     }
-    return withoutDuplicate.toString();
+    return withoutDuplicate.toString ();
   }
 
 
@@ -175,43 +206,125 @@ public class StringUtility
     }
     return c;
   }
-  
+
+
+
   /**
    * Write a method to decide if two strings are anagram or not.
-   * @param str first string.
-   * @param str2 second string.
+   * 
+   * @param str
+   *          first string.
+   * @param str2
+   *          second string.
    * @return true if they are anagram, false otherwise.
    */
-  public boolean isAnagram(String str,String str2) {
-    if (str.length () != str2.length ()) {
-       return false;
+  public boolean isAnagram (String str, String str2)
+  {
+    if (str.length () != str2.length ())
+    {
+      return false;
     }
-    Set<Character> characters = new HashSet<Character>(str.length ());
-    for (int i = 0; i<str.length (); i++) {
+    Set<Character> characters = new HashSet<Character> (str.length ());
+    for (int i = 0; i < str.length (); i++)
+    {
       characters.add (str.charAt (i));
     }
-    
-    for (int i = 0; i<str2.length (); i++) {
+
+    for (int i = 0; i < str2.length (); i++)
+    {
       if (characters.add (str2.charAt (i)))
         return false;
     }
     return true;
   }
 
-  
   /**
-   * To check whether the string is palindromic  or not.
+   * To check whether the string is palindromic or not.
    * 
-   * @param str to be checked.
+   * @param str
+   *          to be checked.
    * @return true if palindrom, false otherwise.
    */
-  public boolean isPalindrom(String str) {
+  public boolean isPalindrom (String str)
+  {
     int len = str.length ();
-    for (int i = 0; i < len /2 ; i++)
-      if (str.charAt (i)!= str.charAt (len -i -1)) {
+    for (int i = 0; i < len / 2; i++)
+      if (str.charAt (i) != str.charAt (len - i - 1))
+      {
         return false;
       }
     return true;
   }
+
+
+
+
+
+
+  /**
+   * Return first duplicate character of a string. If there is no duplicate
+   * character return ' '.
+   * 
+   * @p
+   */
+  public char getFristDuplicateCharacter (String value)
+  {
+    if (value != null)
+    {
+      Set<Character> characters = new HashSet<Character> ();
+
+      for (int i = 0; i < value.length (); i++)
+      {
+        char eachChar = value.charAt (i);
+        if (!characters.add (value.charAt (i)))
+        {
+          return eachChar;
+        }
+      }
+    }
+
+    return ' ';
+  }
+
+
+
+  /**
+   * Return first unique character of a string. If there is no duplicate
+   * character return ' '.
+   * 
+   * @p
+   */
+  public char getFristUniqueCharacter (String value)
+  {
+    if (value != null)
+    {
+      Set<Character> characters = new HashSet<Character> ();
+      List<Character> uniqueuCharacters = new ArrayList<Character> ();
+
+      for (int i = 0; i < value.length (); i++)
+      {
+        Character eachChar = value.charAt (i);
+        if (characters.add (eachChar))
+        {
+          // character first found
+          uniqueuCharacters.add (eachChar);
+        }
+        else
+        {
+          // duplicate character
+          uniqueuCharacters.remove (eachChar);
+        }
+      }
+      if (uniqueuCharacters.size () > 0)
+      {
+        return uniqueuCharacters.get (0);
+      }
+    }
+
+
+    return ' ';
+  }
+
+
 
 }
