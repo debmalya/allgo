@@ -30,6 +30,19 @@ public class ConfusedGorillaTest {
 			result = ConfusedGorilla.getPossibleSteps(new int[]{i});
 			Assert.assertEquals((i+1), result.size());
 		}
+		
+		result = ConfusedGorilla.getPossibleSteps(new int[]{4});
+		printResult(result);
+	}
+
+	/**
+	 * @param result
+	 */
+	private void printResult(List<String> result) {
+		for (String each:result) {
+			System.out.println(each);
+		}
+		
 	}
 
 }
