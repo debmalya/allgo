@@ -143,4 +143,53 @@ public class MathUtil {
 		long prime = 2L;
 		return prime;
 	}
+	
+	/**
+	 * 
+	 * @param value string containing numbers separated by a space
+	 * @return index where prefix sum is equal to suffix sum.
+	 * "2 3 1 6" for this it should return 2- (2+3+1) == 6
+	 * 
+	 */
+	public static int getIndex0(String value) {
+		String[] values = value.split(" ");
+		int[] intValues = new int[values.length];
+		int[] prefixSum = new int[values.length];
+		int[] suffixSum = new int[values.length];
+
+		for (int i = 0; i < values.length; i++) {
+			intValues[i] = Integer.parseInt(values[i]);
+			prefixSum[i] += intValues[i];
+			if (i < values.length - 1) {
+				prefixSum[i + 1] = prefixSum[i];
+			}
+		}
+
+		int min = values.length;
+		for (int i = values.length - 1; i > -1; i--) {
+
+			suffixSum[i] += intValues[i];
+
+			if (i > 0) {
+				if (suffixSum[i] == prefixSum[i - 1]) {
+					return i - 1;
+				} else if (prefixSum[0] == prefixSum[1]) {
+					return 0;
+				} else {
+					for (int j = 0; j < i - 1; j++) {
+						if (prefixSum[i - 1] - prefixSum[j] == suffixSum[i]) {
+							min = Math.min(min, (i - 1));
+						}
+					}
+				}
+				suffixSum[i - 1] += suffixSum[i];
+			}
+		}
+
+		if (min != values.length) {
+			return min;
+		}
+
+		return 0;
+	}
 }
