@@ -192,4 +192,17 @@ public class MathUtil {
 
 		return 0;
 	}
+	
+	/**
+	 * Returns number of inversions in the number.
+	 * 
+	 * Example 123 - it has no inversion.
+	 * 132 - here 3 > 2 it has one inversion. if a(i) > a(j) and i < j.
+	 * @param num
+	 * @return
+	 */
+	public int getNumberOfInvocations(int num) {
+		
+		return 0;
+	}
 }
