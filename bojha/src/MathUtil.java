@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 public class MathUtil {
@@ -137,18 +139,20 @@ public class MathUtil {
 	 * see that the 6th prime is 13.
 	 * 
 	 * What is the 10 001st prime number?
-	 * @param primeCount 
+	 * 
+	 * @param primeCount
 	 */
 	public long getPrime(int primeCount) {
 		long prime = 2L;
 		return prime;
 	}
-	
+
 	/**
 	 * 
-	 * @param value string containing numbers separated by a space
-	 * @return index where prefix sum is equal to suffix sum.
-	 * "2 3 1 6" for this it should return 2- (2+3+1) == 6
+	 * @param value
+	 *            string containing numbers separated by a space
+	 * @return index where prefix sum is equal to suffix sum. "2 3 1 6" for this
+	 *         it should return 2- (2+3+1) == 6
 	 * 
 	 */
 	public static int getIndex0(String value) {
@@ -192,17 +196,37 @@ public class MathUtil {
 
 		return 0;
 	}
-	
+
 	/**
 	 * Returns number of inversions in the number.
 	 * 
-	 * Example 123 - it has no inversion.
-	 * 132 - here 3 > 2 it has one inversion. if a(i) > a(j) and i < j.
+	 * Example 123 - it has no inversion. 132 - here 3 > 2 it has one inversion.
+	 * if a(i) > a(j) and i < j.
+	 * 
 	 * @param num
-	 * @return
+	 * @return total number of inversion in the number.
 	 */
-	public int getNumberOfInvocations(int num) {
-		
-		return 0;
+	public static int getNumberOfInversions(int num) {
+		int mod = num % 10;
+		int divisor = num / 10;
+		int inversionCount = 0;
+		List<Integer> digitList = new ArrayList<Integer>();
+		digitList.add(mod);
+		while (divisor > 0) {
+			mod = divisor % 10;
+			divisor /= 10;
+
+			digitList.add(mod);
+
+		}
+
+		for (int i = 0; i < digitList.size() - 1; i++) {
+			for (int j = i + 1; j < digitList.size(); j++) {
+				if (digitList.get(i) < digitList.get(j)) {
+					inversionCount++;
+				}
+			}
+		}
+		return inversionCount;
 	}
 }
