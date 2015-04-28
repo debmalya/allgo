@@ -68,5 +68,14 @@ public class MathUtilTest {
 		}
 
 	}
+	
+	@Test
+	public void testGetNumberOfInversions() {
+		Assert.assertEquals(0,MathUtil.getNumberOfInversions(123));
+		Assert.assertEquals(1,MathUtil.getNumberOfInversions(213));
+		Assert.assertEquals(1,MathUtil.getNumberOfInversions(132));
+		Assert.assertEquals(2,MathUtil.getNumberOfInversions(312));
+		Assert.assertEquals(3,MathUtil.getNumberOfInversions(321));
+	}
 
 }
