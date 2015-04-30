@@ -77,5 +77,17 @@ public class MathUtilTest {
 		Assert.assertEquals(2,MathUtil.getNumberOfInversions(312));
 		Assert.assertEquals(3,MathUtil.getNumberOfInversions(321));
 	}
+	
+	@Test
+	public void prefixSum() {
+		int[] arr = new int[]{1,2,3,4,5};
+		int[][] result = MathUtil.getSum(arr);
+		
+		int[] prefixSum = new int[]{1,3,6,10,15};
+		Assert.assertArrayEquals(prefixSum, result[0]);
+		
+		int[] expected = new int[]{15,14,12,9,5};
+		Assert.assertArrayEquals(expected, result[1]);
+	}
 
 }

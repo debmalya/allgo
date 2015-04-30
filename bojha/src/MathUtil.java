@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MaximizeAction;
+
 public class MathUtil {
 
 	public MathUtil() {
@@ -231,23 +233,31 @@ public class MathUtil {
 	}
 	
 	/**
-	 * Returns prefix sum.
+	 * Returns prefix sum and suffix sum.
 	 * @param arr integer array
-	 * @return prefix sum
+	 * @return prefix and suffix sum
 	 * if int arr is 1 2 3 4
-	 * it will return
+	 * it will return first element as prefix
 	 * 1 1+2 1+2+3 1+2+3+4
 	 * 1 3 6 10
+	 * 
+	 * second element as suffix sum
+	 * 1+2+3+4 2+3+4 3+4 4
+	 * 10 9 7 4
 	 */
-	public static int[] getSum(int[] arr){
-		int[] sum = null;
+	public static int[][] getSum(int[] arr){
+		int[][] sum = null;
 		if (arr != null ) {
 			int maxLen = arr.length - 1;
-			sum = new int[arr.length];
+			sum = new int[2][];
+			sum[0] = new int[arr.length];
+			sum[1] = new int[arr.length];
 			for (int i = 0; i < arr.length; i++) {
-				sum[i] += arr[i];
+				sum[0][i] += arr[i];
+				sum[1][maxLen - i] += arr[maxLen - i];
 				if (i < maxLen) {
-					sum[i + 1] += sum[i]; 
+					sum[0][i + 1] += sum[0][i]; 
+					sum[1][maxLen - i - 1] += sum[1][maxLen - i];
 				}
 			}
 		}
