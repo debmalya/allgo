@@ -229,4 +229,29 @@ public class MathUtil {
 		}
 		return inversionCount;
 	}
+	
+	/**
+	 * Returns prefix sum.
+	 * @param arr integer array
+	 * @return prefix sum
+	 * if int arr is 1 2 3 4
+	 * it will return
+	 * 1 1+2 1+2+3 1+2+3+4
+	 * 1 3 6 10
+	 */
+	public static int[] getSum(int[] arr){
+		int[] sum = null;
+		if (arr != null ) {
+			int maxLen = arr.length - 1;
+			sum = new int[arr.length];
+			for (int i = 0; i < arr.length; i++) {
+				sum[i] += arr[i];
+				if (i < maxLen) {
+					sum[i + 1] += sum[i]; 
+				}
+			}
+		}
+		return sum;
+		
+	}
 }
