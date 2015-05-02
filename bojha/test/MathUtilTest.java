@@ -79,7 +79,7 @@ public class MathUtilTest {
 	}
 	
 	@Test
-	public void prefixSum() {
+	public void prefixSuffixSum() {
 		int[] arr = new int[]{1,2,3,4,5};
 		int[][] result = MathUtil.getSum(arr);
 		
@@ -89,5 +89,42 @@ public class MathUtilTest {
 		int[] expected = new int[]{15,14,12,9,5};
 		Assert.assertArrayEquals(expected, result[1]);
 	}
+	
+	@Test
+	public void getMathcingSum() {
+		int index = MathUtil.getMatchingSum(new int[]{2,3,1,6});
+		Assert.assertEquals(2, index);
+		
+		index = MathUtil.getMatchingSum(new int[]{5,4,2,3,1,2});
+		Assert.assertEquals(2, index);
+		
+		index = MathUtil.getMatchingSum(new int[]{6, 1, -1, 1, -1, 1, -1});
+		Assert.assertEquals(2, index);
+		
+		index = MathUtil.getMatchingSum("3 0 0 0");
+		Assert.assertEquals(1, index);
+		
+		index = MathUtil.getMatchingSum("3 0 1 2");
+		Assert.assertEquals(0, index);
+		
+		index = MathUtil.getMatchingSum("3 1 1 1");
+		Assert.assertEquals(0, index);
+		
+		index = MathUtil.getMatchingSum("1 3 1 1 1");
+		Assert.assertEquals(1, index);
+		
+		index = MathUtil.getMatchingSum("3 0 1 1 1");
+		Assert.assertEquals(0, index);
+		
+		index = MathUtil.getMatchingSum("5 4 -2 1 1 -2");
+		Assert.assertEquals(3, index);
+		
+		index = MathUtil.getMatchingSum("5 9 8");
+		Assert.assertEquals(0, index);
+		
+		index = MathUtil.getMatchingSum("5 9 1 8");
+		Assert.assertEquals(1, index);
+	}
+	
 
 }
