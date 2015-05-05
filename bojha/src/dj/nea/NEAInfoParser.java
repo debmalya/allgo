@@ -18,7 +18,7 @@ public class NEAInfoParser {
 	/**
 	 * KEY_REF to call nea api
 	 */
-	private static final String KEY_REF = "<<Your API KEY>>";
+	 private static final String KEY_REF = "<<Your API KEY>>";
 
 
 	/**
@@ -26,16 +26,17 @@ public class NEAInfoParser {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String[] datasets = new String[]{"nowcast"};
-		for (String eachData:datasets) {
+		String[] datasets = new String[] { "nowcast", "12hrs_forecast",
+				"3days_outlook", "heavy_rain_warning","uvi","earthquake","psi_update","pm2.5_update" };
+
+		for (int i = 0; i < datasets.length; i++) {
 			try {
-				callNEAWebAPI(eachData, KEY_REF);
+				callNEAWebAPI(datasets[i], KEY_REF);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-		
 
 	}
 
@@ -55,7 +56,7 @@ public class NEAInfoParser {
 		if (responseCode == 200) {
 			// Step 3a: If response status == 200
 			// print the received xml
-			 System.out.println(readStream(con.getInputStream()));
+			System.out.println(readStream(con.getInputStream()));
 		} else {
 			// Step 3b: If response status != 200
 			// print the error received from server
@@ -71,7 +72,7 @@ public class NEAInfoParser {
 		try {
 			reader = new BufferedReader(new InputStreamReader(inputStream));
 			String inputLine;
-			
+
 			while ((inputLine = reader.readLine()) != null) {
 				response.append(inputLine);
 			}
