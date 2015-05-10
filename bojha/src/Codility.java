@@ -1,4 +1,4 @@
-class Solution {
+class Codility {
     int solution(int[] A) {
         int n = A.length;
         int result = 0;
