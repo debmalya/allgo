@@ -363,4 +363,20 @@ public class MathUtil {
 		}
 		return 0;
 	}
+	
+	/**
+	 * Get the maximum digit from a number.
+	 * @param n number whose max digit will be identified
+	 * @return maximum digit
+	 */
+	public static int maxDigit(int n) {
+
+		  int result = 0;
+		  while (n > 0) {
+		    result = Math.max(result, n % 10);
+		    n /= 10;
+		  }
+
+		  return result;
+		}
 }
