@@ -372,8 +372,8 @@ public class MathUtil {
 	public static int maxDigit(int n) {
 
 		  int result = 0;
-		  while (n > 0) {
-		    result = Math.max(result, n % 10);
+		  while (n != 0) {
+		    result = Math.max(result, Math.abs(n % 10));
 		    n /= 10;
 		  }
 
