@@ -126,5 +126,17 @@ public class MathUtilTest {
 		Assert.assertEquals(1, index);
 	}
 	
+	@Test
+	public void getMaxDigit() {
+		Assert.assertEquals(1,MathUtil.maxDigit(100));
+		Assert.assertEquals(9,MathUtil.maxDigit(999));
+		Assert.assertEquals(9,MathUtil.maxDigit(889));
+		Assert.assertEquals(0,MathUtil.maxDigit(000));
+		
+		Assert.assertEquals(1,MathUtil.maxDigit(-100));
+		Assert.assertEquals(9,MathUtil.maxDigit(-999));
+		Assert.assertEquals(9,MathUtil.maxDigit(-889));
+		Assert.assertEquals(0,MathUtil.maxDigit(-000));
+	}
 
 }
