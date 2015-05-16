@@ -379,4 +379,20 @@ public class MathUtil {
 
 		  return result;
 		}
+	
+	/**
+	 * Get the minimum digit from a number.
+	 * @param n number whose minimum digit will be identified
+	 * @return maximum digit
+	 */
+	public static int minDigit(int n) {
+
+		  int result = Math.abs( n % 10);
+		  while (n != 0) {
+		    result = Math.min(result, Math.abs(n % 10));
+		    n /= 10;
+		  }
+
+		  return result;
+		}
 }
