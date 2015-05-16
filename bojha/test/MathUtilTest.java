@@ -138,5 +138,18 @@ public class MathUtilTest {
 		Assert.assertEquals(9,MathUtil.maxDigit(-889));
 		Assert.assertEquals(0,MathUtil.maxDigit(-000));
 	}
+	
+	@Test
+	public void getMinDigit() {
+		Assert.assertEquals(0,MathUtil.minDigit(100));
+		Assert.assertEquals(9,MathUtil.minDigit(999));
+		Assert.assertEquals(8,MathUtil.minDigit(889));
+		Assert.assertEquals(0,MathUtil.minDigit(000));
+		
+		Assert.assertEquals(0,MathUtil.minDigit(-100));
+		Assert.assertEquals(9,MathUtil.minDigit(-999));
+		Assert.assertEquals(8,MathUtil.minDigit(-889));
+		Assert.assertEquals(0,MathUtil.minDigit(-000));
+	}
 
 }
