@@ -1,8 +1,5 @@
 import java.util.Scanner;
 
-/**
- * 
- */
 
 /**
  * @author Debmalya Jash
@@ -32,47 +29,73 @@ public class PrefixSum {
 			}
 		}
 	}
-
 	
-	public static int getIndex0(String value) {
-		String[] values = value.split(" ");
-		int[] intValues = new int[values.length];
-		int[] prefixSum = new int[values.length];
-		int[] suffixSum = new int[values.length];
-
-		for (int i = 0; i < values.length; i++) {
-			intValues[i] = Integer.parseInt(values[i]);
-			prefixSum[i] += intValues[i];
-			if (i < values.length - 1) {
-				prefixSum[i + 1] = prefixSum[i];
-			}
-		}
-
-		int min = values.length;
-		for (int i = values.length - 1; i > -1; i--) {
-
-			suffixSum[i] += intValues[i];
-
-			if (i > 0) {
-				if (suffixSum[i] == prefixSum[i - 1]) {
-					return i - 1;
-				} else if (prefixSum[0] == prefixSum[1]) {
-					return 0;
-				} else {
-					for (int j = 0; j < i - 1; j++) {
-						if (prefixSum[i - 1] - prefixSum[j] == suffixSum[i]) {
-							min = Math.min(min, (i - 1));
-						}
+	/**
+	 * 
+	 * @param arr String containing integer, each integer is separated by space.
+	 * @return index where sum of earlier indexes are equal to sum of later indexes.
+	 * 
+	 * e.g. for the input 2 3 1 6
+	 * at index 2, sum of earlier indexes 2+3+1 = 6
+	 * here we have to return 2.
+	 * 
+	 * If there is no such index return 0.
+	 * 
+	 */
+	public static int getIndex0(String arr) {
+		
+		int[][] sum = getSum(arr);
+		
+		
+		for (int i = 0; i < sum[0].length - 1; i++) {
+			if (sum[0][i] == sum[1][i + 1]) {
+				return i;
+			} else {
+				for (int j = 0; j < i; j++) {
+					if ((sum[0][i] - sum[0][j])== sum[1][i + 1]) {
+						return i;
 					}
 				}
-				suffixSum[i - 1] += suffixSum[i];
 			}
 		}
-
-		if (min != values.length) {
-			return min;
-		}
-
 		return 0;
 	}
+
+	/**
+	 * Returns prefix sum and suffix sum.
+	 * @param value string containing numbers each number is separated by space.
+	 * @return prefix and suffix sum
+	 * if int arr is 1 2 3 4
+	 * it will return first element as prefix
+	 * 1 1+2 1+2+3 1+2+3+4
+	 * 1 3 6 10
+	 * 
+	 * second element as suffix sum
+	 * 1+2+3+4 2+3+4 3+4 4
+	 * 10 9 7 4
+	 */
+	public static int[][] getSum(String value){
+		int[][] sum = null;
+		String[] arr = value.split(" ");
+		if (arr != null ) {
+			int maxLen = arr.length - 1;
+			
+			sum = new int[2][];
+			sum[0] = new int[arr.length];
+			sum[1] = new int[arr.length];
+			
+			for (int i = 0; i < arr.length; i++) {
+				sum[0][i] += Integer.parseInt(arr[i]);
+				sum[1][maxLen - i] += Integer.parseInt(arr[maxLen - i]);
+				if (i < maxLen) {
+					sum[0][i + 1] += sum[0][i]; 
+					sum[1][maxLen - i - 1] += sum[1][maxLen - i];
+				}
+			}
+		}
+		return sum;
+		
+	}
+	
+	
 }
