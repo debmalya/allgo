@@ -29,7 +29,7 @@ public class PrefixSumTest {
 		Assert.assertEquals(2, index);
 		
 		index = PrefixSum.getIndex0("3 0 0 0");
-		Assert.assertEquals(0, index);
+		Assert.assertEquals(1, index);
 		
 		index = PrefixSum.getIndex0("3 0 1 2");
         Assert.assertEquals(0, index);
