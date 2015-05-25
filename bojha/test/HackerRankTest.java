@@ -3,11 +3,11 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 
-public class SolutionTest {
+public class HackerRankTest {
 
 	@Test
 	public void testSolution() {
-		Solution solution = new Solution();
+		Codility solution = new Codility();
 		int r = solution.solution(new int[]{1, 1, 0, 1, 0, 0});
 		assertEquals(4, r);
 		
