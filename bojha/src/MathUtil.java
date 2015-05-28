@@ -83,14 +83,14 @@ public class MathUtil {
 		while (true) {
 			result = multiplier * number;
 			if (isPalindrom(String.valueOf(result))) {
-				System.out.println(number + " X " + multiplier);
+//				System.out.println(number + " X " + multiplier);
 				break;
 			}
 
 			number--;
 			if (number < lowerLimit) {
 				number = --multiplier;
-				System.out.println(number + " Y " + multiplier);
+//				System.out.println(number + " Y " + multiplier);
 			}
 
 		}
@@ -395,4 +395,107 @@ public class MathUtil {
 
 		  return result;
 		}
+	
+	/**
+	 * Find out if binomial coefficient C(n,k) is divisible by the given positive integer number d.
+	 * @param n 1<=n<=1000
+	 * @param k 1<=k<=n
+	 * @param d 2<=d<=1000000
+	 * @return 1 if C(n,k) is divisible by d, 0 otherwise
+	 */
+	public static int conbinatoricFactor1(int n, int k, int d) {
+		long value = 1;
+		for (int i = n; i > n - k ; i--) {
+			value *= i;
+		}
+		for (int i = k; i > 1; i--) {
+			value /= i;
+		}
+		return value % d == 0 ? 1 : 0;
+	}
+	
+	/**
+	 * Find out if binomial coefficient C(n,k) is divisible by the given positive integer number d.
+	 * @param n 1<=n<=1000
+	 * @param k 1<=k<=n
+	 * @param d 2<=d<=1000000
+	 * @return 1 if C(n,k) is divisible by d, 0 otherwise
+	 */
+	public static int conbinatoricFactor2(int n, int k, int d) {
+		
+		long value = 1;
+		int hr = n - k > k ? n - k : k;
+		int lr = n - k > k ? k : n - k;
+		for (int i = n; i > hr ; i--,lr--) {
+			value *= i;
+			if (lr > 1) {
+				value /= lr;
+			}
+		}
+		return value % d == 0 ? 1 : 0;
+	}
+	
+	
+	
+	
+	public static long getBinaryCoefficient(int n, int k) {
+		long value = 1;
+		int hr = n - k > k ? n - k : k;
+		int lr = n - k > k ? k : n - k;
+		for (int i = n; i > hr ; i--,lr--) {
+			value *= i;
+			if (lr > 1) {
+				value /= lr;
+			}
+		}
+		
+		return value;
+	}
+	
+	public static long getBinaryCoefficient0(int n, int k) {
+		long value = 1;
+		for (int i = n; i > n - k ; i--) {
+			value *= i;
+		}
+		for (int i = k; i > 1; i--) {
+			value /= i;
+		}
+		return value;
+	}
+	
+	/**
+	 * Arrange input. Inputs less than index will be on left side, index greater than index will be on right side.
+	 * @param input an array of integer.
+	 * @param index integer.
+	 * @return arranged array
+	 */
+	public static int[] process(int[] input,int index) {
+	    int swap_right = -1;
+	    int swap_left = -1;
+	    int left = 0;
+	    int right = input.length - 1;
+	    int mid = (left + right) / 2;
+	    while (left < right) {
+	        if (input[right] < index) {
+	            // it should go to left side
+	            swap_right = right;
+	            
+	        }
+	        if (input[left] > index) {
+	            // it should go to right side 
+	            swap_left = left;
+	        }
+	        
+	        if (swap_right > -1 && swap_left > -1) {
+	            int temp = input[swap_right];
+	            input[swap_right] = input[swap_left];
+	            input[swap_left] = temp;
+	            swap_right = -1;
+	            swap_left = -1;
+	        }
+	        left++;
+	        right--;
+	    }
+	    return input;
+	}
 }
