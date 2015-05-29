@@ -42,7 +42,7 @@ public class MathUtilTest {
 		MathUtil util = new MathUtil();
 
 		assertEquals(9009, util.getHighestPalindrome(2));
-		System.out.println(util.getHighestPalindrome(3));
+		
 	}
 
 	@Test
@@ -55,10 +55,10 @@ public class MathUtilTest {
 			while (divisor < 1000) {
 				
 				if (util.isPalindrom(String.valueOf(value))) {
-					System.out.println(value);
+					
 					long dividend = value / divisor;
 					if (value % divisor == 0 && dividend > 100) {
-						System.out.println("Looking for :" + value+ " dividend " + dividend + " divisor "+divisor);
+						
 						return;
 					}
 					divisor++;
@@ -152,4 +152,52 @@ public class MathUtilTest {
 		Assert.assertEquals(0,MathUtil.minDigit(-000));
 	}
 
+	/**
+	 * Find out if binomial coefficient C(n,k) is divisible by the given positive integer number d.
+	 * @param n 1<=n<=1000
+	 * @param k 1<=k<=n
+	 * @param d 2<=d<=1000000
+	 * @return 1 if C(n,k) is divisible by d, 0 otherwise
+	 */
+	@Test
+	public void getConbinatoricFactor2() {
+		Assert.assertEquals(0,MathUtil.conbinatoricFactor2(6, 2, 6));
+		Assert.assertEquals(1,MathUtil.conbinatoricFactor2(6, 2, 5));
+		Assert.assertEquals(1,MathUtil.conbinatoricFactor2(6, 2, 3));
+		Assert.assertEquals(0,MathUtil.conbinatoricFactor2(6, 2, 2));
+		Assert.assertEquals(0,MathUtil.conbinatoricFactor2(6, 0, 2));
+		Assert.assertEquals(0,MathUtil.conbinatoricFactor2(6, 0, 1000));
+		Assert.assertEquals(0,MathUtil.conbinatoricFactor2(1000, 1, 1000000));
+		Assert.assertEquals(1,MathUtil.conbinatoricFactor2(1000, 1, 1000));
+		Assert.assertEquals(0,MathUtil.conbinatoricFactor2(1, 1, 2));
+		Assert.assertEquals(1,MathUtil.getBinaryCoefficient(4, 0));
+		Assert.assertEquals(4,MathUtil.getBinaryCoefficient(4, 1));
+		Assert.assertEquals(6,MathUtil.getBinaryCoefficient(4, 2));
+		Assert.assertEquals(4,MathUtil.getBinaryCoefficient(4, 3));
+		Assert.assertEquals(1,MathUtil.getBinaryCoefficient(4, 4));
+		Assert.assertEquals(1,MathUtil.getBinaryCoefficient(1000, 0));
+		Assert.assertEquals(1000,MathUtil.getBinaryCoefficient(1000, 999));
+		Assert.assertEquals(1000,MathUtil.getBinaryCoefficient(1000, 1));
+		Assert.assertEquals(1,MathUtil.getBinaryCoefficient(1000, 1000));
+		Assert.assertEquals(747697931370219115L,MathUtil.getBinaryCoefficient(1000, 500));
+		Assert.assertEquals(0,MathUtil.conbinatoricFactor2(1000, 500, 1000));
+		Assert.assertEquals(1,MathUtil.conbinatoricFactor2(1000, 1, 1000));
+		Assert.assertEquals(1,MathUtil.conbinatoricFactor2(1000, 999, 1000));
+		
+		Assert.assertEquals(1,MathUtil.getBinaryCoefficient(1, 1));
+		
+		
+	}
+
+	@Test
+	public void testProcess() {
+		int[] result = MathUtil.process(new int[]{-1, 2,-3,4,-5},0);
+		for (int i = 0; i < result.length; i++) {
+			System.out.println(result[i]);
+		}
+		result = MathUtil.process(new int[]{-1,-3,4,-5},0);
+		for (int i = 0; i < result.length; i++) {
+			System.out.println(result[i]);
+		}
+	}
 }
