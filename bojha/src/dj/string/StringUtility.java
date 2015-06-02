@@ -2,7 +2,10 @@ package dj.string;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Set;
 
 public class StringUtility {
@@ -282,38 +285,105 @@ public class StringUtility {
 	public String missingAlphabet(String S) {
 		String s = "abcdefghijklmnopqrstuvwxyz";
 		StringBuilder r = new StringBuilder();
-		List<Character> missingCharacter = new ArrayList<Character>();
-		char prevChar = ' ';
+		int[] c = new int[26];				
+
 		int maxCount = 0;
-		int count = 0;
+		boolean isMissing = false;
+		
 		for (int i = 0; i < s.length(); i++) {
 			char currentChar = s.charAt(i);
 			if (S.indexOf(currentChar) == -1) {
-				missingCharacter.add(currentChar);
-			}
-			
-			if (prevChar == currentChar) {
-				count++;
-				maxCount = Math.max(count, maxCount);
+				c[i] = 0;
+				isMissing= true;
 			} else {
-				count = 0;
+				Integer count = S.length() - S.replace(String.valueOf(currentChar), "").length();							
+				c[i] = count;
+				maxCount = Math.max(count, maxCount);
 			}
-			prevChar = currentChar;
 		}
-		
-		
-		if (missingCharacter.size()== 0) {
+
+		if (!isMissing) {
 			return "-1";
-		} else {
-			for (int i = 0; i < missingCharacter.size(); i++) {
-				count = 0;
-				while (count <= maxCount) {
-					r.append(missingCharacter.get(i));
-					count++;
+		} else {			
+				
+				
+				for (int i = 0; i < 26; i++) {
+					int count = c[i];
+					while (count < maxCount){
+						r.append(s.charAt(i));
+						count++;
+					}
 				}
-			}
+						
 			return r.toString();
 		}
 	}
 
+	/**
+	 * A set of alphabet is given by abcdefghijklmnopqrstuvwxyz.
+	 * 
+	 * 2 sets of alphabets mean 2 or more alphabets.
+	 * 
+	 * 
+	 * Find the missing alphabet(s). You may need to output them by the order
+	 * a-z. It is possible that the missing alphabets are more than one.
+	 * 
+	 * 
+	 * If the String contains all of the letters in the alphabet, return "-1"
+	 * 
+	 * 
+	 * Example
+	 * 
+	 * 
+	 * Given String(S): 'abcdefghijklmnopqrstuvwxy' Output String : 'z'
+	 * 
+	 * 
+	 * Given String(S): 'aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyy'
+	 * Output String : 'zz'
+	 * 
+	 * 
+	 * Given String(S): 'abbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxy'
+	 * Output String : 'ayzz'
+	 * 
+	 * @param S
+	 * @return
+	 */
+	public String missingAlphabet0(String S) {
+		String s = "abcdefghijklmnopqrstuvwxyz";
+		StringBuilder r = new StringBuilder();
+		
+		LinkedHashMap<Character,Integer> characterCount = new LinkedHashMap<Character,Integer>();
+
+		int maxCount = 0;
+		boolean isMissing = false;
+		
+		for (int i = 0; i < s.length(); i++) {
+			char currentChar = s.charAt(i);
+			if (S.indexOf(currentChar) == -1) {
+				characterCount.put(currentChar, 0);
+				isMissing= true;
+			} else {
+				Integer count = S.length() - S.replace(String.valueOf(currentChar), "").length();							
+				characterCount.put(currentChar, count);
+				maxCount = Math.max(count, maxCount);
+			}
+		}
+
+		if (!isMissing) {
+			return "-1";
+		} else {			
+				Set<Entry<Character, Integer>> chSet = characterCount.entrySet();
+				Iterator<Entry<Character, Integer>> chI = chSet.iterator();
+				
+				while (chI.hasNext()) {
+					Entry<Character, Integer> nextEntry = chI.next();
+					int count = nextEntry.getValue();
+					while (count < maxCount){
+						r.append(nextEntry.getKey());
+						count++;
+					}
+				}		
+			return r.toString();
+		}
+	}
 }
