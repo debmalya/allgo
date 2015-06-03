@@ -1,7 +1,8 @@
 
 package dj.string;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import junit.framework.Assert;
 
 import org.junit.Test;
@@ -101,6 +102,20 @@ public class StringUtilityTest
     
     actual = utility.getFristUniqueCharacter ("RRaajju");
     Assert.assertEquals ('u', actual);
+  }
+  
+  @Test
+  public void testMissingChar() {
+	  StringUtility utility = new StringUtility ();
+	  String r = utility.missingAlphabet("abcdefghijklmnopqrstuvwxy");
+	  assertTrue("Expected z but found " + r,r.equals("z"));
+	  
+	  r = utility.missingAlphabet("aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyy");
+	  assertTrue("Expected zz but found " + r,r.equals("zz"));
+	  
+	  r = utility.missingAlphabet("abbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxy");
+	  assertTrue("Expected ayzz but found " + r,r.equals("ayzz"));
+	  
   }
 }
 
