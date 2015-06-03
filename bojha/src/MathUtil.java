@@ -83,14 +83,14 @@ public class MathUtil {
 		while (true) {
 			result = multiplier * number;
 			if (isPalindrom(String.valueOf(result))) {
-//				System.out.println(number + " X " + multiplier);
+				// System.out.println(number + " X " + multiplier);
 				break;
 			}
 
 			number--;
 			if (number < lowerLimit) {
 				number = --multiplier;
-//				System.out.println(number + " Y " + multiplier);
+				// System.out.println(number + " Y " + multiplier);
 			}
 
 		}
@@ -231,100 +231,95 @@ public class MathUtil {
 		}
 		return inversionCount;
 	}
-	
+
 	/**
 	 * Returns prefix sum and suffix sum.
-	 * @param arr integer array
-	 * @return prefix and suffix sum
-	 * if int arr is 1 2 3 4
-	 * it will return first element as prefix
-	 * 1 1+2 1+2+3 1+2+3+4
-	 * 1 3 6 10
 	 * 
-	 * second element as suffix sum
-	 * 1+2+3+4 2+3+4 3+4 4
-	 * 10 9 7 4
+	 * @param arr
+	 *            integer array
+	 * @return prefix and suffix sum if int arr is 1 2 3 4 it will return first
+	 *         element as prefix 1 1+2 1+2+3 1+2+3+4 1 3 6 10
+	 * 
+	 *         second element as suffix sum 1+2+3+4 2+3+4 3+4 4 10 9 7 4
 	 */
-	public static int[][] getSum(int[] arr){
+	public static int[][] getSum(int[] arr) {
 		int[][] sum = null;
-		if (arr != null ) {
+		if (arr != null) {
 			int maxLen = arr.length - 1;
-			
+
 			sum = new int[2][];
 			sum[0] = new int[arr.length];
 			sum[1] = new int[arr.length];
-			
+
 			for (int i = 0; i < arr.length; i++) {
 				sum[0][i] += arr[i];
 				sum[1][maxLen - i] += arr[maxLen - i];
 				if (i < maxLen) {
-					sum[0][i + 1] += sum[0][i]; 
+					sum[0][i + 1] += sum[0][i];
 					sum[1][maxLen - i - 1] += sum[1][maxLen - i];
 				}
 			}
 		}
 		return sum;
-		
+
 	}
-	
+
 	/**
 	 * Returns prefix sum and suffix sum.
-	 * @param value string containing numbers each number is separated by space.
-	 * @return prefix and suffix sum
-	 * if int arr is 1 2 3 4
-	 * it will return first element as prefix
-	 * 1 1+2 1+2+3 1+2+3+4
-	 * 1 3 6 10
 	 * 
-	 * second element as suffix sum
-	 * 1+2+3+4 2+3+4 3+4 4
-	 * 10 9 7 4
+	 * @param value
+	 *            string containing numbers each number is separated by space.
+	 * @return prefix and suffix sum if int arr is 1 2 3 4 it will return first
+	 *         element as prefix 1 1+2 1+2+3 1+2+3+4 1 3 6 10
+	 * 
+	 *         second element as suffix sum 1+2+3+4 2+3+4 3+4 4 10 9 7 4
 	 */
-	public static int[][] getSum(String value){
+	public static int[][] getSum(String value) {
 		int[][] sum = null;
 		String[] arr = value.split(" ");
-		if (arr != null ) {
+		if (arr != null) {
 			int maxLen = arr.length - 1;
-			
+
 			sum = new int[2][];
 			sum[0] = new int[arr.length];
 			sum[1] = new int[arr.length];
-			
+
 			for (int i = 0; i < arr.length; i++) {
 				sum[0][i] += Integer.parseInt(arr[i]);
 				sum[1][maxLen - i] += Integer.parseInt(arr[maxLen - i]);
 				if (i < maxLen) {
-					sum[0][i + 1] += sum[0][i]; 
+					sum[0][i + 1] += sum[0][i];
 					sum[1][maxLen - i - 1] += sum[1][maxLen - i];
 				}
 			}
 		}
 		return sum;
-		
+
 	}
+
 	/**
 	 * 
-	 * @param arr integer array
-	 * @return index where sum of earlier indexes are equal to sum of later indexes.
+	 * @param arr
+	 *            integer array
+	 * @return index where sum of earlier indexes are equal to sum of later
+	 *         indexes.
 	 * 
-	 * e.g. for the input 2 3 1 6
-	 * at index 2, sum of earlier indexes 2+3+1 = 6
-	 * here we have to return 2.
+	 *         e.g. for the input 2 3 1 6 at index 2, sum of earlier indexes
+	 *         2+3+1 = 6 here we have to return 2.
 	 * 
-	 * If there is no such index return 0.
+	 *         If there is no such index return 0.
 	 * 
 	 */
 	public static int getMatchingSum(int[] arr) {
-		
+
 		int[][] sum = getSum(arr);
-		
-		
+
 		for (int i = 0; i < arr.length - 1; i++) {
 			if (sum[0][i] == sum[1][i + 1]) {
 				return i;
 			} else {
 				for (int j = 0; j < i; j++) {
-					if ((sum[0][i] - sum[0][j])== sum[1][i + 1]) {
+					if ((sum[0][i] - sum[0][j]) == sum[1][i + 1]) {
 						return i;
 					}
 				}
@@ -332,30 +327,30 @@ public class MathUtil {
 		}
 		return 0;
 	}
-	
+
 	/**
 	 * 
-	 * @param arr String containing integer, each integer is separated by space.
-	 * @return index where sum of earlier indexes are equal to sum of later indexes.
+	 * @param arr
+	 *            String containing integer, each integer is separated by space.
+	 * @return index where sum of earlier indexes are equal to sum of later
+	 *         indexes.
 	 * 
-	 * e.g. for the input 2 3 1 6
-	 * at index 2, sum of earlier indexes 2+3+1 = 6
-	 * here we have to return 2.
+	 *         e.g. for the input 2 3 1 6 at index 2, sum of earlier indexes
+	 *         2+3+1 = 6 here we have to return 2.
 	 * 
-	 * If there is no such index return 0.
+	 *         If there is no such index return 0.
 	 * 
 	 */
 	public static int getMatchingSum(String arr) {
-		
+
 		int[][] sum = getSum(arr);
-		
-		
+
 		for (int i = 0; i < sum[0].length - 1; i++) {
 			if (sum[0][i] == sum[1][i + 1]) {
 				return i;
 			} else {
 				for (int j = 0; j < i; j++) {
-					if ((sum[0][i] - sum[0][j])== sum[1][i + 1]) {
+					if ((sum[0][i] - sum[0][j]) == sum[1][i + 1]) {
 						return i;
 					}
 				}
@@ -363,49 +358,58 @@ public class MathUtil {
 		}
 		return 0;
 	}
-	
+
 	/**
 	 * Get the maximum digit from a number.
-	 * @param n number whose max digit will be identified
+	 * 
+	 * @param n
+	 *            number whose max digit will be identified
 	 * @return maximum digit
 	 */
 	public static int maxDigit(int n) {
 
-		  int result = 0;
-		  while (n != 0) {
-		    result = Math.max(result, Math.abs(n % 10));
-		    n /= 10;
-		  }
-
-		  return result;
+		int result = 0;
+		while (n != 0) {
+			result = Math.max(result, Math.abs(n % 10));
+			n /= 10;
 		}
-	
+
+		return result;
+	}
+
 	/**
 	 * Get the minimum digit from a number.
-	 * @param n number whose minimum digit will be identified
+	 * 
+	 * @param n
+	 *            number whose minimum digit will be identified
 	 * @return maximum digit
 	 */
 	public static int minDigit(int n) {
 
-		  int result = Math.abs( n % 10);
-		  while (n != 0) {
-		    result = Math.min(result, Math.abs(n % 10));
-		    n /= 10;
-		  }
-
-		  return result;
+		int result = Math.abs(n % 10);
+		while (n != 0) {
+			result = Math.min(result, Math.abs(n % 10));
+			n /= 10;
 		}
-	
+
+		return result;
+	}
+
 	/**
-	 * Find out if binomial coefficient C(n,k) is divisible by the given positive integer number d.
-	 * @param n 1<=n<=1000
-	 * @param k 1<=k<=n
-	 * @param d 2<=d<=1000000
+	 * Find out if binomial coefficient C(n,k) is divisible by the given
+	 * positive integer number d.
+	 * 
+	 * @param n
+	 *            1<=n<=1000
+	 * @param k
+	 *            1<=k<=n
+	 * @param d
+	 *            2<=d<=1000000
 	 * @return 1 if C(n,k) is divisible by d, 0 otherwise
 	 */
 	public static int conbinatoricFactor1(int n, int k, int d) {
 		long value = 1;
-		for (int i = n; i > n - k ; i--) {
+		for (int i = n; i > n - k; i--) {
 			value *= i;
 		}
 		for (int i = k; i > 1; i--) {
@@ -413,20 +417,25 @@ public class MathUtil {
 		}
 		return value % d == 0 ? 1 : 0;
 	}
-	
+
 	/**
-	 * Find out if binomial coefficient C(n,k) is divisible by the given positive integer number d.
-	 * @param n 1<=n<=1000
-	 * @param k 1<=k<=n
-	 * @param d 2<=d<=1000000
+	 * Find out if binomial coefficient C(n,k) is divisible by the given
+	 * positive integer number d.
+	 * 
+	 * @param n
+	 *            1<=n<=1000
+	 * @param k
+	 *            1<=k<=n
+	 * @param d
+	 *            2<=d<=1000000
 	 * @return 1 if C(n,k) is divisible by d, 0 otherwise
 	 */
 	public static int conbinatoricFactor2(int n, int k, int d) {
-		
+
 		long value = 1;
 		int hr = n - k > k ? n - k : k;
 		int lr = n - k > k ? k : n - k;
-		for (int i = n; i > hr ; i--,lr--) {
+		for (int i = n; i > hr; i--, lr--) {
 			value *= i;
 			if (lr > 1) {
 				value /= lr;
@@ -434,27 +443,24 @@ public class MathUtil {
 		}
 		return value % d == 0 ? 1 : 0;
 	}
-	
-	
-	
-	
+
 	public static long getBinaryCoefficient(int n, int k) {
 		long value = 1;
 		int hr = n - k > k ? n - k : k;
 		int lr = n - k > k ? k : n - k;
-		for (int i = n; i > hr ; i--,lr--) {
+		for (int i = n; i > hr; i--, lr--) {
 			value *= i;
 			if (lr > 1) {
 				value /= lr;
 			}
 		}
-		
+
 		return value;
 	}
-	
+
 	public static long getBinaryCoefficient0(int n, int k) {
 		long value = 1;
-		for (int i = n; i > n - k ; i--) {
+		for (int i = n; i > n - k; i--) {
 			value *= i;
 		}
 		for (int i = k; i > 1; i--) {
@@ -462,40 +468,82 @@ public class MathUtil {
 		}
 		return value;
 	}
-	
+
 	/**
-	 * Arrange input. Inputs less than index will be on left side, index greater than index will be on right side.
-	 * @param input an array of integer.
-	 * @param index integer.
+	 * Arrange input. Inputs less than index will be on left side, index greater
+	 * than index will be on right side.
+	 * 
+	 * @param input
+	 *            an array of integer.
+	 * @param index
+	 *            integer.
 	 * @return arranged array
 	 */
-	public static int[] process(int[] input,int index) {
-	    int swap_right = -1;
-	    int swap_left = -1;
-	    int left = 0;
-	    int right = input.length - 1;
-	    int mid = (left + right) / 2;
-	    while (left < right) {
-	        if (input[right] < index) {
-	            // it should go to left side
-	            swap_right = right;
-	            
-	        }
-	        if (input[left] > index) {
-	            // it should go to right side 
-	            swap_left = left;
-	        }
-	        
-	        if (swap_right > -1 && swap_left > -1) {
-	            int temp = input[swap_right];
-	            input[swap_right] = input[swap_left];
-	            input[swap_left] = temp;
-	            swap_right = -1;
-	            swap_left = -1;
-	        }
-	        left++;
-	        right--;
-	    }
-	    return input;
+	public static int[] process(int[] input, int index) {
+		int swap_right = -1;
+		int swap_left = -1;
+		int left = 0;
+		int right = input.length - 1;
+		int mid = (left + right) / 2;
+		while (left < right) {
+			if (input[right] < index) {
+				// it should go to left side
+				swap_right = right;
+
+			}
+			if (input[left] > index) {
+				// it should go to right side
+				swap_left = left;
+			}
+
+			if (swap_right > -1 && swap_left > -1) {
+				int temp = input[swap_right];
+				input[swap_right] = input[swap_left];
+				input[swap_left] = temp;
+				swap_right = -1;
+				swap_left = -1;
+			}
+			left++;
+			right--;
+		}
+		return input;
+	}
+
+	/**
+	 * The equilibrium index of a sequence is an index such that the sum of
+	 * elements at lower indexes is equal to the sum of elements at higher
+	 * indexes. For example, in a sequence A: A[0]=-7 A[1]=1 A[2]=5 A[3]=2
+	 * A[4]=-4 A[5]=3 A[6]=0 3 is an equilibrium index, because:
+	 * A[0]+A[1]+A[2]=A[4]+A[5]+A[6] 6 is also an equilibrium index, because:
+	 * A[0]+A[1]+A[2]+A[3]+A[4]+A[5]=0 (The sum of zero elements is zero) 7 is
+	 * not an equilibrium index - because it is not a valid index of sequence A.
+	 * If you still have doubts, here is a precise definition: The integer k is
+	 * an equilibrium index of a sequence A[0],A[1]..,A[n-1] if and only if 0<=
+	 * k and sum(A[0..(k-1)])=sum(A[(k+1)..(n-1)]). Assume the sum of zero
+	 * elements is equal to zero.
+	 * 
+	 * @param A
+	 *            array of integers.
+	 * @param n
+	 * @return
+	 */
+	public static int equi(int[] arr) {
+		int n = arr.length;
+		if (n == 0)
+			return -1;
+		long sum = 0;
+		int i;
+		for (i = 0; i < n; i++)
+			sum += arr[i];
+
+		long sum_left = 0;
+		for (i = 0; i < n; i++) {
+			long sum_right = sum - sum_left - (long) arr[i];
+			if (sum_left == sum_right)
+				return i;
+			sum_left += (long) arr[i];
+		}
+		return -1;
+
 	}
 }
