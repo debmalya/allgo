@@ -127,6 +127,42 @@ public class MathUtilTest {
 	}
 	
 	@Test
+	public void testEqui() {
+		int index = MathUtil.equi(new int[]{2,3,1,6});
+		Assert.assertEquals(2, index);
+		
+		index = MathUtil.equi(new int[]{5,4,2,3,1,2});
+		Assert.assertEquals(2, index);
+		
+		index = MathUtil.equi(new int[]{6, 1, -1, 1, -1, 1, -1});
+		Assert.assertEquals(2, index);
+		
+		index = MathUtil.equi(new int[]{3 ,0, 0, 0});
+		Assert.assertEquals(1, index);
+		
+		index = MathUtil.equi(new int[]{3, 0, 1, 2});
+		Assert.assertEquals(0, index);
+		
+		index = MathUtil.getMatchingSum(new int[]{3, 1, 1, 1});
+		Assert.assertEquals(0, index);
+		
+		index = MathUtil.getMatchingSum(new int[]{ 3, 1, 1, 1});
+		Assert.assertEquals(1, index);
+		
+		index = MathUtil.getMatchingSum(new int[]{3, 0, 1, 1, 1});
+		Assert.assertEquals(0, index);
+		
+		index = MathUtil.getMatchingSum(new int[]{5 ,4, -2, 1, 1, -2});
+		Assert.assertEquals(3, index);
+		
+		index = MathUtil.getMatchingSum(new int[]{5, 9, 8});
+		Assert.assertEquals(0, index);
+		
+		index = MathUtil.getMatchingSum(new int[]{5, 9, 1, 8});
+		Assert.assertEquals(1, index);
+	}
+	
+	@Test
 	public void getMaxDigit() {
 		Assert.assertEquals(1,MathUtil.maxDigit(100));
 		Assert.assertEquals(9,MathUtil.maxDigit(999));
