@@ -546,4 +546,39 @@ public class MathUtil {
 		return -1;
 
 	}
+
+	/**
+	 * For a given set of non-negative integers find the smallest non-negative
+	 * integer not contained in that set.
+	 * 
+	 * In game theory this is known as the mex (minimum excludant) function and
+	 * it plays an important role.
+	 * 
+	 * Input (a) → array.integer :
+	 * 
+	 * An array of N positive integers which represents a set. Some elements may
+	 * be repeating. 0 ≤ N ≤ 100, all elements are less than 100. Output →
+	 * integer Input [[0,2,4,4,2,1,10]] Output 3
+	 * 
+	 * @param a
+	 *            integer array.
+	 * @return smallest non-negative integer not contained in that set.
+	 */
+	public static int mex(int[] a) {
+		int r = 0;
+		while (true) {
+			int f = 0, i = 0;
+				while (i < a.length) {
+				if (a[i++] == r) {
+					f++;
+					continue;
+				}
+			}
+			if (f < 1) {
+				return r;
+			}
+			r++;
+		}
+
+	}
 }
