@@ -285,18 +285,19 @@ public class StringUtility {
 	public String missingAlphabet(String S) {
 		String s = "abcdefghijklmnopqrstuvwxyz";
 		StringBuilder r = new StringBuilder();
-		int[] c = new int[26];				
+		int[] c = new int[26];
 
 		int maxCount = 0;
 		boolean isMissing = false;
-		
+
 		for (int i = 0; i < s.length(); i++) {
 			char currentChar = s.charAt(i);
 			if (S.indexOf(currentChar) == -1) {
 				c[i] = 0;
-				isMissing= true;
+				isMissing = true;
 			} else {
-				Integer count = S.length() - S.replace(String.valueOf(currentChar), "").length();							
+				Integer count = S.length()
+						- S.replace(String.valueOf(currentChar), "").length();
 				c[i] = count;
 				maxCount = Math.max(count, maxCount);
 			}
@@ -304,17 +305,16 @@ public class StringUtility {
 
 		if (!isMissing) {
 			return "-1";
-		} else {			
-				
-				
-				for (int i = 0; i < 26; i++) {
-					int count = c[i];
-					while (count < maxCount){
-						r.append(s.charAt(i));
-						count++;
-					}
+		} else {
+
+			for (int i = 0; i < 26; i++) {
+				int count = c[i];
+				while (count < maxCount) {
+					r.append(s.charAt(i));
+					count++;
 				}
-						
+			}
+
 			return r.toString();
 		}
 	}
@@ -351,19 +351,20 @@ public class StringUtility {
 	public String missingAlphabet0(String S) {
 		String s = "abcdefghijklmnopqrstuvwxyz";
 		StringBuilder r = new StringBuilder();
-		
-		LinkedHashMap<Character,Integer> characterCount = new LinkedHashMap<Character,Integer>();
+
+		LinkedHashMap<Character, Integer> characterCount = new LinkedHashMap<Character, Integer>();
 
 		int maxCount = 0;
 		boolean isMissing = false;
-		
+
 		for (int i = 0; i < s.length(); i++) {
 			char currentChar = s.charAt(i);
 			if (S.indexOf(currentChar) == -1) {
 				characterCount.put(currentChar, 0);
-				isMissing= true;
+				isMissing = true;
 			} else {
-				Integer count = S.length() - S.replace(String.valueOf(currentChar), "").length();							
+				Integer count = S.length()
+						- S.replace(String.valueOf(currentChar), "").length();
 				characterCount.put(currentChar, count);
 				maxCount = Math.max(count, maxCount);
 			}
@@ -371,19 +372,40 @@ public class StringUtility {
 
 		if (!isMissing) {
 			return "-1";
-		} else {			
-				Set<Entry<Character, Integer>> chSet = characterCount.entrySet();
-				Iterator<Entry<Character, Integer>> chI = chSet.iterator();
-				
-				while (chI.hasNext()) {
-					Entry<Character, Integer> nextEntry = chI.next();
-					int count = nextEntry.getValue();
-					while (count < maxCount){
-						r.append(nextEntry.getKey());
-						count++;
-					}
-				}		
+		} else {
+			Set<Entry<Character, Integer>> chSet = characterCount.entrySet();
+			Iterator<Entry<Character, Integer>> chI = chSet.iterator();
+
+			while (chI.hasNext()) {
+				Entry<Character, Integer> nextEntry = chI.next();
+				int count = nextEntry.getValue();
+				while (count < maxCount) {
+					r.append(nextEntry.getKey());
+					count++;
+				}
+			}
 			return r.toString();
 		}
+
+	}
+
+	/**
+	 * @param input1 String.
+	 * @return frequency of each letter in the word.
+	 */
+	public static float[] countFrequency(String input1) {
+		int size = input1.length();
+		float[] frequency = new float[size];
+
+		for (int i = 0; i < input1.length(); i++) {
+			int count = 1;
+			for (int j = i + 1; j < size; j++) {
+				if (input1.charAt(j) == input1.charAt(i)) {
+					count++;
+				}
+			}
+			frequency[i] = (float) count / size;
+		}
+		return frequency;
 	}
 }
