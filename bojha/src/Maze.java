@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
@@ -176,6 +177,12 @@ public class Maze {
 
 			if (blockSize >= 2 && highest_col == mazeSize -1 && highest_row == mazeSize -1) {
 //				destination unreachable.
+				System.out.println("------------------");
+				System.out.println("Rowset " + rowSet);
+				System.out.println("Colset " + colSet);
+				colSet.addAll(rowSet);
+				System.out.println(colSet);
+//				System.out.println("------------------");
 				return true;
 			}
 			
