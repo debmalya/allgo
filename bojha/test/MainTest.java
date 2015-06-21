@@ -17,9 +17,9 @@ public class MainTest {
 	 */
 	@Test
 	public final void testProcessEachInput() {
-	    Main.processEachInput(3);		
-	    Main.processEachInput(1);
-	    Main.processEachInput(10);
+//	    Main.processEachInput(3);		
+//	    Main.processEachInput(1);
+//	    Main.processEachInput(10);
 
 		System.out.println("Thanks");
 	}
