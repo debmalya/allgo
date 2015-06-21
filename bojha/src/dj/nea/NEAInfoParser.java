@@ -18,22 +18,23 @@ public class NEAInfoParser {
 	/**
 	 * KEY_REF to call nea api
 	 */
-	 private static final String KEY_REF = "<<Your API KEY>>";
-
+	// private static final String KEY_REF = "<<Your API KEY>>";
+	private static final String KEY_REF = "781CF461BB6606AD24D4ABA1502FD8EE35587680A9D0709E";
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
 		String[] datasets = new String[] { "nowcast", "12hrs_forecast",
 				"3days_outlook", "heavy_rain_warning","uvi","earthquake","psi_update","pm2.5_update" };
 
 		for (int i = 0; i < datasets.length; i++) {
 			try {
 				callNEAWebAPI(datasets[i], KEY_REF);
+				Thread.sleep(5000);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 		}

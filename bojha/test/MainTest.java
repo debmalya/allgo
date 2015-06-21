@@ -17,7 +17,7 @@ public class MainTest {
 	 */
 	@Test
 	public final void testProcessEachInput() {
-	  
+
 	    Permutation.processEachInput(3);		
 	    Permutation.processEachInput(1);
 	    Permutation.processEachInput(10);

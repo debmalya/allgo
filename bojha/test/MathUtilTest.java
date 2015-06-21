@@ -236,4 +236,10 @@ public class MathUtilTest {
 			System.out.println(result[i]);
 		}
 	}
+	
+	@Test
+	public void testMex(){
+		int actual = MathUtil.mex(new int[]{0,2,4,4,2,1,10});
+		Assert.assertEquals(3, actual);
+	}
 }
