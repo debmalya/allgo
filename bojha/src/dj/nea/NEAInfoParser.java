@@ -18,8 +18,8 @@ public class NEAInfoParser {
 	/**
 	 * KEY_REF to call nea api
 	 */
-	// private static final String KEY_REF = "<<Your API KEY>>";
-	private static final String KEY_REF = "781CF461BB6606AD24D4ABA1502FD8EE35587680A9D0709E";
+	 private static final String KEY_REF = "<<Your API KEY>>";
+	
 
 	/**
 	 * @param args
