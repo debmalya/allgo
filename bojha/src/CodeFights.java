@@ -218,15 +218,33 @@ public class CodeFights {
 	 * @param N
 	 *            string : N < 1e12
 	 * @return  integer : 0, 1, -1
+	 * 
+	 * This takes time for large input, which is beyond acceptance limit.
 	 */
 	int mobious(String N) {
-		int r = -1;
+		
 		long l = Long.parseLong(N);
-		for (long d = 2; d*d <= l; d++){
+		long pc = 0;
+		for (long d = 2; d <= l/2; d++){
 			if (l % d == 0){
-				
+				if (isPrime(d)){
+					if (l % (d*d) == 0) {
+						return 0;
+					}
+					pc++;
+				}
 			}
 		}
-		return r;
+		return (int)Math.pow(-1.0, pc);
+	}
+	
+	boolean isPrime(long n) {
+		
+		for (long d = 2; d*d <= n; d++){
+			if (n%d==0){
+				return false;
+			}
+		}
+		return true;
 	}
 }
