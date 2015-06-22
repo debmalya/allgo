@@ -1,6 +1,8 @@
 import org.junit.Assert;
 import org.junit.Test;
 
+import codility.timecomplexity.TapeEquilibrium;
+
 
 public class TapeEquilibriumTest {
 
