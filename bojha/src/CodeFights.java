@@ -247,4 +247,34 @@ public class CodeFights {
 		}
 		return true;
 	}
+	
+	/**
+	 * Given an array of integers, find two non-empty non-intersecting
+	 * contiguous sub-arrays in such a way that the total sum of all the
+	 * elements in both sub-arrays is the maximum possible, and output that sum.
+	 * 
+	 * 
+	 * Example 1: N = 6 A = [1, 3, 2, -5, 3, 1] Answer: 10 The 2 contiguous
+	 * sub-arrays are [1, 3, 2] and [3, 1], and the answer is the sum of all
+	 * elements in both sub-arrays.
+	 * 
+	 * 
+	 * Example 2: N = 5 A = [-1, 3, 1, 5, 0] Answer: 9 We can obtain 9 in many
+	 * ways, like [3] and [1, 5, 0], or [3, 1] and [5].
+	 * 
+	 * 
+	 * 
+	 * Input (N) → integer : Number of integers in the array (2 <= N <= 100).
+	 * 
+	 * Input (A) → array.integer : The array of N integers (-100 <= Ai <= 100).
+	 * 
+	 * Output → integer : The maximum sum you can get.
+	 * 
+	 * @param N
+	 * @param A
+	 * @return
+	 */
+	int maxSum(int N, int[] A) {
+		return 0;
+	}
 }
