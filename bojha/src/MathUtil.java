@@ -581,4 +581,11 @@ public class MathUtil {
 		}
 
 	}
+	
+	/**
+	 * https://class.coursera.org/algo-004/lecture/167
+	 */
+	public int karatSubMultiplication(int a,int b){
+		return 0;
+	}
 }
