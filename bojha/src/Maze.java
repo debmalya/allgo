@@ -177,18 +177,34 @@ public class Maze {
 
 			if (blockSize >= 2 && highest_col == mazeSize -1 && highest_row == mazeSize -1) {
 //				destination unreachable.
-				System.out.println("------------------");
-				System.out.println("Rowset " + rowSet);
-				System.out.println("Colset " + colSet);
-				colSet.addAll(rowSet);
-				System.out.println(colSet);
 //				System.out.println("------------------");
+//				System.out.println("Rowset " + rowSet);
+//				System.out.println("Colset " + colSet);
+				colSet.addAll(rowSet);
+//				System.out.println(colSet);
+//				if (!isContinuous(colSet)) {
+//					return false;
+//				}
 				return true;
 			}
 			
 
 		}
 		return false;
+	}
+
+	/**
+	 * @param colSet
+	 * @return
+	 */
+	private static boolean isContinuous(Set<Integer> colSet) {
+		Integer[] values = colSet.toArray(new Integer[0]);
+		for (int i = 1; i < values.length; i++){
+			if (values[i] - values[i -1] > 1){
+				return false;
+			}
+		}
+		return true;
 	}
 
 
