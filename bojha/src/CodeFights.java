@@ -217,37 +217,38 @@ public class CodeFights {
 	 * 
 	 * @param N
 	 *            string : N < 1e12
-	 * @return  integer : 0, 1, -1
+	 * @return integer : 0, 1, -1
 	 * 
-	 * This takes time for large input, which is beyond acceptance limit.
+	 *         This takes time for large input, which is beyond acceptance
+	 *         limit.
 	 */
 	int mobious(String N) {
-		
+
 		long l = Long.parseLong(N);
 		long pc = 0;
-		for (long d = 2; d <= l/2; d++){
-			if (l % d == 0){
-				if (isPrime(d)){
-					if (l % (d*d) == 0) {
+		for (long d = 2; d <= l / 2; d++) {
+			if (l % d == 0) {
+				if (isPrime(d)) {
+					if (l % (d * d) == 0) {
 						return 0;
 					}
 					pc++;
 				}
 			}
 		}
-		return (int)Math.pow(-1.0, pc);
+		return (int) Math.pow(-1.0, pc);
 	}
-	
+
 	boolean isPrime(long n) {
-		
-		for (long d = 2; d*d <= n; d++){
-			if (n%d==0){
+
+		for (long d = 2; d * d <= n; d++) {
+			if (n % d == 0) {
 				return false;
 			}
 		}
 		return true;
 	}
-	
+
 	/**
 	 * Given an array of integers, find two non-empty non-intersecting
 	 * contiguous sub-arrays in such a way that the total sum of all the
@@ -277,4 +278,43 @@ public class CodeFights {
 	int maxSum(int N, int[] A) {
 		return 0;
 	}
+
+	/**
+	 * The sequence of Chando is an infinite sequence of all Chando's numbers in
+	 * an ascending order.
+	 * 
+	 * 
+	 * A number is called Chando's if it is an integer that can be represented
+	 * as a sum of different positive integer powers of 5.
+	 * 
+	 * 
+	 * The first Chando's numbers are 5, 25, 30, 125, 130, 150...
+	 * 
+	 * 
+	 * Your task is to find the Chando's N-th number for a given N.
+	 * 
+	 * 
+	 * 
+	 * Input (N) → integer : 1 <= N <= 7000
+	 * 
+	 * Output → integer : N-th Chando's number
+	 * 
+	 * @param N
+	 * @return
+	 */
+	int nthChandosNumber(int N) {
+		if (N == 1) {
+			return 5;
+		}else if (N==2){
+			return 25;
+		} else {
+			int c = 2;
+			while (N <= c){
+				c = c << 1;
+			}
+		}
+		
+		return 0;
+	}
+
 }
