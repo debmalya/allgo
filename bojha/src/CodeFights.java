@@ -300,21 +300,37 @@ public class CodeFights {
 	 * Output → integer : N-th Chando's number
 	 * 
 	 * @param N
-	 * @return
+	 * @return 1 - 5 2 - 25 3 - 30 4 - 125 5 - 130 6 - 150 7 - 155 8 - 625 9 -
+	 *         630 and so on.
 	 */
+	
 	int nthChandosNumber(int N) {
-		if (N == 1) {
-			return 5;
-		}else if (N==2){
-			return 25;
-		} else {
-			int c = 2;
-			while (N <= c){
-				c = c << 1;
+		int r = 0, c = 1;
+
+		while (N > 0){
+			if (N%2==1){
+				r+=(int)Math.pow(5, c);
+			}
+			N /=2;
+			c++;
+		}
+
+		return r;
+
+	}
+	int nthChandosNumber0(int N) {
+		int r = 0;
+
+		char[] cN = Integer.toBinaryString(N).toCharArray();
+		int z = cN.length;
+		for (int i = z; i > 0; i--) {
+			if (cN[z - i] == '1') {
+				r += Math.pow(5, i);
 			}
 		}
-		
-		return 0;
+
+		return r;
+
 	}
 
 }
