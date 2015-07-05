@@ -18,7 +18,7 @@ public class CodeFightsTest {
 	/**
 	 * Test method for {@link CodeFights#minBoxes(int[])}.
 	 */
-	@Test
+//	@Test
 	public final void testMinBoxes() {
 		CodeFights fights = new CodeFights();
 		int actual = fights.minBoxes(new int[]{9,9,9,3});
@@ -46,5 +46,25 @@ public class CodeFightsTest {
 		CodeFights fights = new CodeFights();
 		int actual = fights.mobious("10");
 		Assert.assertEquals(1,actual);
+	}
+	
+	@Test
+	public final void testChandosNumber() {
+		CodeFights fights = new CodeFights();
+		int actual = fights.nthChandosNumber(1);
+		Assert.assertEquals(5,actual);
+		actual = fights.nthChandosNumber(2);
+		Assert.assertEquals(25,actual);
+		actual = fights.nthChandosNumber(3);
+		Assert.assertEquals(30,actual);
+		
+		actual = fights.nthChandosNumber(4);
+		Assert.assertEquals(125,actual);
+		
+		actual = fights.nthChandosNumber(5);
+		Assert.assertEquals(130,actual);
+		
+		actual = fights.nthChandosNumber(9);
+		Assert.assertEquals(630,actual);
 	}
 }
