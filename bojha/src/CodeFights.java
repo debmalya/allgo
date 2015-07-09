@@ -332,5 +332,34 @@ public class CodeFights {
 		return r;
 
 	}
+	
+	/**
+	   * 
+	   Given an integer N, how many calculations will it take for N to be 1 if you
+	   * follow the following rules:
+	   * 
+	   * 1) if N is even -> divide N by 2
+	   * 
+	   * 2) if N is odd -> add 1 to N
+	   * 
+	   * Input (N) → integer :
+	   * 
+	   * 10 <= N <= 10000 Output → integer :
+	   * 
+	   * Number of calculations it takes for N to be 1
+	   */
+	  int Num_Calc (int N)
+	  {
+	    if (N == 1)
+	    {
+	      return 0;
+	    }
+	    else
+	      if (N % 2 == 1)
+	      {
+	        return 2 + Num_Calc (N / 2 + 1);
+	      }
+	    return 1 + Num_Calc (N / 2);
+	  }
 
 }
