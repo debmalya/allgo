@@ -67,4 +67,17 @@ public class CodeFightsTest {
 		actual = fights.nthChandosNumber(9);
 		Assert.assertEquals(630,actual);
 	}
+	
+	@Test
+	public final void testNum_Calc(){
+		CodeFights fights = new CodeFights();
+		int actual = fights.Num_Calc(10);
+		Assert.assertEquals(6, actual);
+		
+		actual = fights.Num_Calc(9);
+		Assert.assertEquals(7, actual);
+		
+		actual = fights.Num_Calc(8);
+		Assert.assertEquals(3, actual);
+	}
 }
