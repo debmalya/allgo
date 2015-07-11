@@ -390,7 +390,8 @@ public class StringUtility {
 	}
 
 	/**
-	 * @param input1 String.
+	 * @param input1
+	 *            String.
 	 * @return frequency of each letter in the word.
 	 */
 	public static float[] countFrequency(String input1) {
@@ -408,4 +409,39 @@ public class StringUtility {
 		}
 		return frequency;
 	}
+
+	/**
+	 * Given a string, check if its characters can be rearranged to form a
+	 * palindrome. Where a palindrome is a string that reads the same
+	 * left-to-right and right-to-left.
+	 * 
+	 * 
+	 * Example
+	 * 
+	 * 
+	 * "trueistrue" -> false; "abcab" -> true because "abcba" is a palindrome
+	 * 
+	 * Input 1 (s) → string : Output → boolean :
+	 */
+	boolean isPalindrome(String s) {
+		int l = s.length();
+		int p, c = 0;
+		while (s.length() > 0) {
+			p = s.length();
+			s = s.replace(String.valueOf(s.charAt(0)), "");
+			if (p - s.length() % 2 == 1) {
+				c++;
+				if (c > 1) {
+					return false;
+				}
+			}
+		}
+		
+		if (l % 2 == 0 && c== 1){
+			return false;
+		}
+		return true;
+	}
+
+	
 }
