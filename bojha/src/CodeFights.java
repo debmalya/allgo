@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /**
  * 
  */
@@ -303,21 +305,22 @@ public class CodeFights {
 	 * @return 1 - 5 2 - 25 3 - 30 4 - 125 5 - 130 6 - 150 7 - 155 8 - 625 9 -
 	 *         630 and so on.
 	 */
-	
+
 	int nthChandosNumber(int N) {
 		int r = 0, c = 1;
 
-		while (N > 0){
-			if (N%2==1){
-				r+=(int)Math.pow(5, c);
+		while (N > 0) {
+			if (N % 2 == 1) {
+				r += (int) Math.pow(5, c);
 			}
-			N /=2;
+			N /= 2;
 			c++;
 		}
 
 		return r;
 
 	}
+
 	int nthChandosNumber0(int N) {
 		int r = 0;
 
@@ -332,34 +335,67 @@ public class CodeFights {
 		return r;
 
 	}
-	
+
 	/**
-	   * 
-	   Given an integer N, how many calculations will it take for N to be 1 if you
-	   * follow the following rules:
-	   * 
-	   * 1) if N is even -> divide N by 2
-	   * 
-	   * 2) if N is odd -> add 1 to N
-	   * 
-	   * Input (N) → integer :
-	   * 
-	   * 10 <= N <= 10000 Output → integer :
-	   * 
-	   * Number of calculations it takes for N to be 1
-	   */
-	  int Num_Calc (int N)
-	  {
-	    if (N == 1)
-	    {
-	      return 0;
-	    }
-	    else
-	      if (N % 2 == 1)
-	      {
-	        return 2 + Num_Calc (N / 2 + 1);
-	      }
-	    return 1 + Num_Calc (N / 2);
-	  }
+	 * 
+	 Given an integer N, how many calculations will it take for N to be 1 if
+	 * you follow the following rules:
+	 * 
+	 * 1) if N is even -> divide N by 2
+	 * 
+	 * 2) if N is odd -> add 1 to N
+	 * 
+	 * Input (N) → integer :
+	 * 
+	 * 10 <= N <= 10000 Output → integer :
+	 * 
+	 * Number of calculations it takes for N to be 1
+	 */
+	int Num_Calc(int N) {
+		if (N == 1) {
+			return 0;
+		} else if (N % 2 == 1) {
+			return 2 + Num_Calc(N / 2 + 1);
+		}
+		return 1 + Num_Calc(N / 2);
+	}
+
+	/**
+	 * Given array of symbol frequencies. Return the array of lengths of symbols
+	 * in bits after Huffman coding. It is guaranteed that there are no vertexes
+	 * in the Huffman tree with equal frequencies and different distances to the
+	 * root.
+	 * 
+	 * 
+	 * Examples
+	 * 
+	 * input: [0.3, 0.3, 0.4] output: [2, 2, 1]
+	 * 
+	 * 
+	 * input: [0.384615, 0.179487, 0.153846, 0.153846, 0.128205] output: [1, 3,
+	 * 3, 3, 3]
+	 * 
+	 * https://en.wikipedia.org/wiki/Huffman_coding
+	 */
+	int[] huffman_lengths(double[] freq) {
+		int[] r = new int[freq.length];
+		return r;
+	}
+
+	/**
+	 * Given N cranes where array A represents their respective maximum lifting
+	 * capabilities (in terms of weight) -> what is the maximum weight of an
+	 * object that these N cranes can lift together, such that none of the
+	 * cranes lift more than their maximum lifting capabilities. For example:
+	 * >>> Cranes(3,[10,1,5]) 3 >>> Cranes(2,[10,15]) 20
+	 * 
+	 * 
+	 * 
+	 * Input (N) → integer : Input (A) → array.integer : Output → integer :
+	 */
+	int Cranes(int N, int[] A) {
+		Arrays.sort(A);
+		return N*A[0];
+	}
 
 }
