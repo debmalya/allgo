@@ -7,6 +7,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StringUtility {
 
@@ -443,6 +445,23 @@ public class StringUtility {
 		return true;
 	}
 
+	/**
+	 * Input string will be like
+	 * DEB:<string>:<messageId>
+	 * DEB:<int>:<messageId>
+	 * 
+	 */
+	public boolean isInt(String input) {
+		
+		Matcher matcherForInt = Pattern.compile ("DEB:[0-9]+:(.+)").matcher (input);
+		Matcher matcherForAny = Pattern.compile ("DEB:[0-9][a-z][A-Z]+:(.+)").matcher (input);
+		boolean isInt = matcherForInt.find ();
+		boolean isAll = matcherForAny.find();
+		
+		System.out.println(matcherForInt.group());
+		
+		return isInt && !isAll;
+	}
 	
 	
 }
