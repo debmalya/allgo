@@ -3,8 +3,8 @@ package dj.string;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import junit.framework.Assert;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 
@@ -81,6 +81,14 @@ public class StringUtilityTest
     assertTrue(utility.isPalindrom ("madam"));
     assertTrue(utility.isPalindrom ("900009"));
     assertFalse(utility.isPalindrom ("910009"));
+   
+  }
+  
+  @Test
+  public void isPalindrome(){
+	  StringUtility utility = new StringUtility ();
+	  Assert.assertTrue(utility.isPalindrome("abb"));
+	  Assert.assertFalse(utility.isPalindrome("abc"));
   }
   
   @Test
@@ -115,6 +123,14 @@ public class StringUtilityTest
 	  
 	  r = utility.missingAlphabet("abbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxy");
 	  assertTrue("Expected ayzz but found " + r,r.equals("ayzz"));
+	  
+  }
+  
+  @Test
+  public void testIsInt() {
+	  StringUtility utility = new StringUtility ();
+	  Assert.assertTrue(utility.isInt("DEB:123456:123"));
+	  Assert.assertFalse(utility.isInt("DEB:A0000001:123"));
 	  
   }
 }
