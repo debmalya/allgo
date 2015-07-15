@@ -395,7 +395,34 @@ public class CodeFights {
 	 */
 	int Cranes(int N, int[] A) {
 		Arrays.sort(A);
-		return N*A[0];
+		return N * A[0];
 	}
 
+	/**
+	 * Given a sorted array and an integer as inputs, determine if there is a
+	 * pair of elements in the array that produce the given integer when
+	 * multiplied.
+	 * 
+	 * 
+	 * Examples
+	 * 
+	 * 
+	 * isPairMult([1,2,3,6,15,25], 30) -> true, since 15*2 = 30
+	 * isPairMult([2,3,6,15,25], 10) -> false
+	 * 
+	 * Input 1 (a) → array.integer : array of integers
+	 * 
+	 * Input 2 (N) → integer : desired product
+	 */
+	boolean isPairMult(int[] a, int N) {
+		int k = a.length;
+		for (int i = 0; i < k -1; i++) {
+			for (int j = i + 1; j < k; j++){
+				if (a[i] * a[j] == N){
+					return true;
+				} 
+			}
+		}
+		return false;
+	}
 }
