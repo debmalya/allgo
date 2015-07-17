@@ -80,4 +80,12 @@ public class CodeFightsTest {
 		actual = fights.Num_Calc(8);
 		Assert.assertEquals(3, actual);
 	}
+	
+	@Test
+	public final void testisPairMult(){
+		CodeFights fights = new CodeFights();
+		Assert.assertTrue(fights.isPairMult(new int[]{1,2,3,6,15,25}, 30));
+		Assert.assertFalse(fights.isPairMult(new int[]{2,3,6,15,25},  10));
+		Assert.assertTrue(fights.isPairMult(new int[]{1,2,3},6));
+	}
 }
