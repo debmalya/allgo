@@ -416,13 +416,57 @@ public class CodeFights {
 	 */
 	boolean isPairMult(int[] a, int N) {
 		int k = a.length;
-		for (int i = 0; i < k -1; i++) {
-			for (int j = i + 1; j < k; j++){
-				if (a[i] * a[j] == N){
+		for (int i = 0; i < k - 1; i++) {
+			for (int j = i + 1; j < k; j++) {
+				if (a[i] * a[j] == N) {
 					return true;
-				} 
+				}
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * You are given a digital number written down on a sheet of paper. Your
+	 * task is to figure out if you rotate the given sheet of paper by 180
+	 * degrees would the number still look exactly the same.
+	 * 
+	 * 
+	 * Examples
+	 * 
+	 * 
+	 * input: "1" output: false
+	 * 
+	 * input: "29562" output: true
+	 * 
+	 * input: "77" output: false
+	 * 
+	 * Input 1 (number) → string : sequence of digital digits given as a string
+	 * 
+	 * Output → boolean :
+	 */
+	boolean digital_number(String number) {
+		int l = number.length();
+
+		for (int i = 0; i <= l / 2; i++) {
+			char f = number.charAt(i);
+			char s = number.charAt(l - i - 1);
+			if (f == s && (f == '5' || f == '0' || f == '2' || f == '8')) {
+
+			}
+
+			else if (f == '6' && s == '9') {
+
+			} else if (f == '9' && s == '6') {
+
+			} else {
+				return false;
+			}
+		}
+		if (l > 1) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }
