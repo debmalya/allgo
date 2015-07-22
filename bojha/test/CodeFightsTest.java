@@ -88,4 +88,14 @@ public class CodeFightsTest {
 		Assert.assertFalse(fights.isPairMult(new int[]{2,3,6,15,25},  10));
 		Assert.assertTrue(fights.isPairMult(new int[]{1,2,3},6));
 	}
+	
+	@Test
+	public final void testDigital_Number() {
+		CodeFights fights = new CodeFights();
+		Assert.assertTrue(fights.digital_number("29562"));
+		Assert.assertFalse(fights.digital_number("1"));
+		Assert.assertFalse(fights.digital_number("77"));
+		Assert.assertFalse(fights.digital_number("29962"));
+		Assert.assertTrue(fights.digital_number("000"));
+	}
 }
