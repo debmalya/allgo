@@ -98,4 +98,11 @@ public class CodeFightsTest {
 		Assert.assertFalse(fights.digital_number("29962"));
 		Assert.assertTrue(fights.digital_number("000"));
 	}
+	
+	@Test
+	public final void testmax_num_of_ele(){
+		CodeFights fights = new CodeFights();
+		Assert.assertEquals(2, fights.max_num_of_ele(10, new int[]{10,3,7}));
+		Assert.assertEquals(3, fights.max_num_of_ele(3, new int[]{1,1,2,1}));
+	}
 }
