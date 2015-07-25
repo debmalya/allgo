@@ -524,7 +524,7 @@ public class MathUtil {
 	 * 
 	 * @param A
 	 *            array of integers.
-	 * @param n
+	 * @param numberOfShelves
 	 * @return
 	 */
 	public static int equi(int[] arr) {
