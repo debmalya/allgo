@@ -488,11 +488,59 @@ public class CodeFights {
 		Arrays.sort(list);
 		int s = 0;
 		int c = 0;
-		for (int i = 0; i < list.length && s < sum; i++){
+		for (int i = 0; i < list.length && s < sum; i++) {
 			s += list[i];
 			c++;
 			if (s == sum) {
 				return c;
+			}
+		}
+		return 0;
+	}
+
+	/**
+	 * The Secret Number
+	 * 
+	 * 
+	 * All numbers from 1 to N have been inserted into an array of N-1 integers
+	 * in random order, except for the secret number. Assuming it is less than
+	 * N, find the secret number in the given array.
+	 * 
+	 * 
+	 * Example
+	 * 
+	 * 
+	 * N=10, Array: [6, 8, 3, 10, 1, 9, 2, 5, 7] Missing Number: 4
+	 * 
+	 * N=5, Array: [5, 2, 4, 1] Missing Number: 3
+	 * 
+	 * Input 1 (A) → array.integer : Array with N-1 numbers (only missing the
+	 * 'Secret number')
+	 * 
+	 * Output → integer : The missing number
+	 */
+	public int missingNumber(int[] A) {
+		Arrays.sort(A);
+		  for (int i = 0; i < A.length;i++){
+		    if (i > 0 && A[i] > A[i - 1] + 1){
+		      	return A[i - 1]+1;
+		    }
+		  }
+		  return 0;
+	}
+	public int missingNumber0(int[] A) {
+		int l = A.length;
+		int i = 0;
+		for (; i < l; i++) {
+			for (int j = i + 1; j < l; j++) {
+				if (A[i] > A[j]) {
+					int t = A[j];
+					A[j] = A[i];
+					A[i] = t;
+				}
+			}
+			if (i > 0 && A[i] > A[i - 1] + 1) {
+				return A[i - 1] + 1;
 			}
 		}
 		return 0;
