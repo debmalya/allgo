@@ -1,7 +1,4 @@
 
-
-
-
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -18,77 +15,78 @@ public class CodeFightsTest {
 	/**
 	 * Test method for {@link CodeFights#minBoxes(int[])}.
 	 */
-//	@Test
+	// @Test
 	public final void testMinBoxes() {
 		CodeFights fights = new CodeFights();
-		int actual = fights.minBoxes(new int[]{9,9,9,3});
+		int actual = fights.minBoxes(new int[] { 9, 9, 9, 3 });
 		Assert.assertEquals(4, actual);
-		
-		actual = fights.minBoxes(new int[]{6, 7, 2, 4});
+
+		actual = fights.minBoxes(new int[] { 6, 7, 2, 4 });
 		Assert.assertEquals(2, actual);
-		
-		actual = fights.minBoxes(new int[]{6, 7, 3, 4});
+
+		actual = fights.minBoxes(new int[] { 6, 7, 3, 4 });
 		Assert.assertEquals(2, actual);
-		
-		actual = fights.minBoxes(new int[]{6, 7, 4, 4});
+
+		actual = fights.minBoxes(new int[] { 6, 7, 4, 4 });
 		Assert.assertEquals(3, actual);
-		
-		actual = fights.minBoxes(new int[]{9,9,9,3});
+
+		actual = fights.minBoxes(new int[] { 9, 9, 9, 3 });
 		Assert.assertEquals(4, actual);
-		
-		actual = fights.minBoxes(new int[]{7,4,2,3,5,1,8});
+
+		actual = fights.minBoxes(new int[] { 7, 4, 2, 3, 5, 1, 8 });
 		Assert.assertEquals(3, actual);
-		
+
 	}
 
 	@Test
-	public final void testMobious(){
+	public final void testMobious() {
 		CodeFights fights = new CodeFights();
 		int actual = fights.mobious("10");
-		Assert.assertEquals(1,actual);
+		Assert.assertEquals(1, actual);
 	}
-	
+
 	@Test
 	public final void testChandosNumber() {
 		CodeFights fights = new CodeFights();
 		int actual = fights.nthChandosNumber(1);
-		Assert.assertEquals(5,actual);
+		Assert.assertEquals(5, actual);
 		actual = fights.nthChandosNumber(2);
-		Assert.assertEquals(25,actual);
+		Assert.assertEquals(25, actual);
 		actual = fights.nthChandosNumber(3);
-		Assert.assertEquals(30,actual);
-		
+		Assert.assertEquals(30, actual);
+
 		actual = fights.nthChandosNumber(4);
-		Assert.assertEquals(125,actual);
-		
+		Assert.assertEquals(125, actual);
+
 		actual = fights.nthChandosNumber(5);
-		Assert.assertEquals(130,actual);
-		
+		Assert.assertEquals(130, actual);
+
 		actual = fights.nthChandosNumber(9);
-		Assert.assertEquals(630,actual);
+		Assert.assertEquals(630, actual);
 	}
-	
+
 	@Test
-	public final void testNum_Calc(){
+	public final void testNum_Calc() {
 		CodeFights fights = new CodeFights();
 		int actual = fights.Num_Calc(10);
 		Assert.assertEquals(6, actual);
-		
+
 		actual = fights.Num_Calc(9);
 		Assert.assertEquals(7, actual);
-		
+
 		actual = fights.Num_Calc(8);
 		Assert.assertEquals(3, actual);
 	}
-	
+
 	@Test
-	public final void testisPairMult(){
+	public final void testisPairMult() {
 		CodeFights fights = new CodeFights();
-		Assert.assertTrue(fights.isPairMult(new int[]{1,2,3,6,15,25}, 30));
-		Assert.assertFalse(fights.isPairMult(new int[]{2,3,6,15,25},  10));
-		Assert.assertTrue(fights.isPairMult(new int[]{1,2,3},6));
+		Assert.assertTrue(fights.isPairMult(new int[] { 1, 2, 3, 6, 15, 25 },
+				30));
+		Assert.assertFalse(fights.isPairMult(new int[] { 2, 3, 6, 15, 25 }, 10));
+		Assert.assertTrue(fights.isPairMult(new int[] { 1, 2, 3 }, 6));
 	}
-	
+
 	@Test
 	public final void testDigital_Number() {
 		CodeFights fights = new CodeFights();
@@ -98,11 +96,29 @@ public class CodeFightsTest {
 		Assert.assertFalse(fights.digital_number("29962"));
 		Assert.assertTrue(fights.digital_number("000"));
 	}
-	
+
 	@Test
-	public final void testmax_num_of_ele(){
+	public final void testmax_num_of_ele() {
 		CodeFights fights = new CodeFights();
-		Assert.assertEquals(2, fights.max_num_of_ele(10, new int[]{10,3,7}));
-		Assert.assertEquals(3, fights.max_num_of_ele(3, new int[]{1,1,2,1}));
+		Assert.assertEquals(2,
+				fights.max_num_of_ele(10, new int[] { 10, 3, 7 }));
+		Assert.assertEquals(3,
+				fights.max_num_of_ele(3, new int[] { 1, 1, 2, 1 }));
+	}
+
+	@Test
+	public void testmissingNumber() {
+		CodeFights fights = new CodeFights();
+		int actual = fights.missingNumber(new int[]{1,2,4,5});
+		Assert.assertEquals(3, actual);
+		
+		actual = fights.missingNumber(new int[]{10,2,5,7,3,6,8,1,4});
+		Assert.assertEquals(9, actual);
+		
+		actual = fights.missingNumber(new int[]{5, 2, 4, 1});
+		Assert.assertEquals(3, actual);
+		
+		actual = fights.missingNumber(new int[]{6, 8, 3, 10, 1, 9, 2, 5, 7});
+		Assert.assertEquals(4, actual);
 	}
 }
