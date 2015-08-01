@@ -232,10 +232,12 @@ public class StringUtility {
 	 * 
 	 * @p
 	 */
-	public char getFristUniqueCharacter(String value) {
+	public Character getFristUniqueCharacter(String value) {
+		List<Character> uniqueuCharacters = new ArrayList<Character>();
 		if (value != null) {
+//			value = value.toLowerCase();
 			Set<Character> characters = new HashSet<Character>();
-			List<Character> uniqueuCharacters = new ArrayList<Character>();
+			uniqueuCharacters = new ArrayList<Character>();
 
 			for (int i = 0; i < value.length(); i++) {
 				Character eachChar = value.charAt(i);
@@ -247,12 +249,14 @@ public class StringUtility {
 					uniqueuCharacters.remove(eachChar);
 				}
 			}
-			if (uniqueuCharacters.size() > 0) {
-				return uniqueuCharacters.get(0);
-			}
+			
 		}
 
-		return ' ';
+		if (!uniqueuCharacters.isEmpty()) {
+			return uniqueuCharacters.get(0);
+		} else {
+			return null;
+		}
 	}
 
 	/**
@@ -438,30 +442,29 @@ public class StringUtility {
 				}
 			}
 		}
-		
-		if (l % 2 == 0 && c== 1){
+
+		if (l % 2 == 0 && c == 1) {
 			return false;
 		}
 		return true;
 	}
 
 	/**
-	 * Input string will be like
-	 * DEB:<string>:<messageId>
-	 * DEB:<int>:<messageId>
+	 * Input string will be like DEB:<string>:<messageId> DEB:<int>:<messageId>
 	 * 
 	 */
 	public boolean isInt(String input) {
-		
-		Matcher matcherForInt = Pattern.compile ("DEB:[0-9]+:(.+)").matcher (input);
-		Matcher matcherForAny = Pattern.compile ("DEB:[0-9][a-z][A-Z]+:(.+)").matcher (input);
-		boolean isInt = matcherForInt.find ();
+
+		Matcher matcherForInt = Pattern.compile("DEB:[0-9]+:(.+)").matcher(
+				input);
+		Matcher matcherForAny = Pattern.compile("DEB:[0-9][a-z][A-Z]+:(.+)")
+				.matcher(input);
+		boolean isInt = matcherForInt.find();
 		boolean isAll = matcherForAny.find();
-		
-		System.out.println(matcherForInt.group());
-		
+
+		// System.out.println(matcherForInt.group());
+
 		return isInt && !isAll;
 	}
-	
-	
+
 }
