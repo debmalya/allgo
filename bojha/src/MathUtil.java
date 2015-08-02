@@ -568,7 +568,7 @@ public class MathUtil {
 		int r = 0;
 		while (true) {
 			int f = 0, i = 0;
-				while (i < a.length) {
+			while (i < a.length) {
 				if (a[i++] == r) {
 					f++;
 					continue;
@@ -581,11 +581,44 @@ public class MathUtil {
 		}
 
 	}
-	
+
 	/**
 	 * https://class.coursera.org/algo-004/lecture/167
 	 */
-	public int karatSubMultiplication(int a,int b){
+	public int karatSubMultiplication(int a, int b) {
 		return 0;
+	}
+
+	/**
+	 * A DOTA game has N heroes, each with a distinct rank from [1..N]. In DOTA
+	 * every formation is characterized as a permutation [1...N] of ranks of
+	 * players. A formation is Imba when the sum of ranks of every two
+	 * consecutive players is less than or equal to (N+1). Given N, you are to
+	 * print the lexicographically smallest permutation of ranks [1...N] that
+	 * makes the formation Imba.
+	 * 
+	 * @param n
+	 *            number of heroes (2 <= n < 10000)
+	 * @return lexicographically smallest permutation of ranks [1...N] that
+	 *         makes the formation Imba.
+	 */
+	public static String imba(final int n) {
+		StringBuilder imba = new StringBuilder("");
+
+		int i = 1;
+		int m = n;
+		while (i <= m) {
+			imba.append(m--);
+
+			if (i < m) {
+				imba.append(" ");
+				imba.append(i++);
+
+			}
+			imba.append(" ");
+
+		}
+
+		return imba.reverse().toString().trim();
 	}
 }
