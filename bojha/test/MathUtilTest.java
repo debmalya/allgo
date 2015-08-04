@@ -126,7 +126,7 @@ public class MathUtilTest {
 		Assert.assertEquals(1, index);
 	}
 	
-	@Test
+//	@Test
 	public void testEqui() {
 		int index = MathUtil.equi(new int[]{2,3,1,6});
 		Assert.assertEquals(2, index);
@@ -228,18 +228,33 @@ public class MathUtilTest {
 	@Test
 	public void testProcess() {
 		int[] result = MathUtil.process(new int[]{-1, 2,-3,4,-5},0);
-		for (int i = 0; i < result.length; i++) {
-			System.out.println(result[i]);
-		}
+//		for (int i = 0; i < result.length; i++) {
+//			System.out.println(result[i]);
+//		}
 		result = MathUtil.process(new int[]{-1,-3,4,-5},0);
-		for (int i = 0; i < result.length; i++) {
-			System.out.println(result[i]);
-		}
+//		for (int i = 0; i < result.length; i++) {
+//			System.out.println(result[i]);
+//		}
 	}
 	
 	@Test
 	public void testMex(){
 		int actual = MathUtil.mex(new int[]{0,2,4,4,2,1,10});
 		Assert.assertEquals(3, actual);
+	}
+	
+	@Test
+	public void testImba() {
+		String actual = MathUtil.imba(3);		
+		Assert.assertEquals("2 1 3", actual);
+		
+		actual = MathUtil.imba(2);		
+		Assert.assertEquals("1 2", actual);
+		
+		actual = MathUtil.imba(4);		
+		Assert.assertEquals("2 3 1 4", actual);
+		
+		actual = MathUtil.imba(5);		
+		Assert.assertEquals("3 2 4 1 5", actual);
 	}
 }
