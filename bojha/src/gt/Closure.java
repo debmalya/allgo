@@ -27,8 +27,7 @@ public class Closure {
 			for (int col = 0; col < matrix[row].length; col++) {
 				if (!visited[row][col]) {
 					
-					if (isClosure(matrix, row, col, visited)) {
-						System.out.println(row + " , " + col);
+					if (isClosure(matrix, row, col, visited)) {						
 						count++;
 					}
 				}
