@@ -621,4 +621,32 @@ public class MathUtil {
 
 		return imba.reverse().toString().trim();
 	}
+	
+	/**
+	 * If num is prime, it will be added into the list.
+	 * @param num
+	 * @param primeList
+	 * 
+	 * It can be called in a loop.
+	 * Starting from 3 ... 
+	 */
+	public static void primeList(int num, List<Integer> primeList) {
+		if (primeList == null) {
+			primeList = new ArrayList<Integer>();
+		}
+		if (primeList.isEmpty()) {
+			primeList.add(2);
+		}
+		for (int i = 0; i < primeList.size(); i++) {
+			if (primeList.get(i) > Math.sqrt(num)) {
+				break;
+			}
+			if (num % primeList.get(i) == 0 ) {
+				return;
+			}
+			
+		}
+		
+		primeList.add(num);
+	}
 }
