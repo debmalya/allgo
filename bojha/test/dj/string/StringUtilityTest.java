@@ -105,11 +105,20 @@ public class StringUtilityTest
   @Test
   public void testGetFirstUniqueCharacter() {
     StringUtility utility = new StringUtility ();
-    char actual = utility.getFristUniqueCharacter ("Banana");
-    Assert.assertEquals ('B', actual);
+    Character actual = utility.getFristUniqueCharacter ("Banana");
+    Assert.assertEquals ('B', actual.charValue());
     
     actual = utility.getFristUniqueCharacter ("RRaajju");
-    Assert.assertEquals ('u', actual);
+    Assert.assertEquals ('u', actual.charValue());
+    
+    actual = utility.getFristUniqueCharacter (" ");
+    Assert.assertEquals (' ', actual.charValue());
+    
+    actual = utility.getFristUniqueCharacter ("  ");
+    Assert.assertNull (actual);
+    
+    actual = utility.getFristUniqueCharacter ("Aharsi");
+    Assert.assertEquals ('A', actual.charValue());
   }
   
   @Test
