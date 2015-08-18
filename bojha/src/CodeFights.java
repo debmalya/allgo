@@ -546,5 +546,51 @@ public class CodeFights {
 		return 0;
 	}
 
+	/**
+	   * 
+	   Given an array and a number N call a pair of numbers from the array a
+	   * Perfect Pair if their sum is equal to N.
+	   * 
+	   * Find all of the perfect pairs and return the sum of their indices. Note
+	   * that any element of the array can only be counted in one Perfect Pair. Also
+	   * if there are multiple correct answers, return the smallest one.
+	   * 
+	   * Examples
+	   * 
+	   * pairwise([1, 4, 2, 3, 0, 5], 7) = 11
+	   * 
+	   * Since the Perfect Pairs are (4, 3) and (2, 5) with indices 1 + 3 + 2 + 5 =
+	   * 11.
+	   * 
+	   * pairwise([1, 3, 2, 4], 4) = 1
+	   * 
+	   * Since the element at index 0 (i.e. 1) and the element at index 1 (i.e. 3)
+	   * form the only Perfect Pair.
+	   * 
+	   * Input 1 (arr) → array.integer :
+	   * 
+	   * array of non-negative integers Input 2 (N) → integer :
+	   * 
+	   * positive integer Output → integer :
+	   * 
+	   * sum of indices and 0 if no Perfect Pair exists
+	   */
+	  public int pairwise (int[] arr, int N)
+	  {
+	    int l = arr.length;
+	    int r = 0;
+	    int[] c = new int[l];
+	    for (int i = 0; i < l - 1; i++){
+	      for (int j = i + 1; j < l; j++) {
+	        if (arr[i]+arr[j] == N && c[i] + c[j] == 0) {
+	          r += (i + j);
+	          c[i]=1;
+	          c[j]=1;
+	        }
+	      }
+	    }
+	    return r;
+	  }
+
 
 }
