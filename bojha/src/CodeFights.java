@@ -610,34 +610,34 @@ public class CodeFights {
 	 * the given range.
 	 * 
 	 */
-	int LuckyNum(int L, int R) {	    
-	    
-	    
-	    for (int i = L; i <= R; i++)
-	    {
-	      int l = i;
+	public int LuckyNum(int L, int R) {
 
+		while (L <= R) {
+			
+			if (String.valueOf(L).matches("[47]*") ) 
+				return L;
+			L++;
 
-	      int lu = 0;
-	      while (l > 0)
-	      {
-	        int r = l % 10;
-	        if (r != 7 && r != 4)
-	        {
-	          // not a lucky number
-	          lu = 1;
-	          break;
-	        }
-	        l /= 10;
-	      }
-	      if (lu == 0)
-	      {
-	        return i;
-	      }
+		}
+		return -1;
 
-	    }
-	    return -1;
-	  }
+	}
+	
+	public int LuckyNum0(int L, int R) {
 
+		while (L <= R) {
+			
+			if (String.valueOf(L).matches("[47]*") ) 
+				return L;
+			L++;
+
+		}
+		return -1;
+
+	}
+	
+	
+
+	
 
 }
