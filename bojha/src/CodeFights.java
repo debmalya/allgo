@@ -521,13 +521,14 @@ public class CodeFights {
 	 */
 	public int missingNumber(int[] A) {
 		Arrays.sort(A);
-		  for (int i = 0; i < A.length;i++){
-		    if (i > 0 && A[i] > A[i - 1] + 1){
-		      	return A[i - 1]+1;
-		    }
-		  }
-		  return 0;
+		for (int i = 0; i < A.length; i++) {
+			if (i > 0 && A[i] > A[i - 1] + 1) {
+				return A[i - 1] + 1;
+			}
+		}
+		return 0;
 	}
+
 	public int missingNumber0(int[] A) {
 		int l = A.length;
 		int i = 0;
@@ -547,49 +548,95 @@ public class CodeFights {
 	}
 
 	/**
-	   * 
-	   Given an array and a number N call a pair of numbers from the array a
-	   * Perfect Pair if their sum is equal to N.
-	   * 
-	   * Find all of the perfect pairs and return the sum of their indices. Note
-	   * that any element of the array can only be counted in one Perfect Pair. Also
-	   * if there are multiple correct answers, return the smallest one.
-	   * 
-	   * Examples
-	   * 
-	   * pairwise([1, 4, 2, 3, 0, 5], 7) = 11
-	   * 
-	   * Since the Perfect Pairs are (4, 3) and (2, 5) with indices 1 + 3 + 2 + 5 =
-	   * 11.
-	   * 
-	   * pairwise([1, 3, 2, 4], 4) = 1
-	   * 
-	   * Since the element at index 0 (i.e. 1) and the element at index 1 (i.e. 3)
-	   * form the only Perfect Pair.
-	   * 
-	   * Input 1 (arr) → array.integer :
-	   * 
-	   * array of non-negative integers Input 2 (N) → integer :
-	   * 
-	   * positive integer Output → integer :
-	   * 
-	   * sum of indices and 0 if no Perfect Pair exists
-	   */
-	  public int pairwise (int[] arr, int N)
-	  {
-	    int l = arr.length;
-	    int r = 0;
-	    int[] c = new int[l];
-	    for (int i = 0; i < l - 1; i++){
-	      for (int j = i + 1; j < l; j++) {
-	        if (arr[i]+arr[j] == N && c[i] + c[j] == 0) {
-	          r += (i + j);
-	          c[i]=1;
-	          c[j]=1;
+	 * 
+	 Given an array and a number N call a pair of numbers from the array a
+	 * Perfect Pair if their sum is equal to N.
+	 * 
+	 * Find all of the perfect pairs and return the sum of their indices. Note
+	 * that any element of the array can only be counted in one Perfect Pair.
+	 * Also if there are multiple correct answers, return the smallest one.
+	 * 
+	 * Examples
+	 * 
+	 * pairwise([1, 4, 2, 3, 0, 5], 7) = 11
+	 * 
+	 * Since the Perfect Pairs are (4, 3) and (2, 5) with indices 1 + 3 + 2 + 5
+	 * = 11.
+	 * 
+	 * pairwise([1, 3, 2, 4], 4) = 1
+	 * 
+	 * Since the element at index 0 (i.e. 1) and the element at index 1 (i.e. 3)
+	 * form the only Perfect Pair.
+	 * 
+	 * Input 1 (arr) → array.integer :
+	 * 
+	 * array of non-negative integers Input 2 (N) → integer :
+	 * 
+	 * positive integer Output → integer :
+	 * 
+	 * sum of indices and 0 if no Perfect Pair exists
+	 */
+	public int pairwise(int[] arr, int N) {
+		int l = arr.length;
+		int r = 0;
+		int[] c = new int[l];
+		for (int i = 0; i < l - 1; i++) {
+			for (int j = i + 1; j < l; j++) {
+				if (arr[i] + arr[j] == N && c[i] + c[j] == 0) {
+					r += (i + j);
+					c[i] = 1;
+					c[j] = 1;
+				}
+			}
+		}
+		return r;
+	}
+
+	/**
+	 * A number is called lucky if it consists only of digits 4 and 7. For
+	 * example, 44, 747, 4 are lucky numbers, and 745, 423, 111 are not. Your
+	 * task is to find the smallest lucky number in range [L, R] , and if there
+	 * is none you should return -1.
+	 * 
+	 * 
+	 * Example: For L = 1 and R = 2 the output should be -1. For L = 4 and R = 7
+	 * the output should be 4.
+	 * 
+	 * 
+	 * 
+	 * Input 1 (L) → integer : 0 ≤ L ≤ R ≤ 10^5
+	 * 
+	 * Input 2 (R) → integer : Output → integer : The smallest lucky number from
+	 * the given range.
+	 * 
+	 */
+	int LuckyNum(int L, int R) {	    
+	    
+	    
+	    for (int i = L; i <= R; i++)
+	    {
+	      int l = i;
+
+
+	      int lu = 0;
+	      while (l > 0)
+	      {
+	        int r = l % 10;
+	        if (r != 7 && r != 4)
+	        {
+	          // not a lucky number
+	          lu = 1;
+	          break;
 	        }
+	        l /= 10;
 	      }
+	      if (lu == 0)
+	      {
+	        return i;
+	      }
+
 	    }
-	    return r;
+	    return -1;
 	  }
 
 
