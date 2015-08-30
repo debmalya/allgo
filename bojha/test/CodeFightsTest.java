@@ -121,4 +121,33 @@ public class CodeFightsTest {
 		actual = fights.missingNumber(new int[]{6, 8, 3, 10, 1, 9, 2, 5, 7});
 		Assert.assertEquals(4, actual);
 	}
+	
+	@Test
+	public void testLuckyNumber() {
+		CodeFights fights = new CodeFights();
+		int actual = fights.LuckyNum(1, 3);
+		Assert.assertEquals(-1,actual);
+		
+		actual = fights.LuckyNum(4, 7);
+		Assert.assertEquals(4,actual);
+		
+		actual = fights.LuckyNum(5, 7);
+		Assert.assertEquals(7,actual);
+		
+		actual = fights.LuckyNum(35, 47);
+		Assert.assertEquals(44,actual);
+		
+		actual = fights.LuckyNum(45, 57);
+		Assert.assertEquals(47,actual);
+		
+		actual = fights.LuckyNum(3, 77);
+		Assert.assertEquals(4,actual);
+		
+		actual = fights.LuckyNum(450,777);
+		Assert.assertEquals(474,actual);
+		
+		actual = fights.LuckyNum(0,10000);
+		Assert.assertEquals(4,actual);
+		
+	}
 }
