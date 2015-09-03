@@ -3,6 +3,8 @@
  */
 package hr;
 
+import java.util.Stack;
+
 /**
  * @author debmalyajash
  *
@@ -85,15 +87,15 @@ public class Node {
 			return head.next;
 		}
 		while (pos < position) {
-			
+
 			if (next == null) {
 				return head;
 			}
-			prev=next;
-			next=next.next;
+			prev = next;
+			next = next.next;
 			pos++;
 		}
-		prev.next=next.next;
+		prev.next = next.next;
 		return head;
 	}
 
@@ -105,6 +107,59 @@ public class Node {
 			next = next.next;
 		}
 		return me.toString();
+	}
+
+	/**
+	 * You are given the pointer to the head node of a linked list and you need
+	 * to print all its elements in reverse order from tail to head, one element
+	 * per line. The head pointer may be null meaning that the list is empty -
+	 * in that case, do not print anything!
+	 * 
+	 * 
+	 * @param head
+	 */
+	void ReversePrint(Node head) {
+		// This is a "method-only" submission.
+		// You only need to complete this method.
+		Node next = head;
+		StringBuilder me = new StringBuilder();
+		while (next != null) {
+			me.append(next.data);
+			next = next.next;
+		}
+		String reverse = me.reverse().toString();
+		for (int i = 0; i < reverse.length(); i++) {
+			System.out.println(reverse.charAt(i));
+		}
+
+	}
+
+	
+	Node Reverse(Node head) {
+		Node next = head;
+		Node prev = head;
+
+		Stack<Node> nodeStack = new Stack<Node>();
+		boolean firstEntry = true;
+		while (next != null) {
+			if (!nodeStack.empty()) {
+				if (firstEntry) {
+					firstEntry = false;
+					nodeStack.peek().next = null;
+				} else {
+					nodeStack.peek().next = prev;
+					prev = prev.next;
+				}
+			}
+			nodeStack.push(next);
+			next = next.next;
+		}
+		if (!nodeStack.empty())
+			head=nodeStack.pop();
+		if (!nodeStack.empty()) {
+			head.next = nodeStack.pop();
+		}		
+		return head;
 	}
 
 	// --------------------------------------------------------------------------
