@@ -1,4 +1,11 @@
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 /**
  * 
@@ -613,8 +620,8 @@ public class CodeFights {
 	public int LuckyNum(int L, int R) {
 
 		while (L <= R) {
-			
-			if (String.valueOf(L).matches("[47]*") ) 
+
+			if (String.valueOf(L).matches("[47]*"))
 				return L;
 			L++;
 
@@ -622,22 +629,230 @@ public class CodeFights {
 		return -1;
 
 	}
-	
-	public int LuckyNum0(int L, int R) {
 
-		while (L <= R) {
-			
-			if (String.valueOf(L).matches("[47]*") ) 
-				return L;
-			L++;
+	/**
+	 * Find the number of N-digit numbers whose sum of digits equals their
+	 * product.
+	 * 
+	 * 
+	 * The result should have 2 numbers: the number of N-digit numbers and the
+	 * smallest among them.
+	 * 
+	 * 
+	 * Example
+	 * 
+	 * 
+	 * For N = 1 the output should be '10 0'. For N = 2 the output should be '1
+	 * 22'.
+	 * 
+	 * 
+	 * 
+	 * @param N
+	 *            Input 1 (N) → integer : Number of digits, 0 < N < 11
+	 * 
+	 * @return Output → string : A string that consists of two integers,
+	 *         separated by one space character.
+	 * 
+	 * 
+	 * 
+	 */
+	public String SumAndMultiply(int N) {
+		return null;
+	}
+
+	/**
+	 * Solve a Boolean satisfiability problem efficiently.
+	 * 
+	 * The C++ committee is holding a conference to approve the final version of
+	 * C++17 standard. There are N different concepts to be discussed, which can
+	 * be either included or excluded from the release version. There are M
+	 * juries who vote for or against these concepts. Every jury votes about
+	 * exactly 2 different concepts.
+	 * 
+	 * The committee will be able to release the new standard if and only if
+	 * there is a certain agreement among the juries.
+	 * 
+	 * The agreement criteria is as follows: For every jury at least one of
+	 * his/her votes should be satisfied.
+	 * 
+	 *
+	 * 
+	 * Your task is to determine whether there is a possibility of agreement
+	 * among the juries. In other words, whether there is a set of concepts to
+	 * implement such that the committee meets the agreement criteria.
+	 * 
+	 * Example
+	 * 
+	 * For N = 3, M = 3, votes = [[1,2],[-1,-2],[3,1]] the answer is true.
+	 * Explanation: The 1st jury voted for concepts 1 and 2, the 2nd jury voted
+	 * against concepts 1 and 2, the 3rd jury voted for concepts 3 and 1. The
+	 * included concepts could be 1 and 3. This way the 1st jury gets his first
+	 * vote satisfied but not the second one, the 2nd jury gets his second vote
+	 * satisfied but not the first one. Finally, the 3rd jury gets both votes
+	 * satisfied.
+	 * 
+	 * For N = 2, M = 4, votes = [[1,2],[-1,-2],[1,-2],[-1,2]] the answer is
+	 * false. Explanation: Let's say that concept 1 is included. Then concept 2
+	 * has to be excluded because of the 2nd jury AND included because of the
+	 * 4th jury at the same time. Let's say that concept 1 is NOT included. Then
+	 * concept 2 has to be excluded because of the 1st jury AND included because
+	 * of the 3rd jury at the same time, which is a contradiction. So there is
+	 * no such set of concepts that meets the agreement criteria.
+	 * 
+	 * [input] integer N
+	 * 
+	 * The number of concepts, 1 < N < 1000. [input] integer M
+	 * 
+	 * The umber of juries, 0 < M < 500. [input] array.array.integer votes
+	 * 
+	 * Votes as an array of arrays of length 2. Each element is in range
+	 * [-N,..,-1,1,..,N]. [output] boolean
+	 * 
+	 * @param N
+	 *            - Different concepts
+	 * @param M
+	 *            - Number of juries
+	 * @param votes
+	 *            - The data is given as an array of arrays of size M. Each of
+	 *            its elements is an array of exactly 2 elements - jury's votes.
+	 *            Each vote is a number X. If X is positive, then the jury is
+	 *            voting for the Xth concept. If X is negative, then the jury is
+	 *            voting against the Xth concept. Concepts are numbered from 1
+	 *            to N.
+	 * 
+	 *            Answer to the task.
+	 */
+	public static boolean jury_compability(int N, int M, int[][] votes) {
+
+		int[] c = new int[N];
+		boolean[] sc = new boolean[N];
+
+		for (int i = 0; i < M; i++) {
+			int[] ejv = votes[i];
+			for (int j = 0; j < ejv.length; j++) {
+				int co = Math.abs(ejv[j]) - 1;
+				c[co] += ejv[j];
+				if (c[co] > 0) {
+					sc[co] = true;
+				} else {
+					sc[co] = false;
+				}
+			}
+		}
+
+		// Check whether any of the concept selectable
+		boolean s = false;
+		for (int i = 0; i < sc.length; i++) {
+			if (sc[i]){
+				s = true;
+			}
+		}
+		if (!s) {
+			return false;
+		}
+		for (int i = 0; i < votes.length; i++) {
+			int[] ejv = votes[i];
+
+			int co = Math.abs(ejv[0]) - 1;
+			int co1 = Math.abs(ejv[1]) - 1;
+
+			if ((sc[co] && ejv[0] > 0) || (!sc[co] && ejv[0] < 0)
+					|| (sc[co1] && ejv[1] > 0) || (!sc[co1] && ejv[1] < 0)) {
+				continue;
+			} else {
+				// none of the jury criteria satisfied
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	public static boolean jury_compability2(int N, int M, int[][] votes) {
+
+		Map<Integer, Integer> cm = new HashMap<Integer, Integer>();
+
+		for (int i = 0; i < M; i++) {
+			int[] ejv = votes[i];
+
+			for (int j = 0; j < ejv.length; j++) {
+				int a = Math.abs(ejv[j]);
+				Integer value = cm.get(a);
+				if (value == null) {
+					value = 0;
+				}
+				if (ejv[j] > 0) {
+					value++;
+				} else {
+					value--;
+				}
+				cm.put(a, value);
+			}
 
 		}
-		return -1;
+		// For every jury at least one of his/her votes should be satisfied.
 
+		Collection<Integer> values = cm.values();
+		Iterator<Integer> it = values.iterator();
+		while (it.hasNext()) {
+			if (it.next() > 0) {
+				return true;
+			}
+		}
+
+		return false;
 	}
-	
-	
 
-	
+	public static boolean jury_compability1(int N, int M, int[][] votes) {
+
+		Map<Integer, Integer> cm = new HashMap<Integer, Integer>();
+
+		for (int i = 0; i < M; i++) {
+			int[] ejv = votes[i];
+
+			for (int j = 0; j < ejv.length; j++) {
+				int a = Math.abs(ejv[j]);
+				Integer value = cm.get(a);
+				if (value == null) {
+					value = 0;
+				}
+				if (ejv[j] > 0) {
+					value++;
+				} else {
+					value--;
+				}
+				cm.put(a, value);
+			}
+
+		}
+
+		Set<Entry<Integer, Integer>> es = cm.entrySet();
+		Iterator<Entry<Integer, Integer>> ei = es.iterator();
+		while (ei.hasNext()) {
+			Entry<Integer, Integer> ne = ei.next();
+			if (ne.getValue() > 0) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public static boolean jury_compability0(int N, int M, int[][] votes) {
+		int pc = 0;
+		int tc = 0;
+
+		for (int i = 0; i < M; i++) {
+			int[] ejv = votes[i];
+
+			for (int j = 0; j < ejv.length; j++) {
+				tc++;
+				if (ejv[j] > 0) {
+					pc++;
+				}
+			}
+
+		}
+		return pc > (tc - pc);
+	}
 
 }
