@@ -1,11 +1,5 @@
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
+import java.util.Stack;
 
 /**
  * 
@@ -743,7 +737,7 @@ public class CodeFights {
 		// Check whether any of the concept selectable
 		boolean s = false;
 		for (int i = 0; i < sc.length; i++) {
-			if (sc[i]){
+			if (sc[i]) {
 				s = true;
 			}
 		}
@@ -768,91 +762,53 @@ public class CodeFights {
 		return true;
 	}
 
-	public static boolean jury_compability2(int N, int M, int[][] votes) {
-
-		Map<Integer, Integer> cm = new HashMap<Integer, Integer>();
-
-		for (int i = 0; i < M; i++) {
-			int[] ejv = votes[i];
-
-			for (int j = 0; j < ejv.length; j++) {
-				int a = Math.abs(ejv[j]);
-				Integer value = cm.get(a);
-				if (value == null) {
-					value = 0;
+	/**
+	 * Check the balance in the 2 types parentheses sequence.
+	 * 
+	 * Given a string of opening and closing parentheses, check whether it’s
+	 * balanced. We have 2 types of parentheses: round brackets: (,) and square
+	 * brackets: [,]. Assume that the string doesn’t contain any other character
+	 * than these, no spaces, words or numbers. Just to remind you, balanced
+	 * parentheses require every opening parenthesis to be closed in the reverse
+	 * order opened.
+	 * 
+	 * Example: "([])" and "()()()()[]" are balanced. "([)]","(","[]]" are not.
+	 * 
+	 * [input] string seq
+	 * 
+	 * The sequence of parentheses with length in range [0,100]. [output]
+	 * boolean
+	 * 
+	 * The answer to the task.
+	 */
+	public static boolean correct_parentheses(String seq) {
+		Stack<Character> b = new Stack<Character>();
+		for (int i = 0; i < seq.length(); i++) {
+			char c = seq.charAt(i);
+			switch(c) {
+			case '(':
+			case '[':
+				b.push(c);
+				break;
+			case ')':
+				if (b.empty()){
+					return false;
+				} else if (b.peek()=='('){
+					b.pop();
 				}
-				if (ejv[j] > 0) {
-					value++;
-				} else {
-					value--;
+				break;
+			case ']':
+				if (b.empty()){
+					return false;
+				} else if (b.peek()=='['){
+					b.pop();
 				}
-				cm.put(a, value);
-			}
-
-		}
-		// For every jury at least one of his/her votes should be satisfied.
-
-		Collection<Integer> values = cm.values();
-		Iterator<Integer> it = values.iterator();
-		while (it.hasNext()) {
-			if (it.next() > 0) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-	public static boolean jury_compability1(int N, int M, int[][] votes) {
-
-		Map<Integer, Integer> cm = new HashMap<Integer, Integer>();
-
-		for (int i = 0; i < M; i++) {
-			int[] ejv = votes[i];
-
-			for (int j = 0; j < ejv.length; j++) {
-				int a = Math.abs(ejv[j]);
-				Integer value = cm.get(a);
-				if (value == null) {
-					value = 0;
-				}
-				if (ejv[j] > 0) {
-					value++;
-				} else {
-					value--;
-				}
-				cm.put(a, value);
-			}
-
-		}
-
-		Set<Entry<Integer, Integer>> es = cm.entrySet();
-		Iterator<Entry<Integer, Integer>> ei = es.iterator();
-		while (ei.hasNext()) {
-			Entry<Integer, Integer> ne = ei.next();
-			if (ne.getValue() > 0) {
-				return true;
+				break;
+			default:
+				break;
 			}
 		}
-		return false;
-	}
-
-	public static boolean jury_compability0(int N, int M, int[][] votes) {
-		int pc = 0;
-		int tc = 0;
-
-		for (int i = 0; i < M; i++) {
-			int[] ejv = votes[i];
-
-			for (int j = 0; j < ejv.length; j++) {
-				tc++;
-				if (ejv[j] > 0) {
-					pc++;
-				}
-			}
-
-		}
-		return pc > (tc - pc);
+		return b.size()==0;
 	}
 
 }
