@@ -1,4 +1,3 @@
-
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -109,45 +108,75 @@ public class CodeFightsTest {
 	@Test
 	public void testmissingNumber() {
 		CodeFights fights = new CodeFights();
-		int actual = fights.missingNumber(new int[]{1,2,4,5});
+		int actual = fights.missingNumber(new int[] { 1, 2, 4, 5 });
 		Assert.assertEquals(3, actual);
-		
-		actual = fights.missingNumber(new int[]{10,2,5,7,3,6,8,1,4});
+
+		actual = fights.missingNumber(new int[] { 10, 2, 5, 7, 3, 6, 8, 1, 4 });
 		Assert.assertEquals(9, actual);
-		
-		actual = fights.missingNumber(new int[]{5, 2, 4, 1});
+
+		actual = fights.missingNumber(new int[] { 5, 2, 4, 1 });
 		Assert.assertEquals(3, actual);
-		
-		actual = fights.missingNumber(new int[]{6, 8, 3, 10, 1, 9, 2, 5, 7});
+
+		actual = fights.missingNumber(new int[] { 6, 8, 3, 10, 1, 9, 2, 5, 7 });
 		Assert.assertEquals(4, actual);
 	}
-	
+
 	@Test
 	public void testLuckyNumber() {
 		CodeFights fights = new CodeFights();
 		int actual = fights.LuckyNum(1, 3);
-		Assert.assertEquals(-1,actual);
-		
+		Assert.assertEquals(-1, actual);
+
 		actual = fights.LuckyNum(4, 7);
-		Assert.assertEquals(4,actual);
-		
+		Assert.assertEquals(4, actual);
+
 		actual = fights.LuckyNum(5, 7);
-		Assert.assertEquals(7,actual);
-		
+		Assert.assertEquals(7, actual);
+
 		actual = fights.LuckyNum(35, 47);
-		Assert.assertEquals(44,actual);
-		
+		Assert.assertEquals(44, actual);
+
 		actual = fights.LuckyNum(45, 57);
-		Assert.assertEquals(47,actual);
-		
+		Assert.assertEquals(47, actual);
+
 		actual = fights.LuckyNum(3, 77);
-		Assert.assertEquals(4,actual);
+		Assert.assertEquals(4, actual);
+
+		actual = fights.LuckyNum(450, 777);
+		Assert.assertEquals(474, actual);
+
+		actual = fights.LuckyNum(0, 10000);
+		Assert.assertEquals(4, actual);
+
+	}
+
+	@Test
+	public void test() {
+		int[][] votes = { { 1, 2 }, { -1, -2 }, { 1, -2 }, { -1, 2 } };
+		Assert.assertFalse(CodeFights.jury_compability(2, 4, votes));
+
+		votes = new int[][] { {1,2},{-1,-2},{1,-2},{-1,2} };
+		Assert.assertFalse(CodeFights.jury_compability(2, 4, votes));
 		
-		actual = fights.LuckyNum(450,777);
-		Assert.assertEquals(474,actual);
+		votes = new int[][] { {1,2},{-1,-2},{1,-2}};
+		Assert.assertTrue(CodeFights.jury_compability(2,3,votes));
 		
-		actual = fights.LuckyNum(0,10000);
-		Assert.assertEquals(4,actual);
+		votes = new int[][]{{1,2},{-1,-2},{3,1}};
+		Assert.assertTrue(CodeFights.jury_compability(3,3,votes));
 		
+		votes = new int[][]{{1,2},{-1,-2},{4,5}};
+		Assert.assertFalse(CodeFights.jury_compability(5,3,votes));
+				
+
+	}
+	
+	@Test
+	public void test_correct_parentheses(){
+		Assert.assertTrue(CodeFights.correct_parentheses("([])"));
+		Assert.assertTrue(CodeFights.correct_parentheses("()()()()[]"));
+		
+		Assert.assertFalse(CodeFights.correct_parentheses("([)]"));
+		Assert.assertFalse(CodeFights.correct_parentheses("("));		
+		Assert.assertFalse(CodeFights.correct_parentheses("[]]"));
 	}
 }
