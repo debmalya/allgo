@@ -785,22 +785,22 @@ public class CodeFights {
 		Stack<Character> b = new Stack<Character>();
 		for (int i = 0; i < seq.length(); i++) {
 			char c = seq.charAt(i);
-			switch(c) {
+			switch (c) {
 			case '(':
 			case '[':
 				b.push(c);
 				break;
 			case ')':
-				if (b.empty()){
+				if (b.empty()) {
 					return false;
-				} else if (b.peek()=='('){
+				} else if (b.peek() == '(') {
 					b.pop();
 				}
 				break;
 			case ']':
-				if (b.empty()){
+				if (b.empty()) {
 					return false;
-				} else if (b.peek()=='['){
+				} else if (b.peek() == '[') {
 					b.pop();
 				}
 				break;
@@ -808,7 +808,43 @@ public class CodeFights {
 				break;
 			}
 		}
-		return b.size()==0;
+		return b.size() == 0;
+	}
+
+	/**
+	 * 
+	 Find the number of days it takes a snail to reach the top.
+	 * 
+	 * A snail is climbing a post of height H. Every day it climbs d meters up.
+	 * Then at night it sleeps, slowly slipping n meters down.
+	 * 
+	 * Your task is to calculate the number of days snail needs to climb onto
+	 * the post.
+	 * 
+	 * Example:
+	 * 
+	 * For H = 30, d = 20, n = 10 the answer is 2. Here snail will climb 20
+	 * meters during the day, then -10 at night, slipping back to 10 meters
+	 * height, then by the end of the next day it will reach the top. Thus, the
+	 * answer is 2.
+	 * 
+	 * For H = 10, d = 12, n = 5 the answer is 1. Here snail will be able to do
+	 * it during the first day. Thus, the answer is 1.
+	 * 
+	 * For H = 0, d = 2, n = 1 the answer is 0. Here snail is already on top of
+	 * the post before day 1. Thus, the answer is 0.
+	 * 
+	 * [input] integer H Post height 0 ≤ H ≤ 1000
+	 * 
+	 * [input] integer d The distance travelled up during the day 1 ≤ d ≤ 100.
+	 * 
+	 * [input] integer n The distance slipped down during the night 0 ≤ n < d.
+	 * 
+	 * [output] integer The answer to the task.
+	 */
+	int snail_trip(int H, int d, int n) {
+		return H == 0 ? 0 : d > H ? 1 : 1 + (H - d) / (d - n)
+				+ ((H - d) % (d - n) > 0 ? 1 : 0);
 	}
 
 }
