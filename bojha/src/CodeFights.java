@@ -1,3 +1,4 @@
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Stack;
 
@@ -846,5 +847,123 @@ public class CodeFights {
 		return H == 0 ? 0 : d > H ? 1 : 1 + (H - d) / (d - n)
 				+ ((H - d) % (d - n) > 0 ? 1 : 0);
 	}
+
+	/**
+	 * Maximize probability of winning in a betting game.
+	 * 
+	 * Justin, Jessica and John are playing a trivia game. After the first
+	 * rounds they have accumulated scores[0], scores[1] and scores[2] points
+	 * respectively. Now it's time for the final round. Firstly, each player
+	 * decides how many points he/she is going to bet. The bet size can be from
+	 * 0 up to the player's current score. When all bets are made, a single
+	 * question for all the contestants is announced. If a player answers
+	 * correctly, he/she doubles the bet amount, otherwise loses it. After the
+	 * final round, the player with the most points wins.
+	 * 
+	 * A game example: Let the scores be 100, 100, 100. Let's assume that Justin
+	 * bets 50, Jessica bets 25, and John bets 75. Let's say Jessica is correct,
+	 * while Justin and John are not. New scores are 50 for Justin, 125 for
+	 * Jessica and 25 for John. Thus, Jessica has won the game!
+	 * 
+	 * For all 3 players the probability of answering the question correctly is
+	 * equal to 50%. Justin is the last one to make a bet, so he is aware of his
+	 * opponents' bets (jessica_bet and john_bet). He wants you to help him make
+	 * a bet that will maximize his chances to win.
+	 * 
+	 * Your task is to calculate the bet that maximizes Justin's chance to win
+	 * (draw is the same as losing for him). If there are several such bets,
+	 * choose the smallest one. Consequently, if Justin cannot win under any
+	 * circumstance or will win under any circumstance, return 0.
+	 * 
+	 * Example:
+	 * 
+	 * For scores = [100,100,100], jessica_bet = 25, john_bet = 75 the answer is
+	 * 76.
+	 * 
+	 * Let's look through the possible bets: For bet in range [0, 24] Justin
+	 * wins only when his opponents are incorrect, which has 1 / 4 chance. For
+	 * bet = 25 Justin wins only when he is correct and both other players are
+	 * incorrect, which has 1 / 8 chance. For bet in range [26, 75] Justin wins
+	 * only when he is correct and John is incorrect, which has 1 / 4 chance.
+	 * For bet in range [76, 100] Justin wins when he is correct, which has
+	 * exactly 1 / 2 chance. Thus, the answer is 76.
+	 * 
+	 * [input] array.integer scores
+	 * 
+	 * Scores before the final round. 3 elements array. 0 ≤ scoresi ≤ 1000.
+	 * [input] integer jessica_bet
+	 * 
+	 * Jessica's bet 0 ≤ jessica_bet ≤ scores[1]. [input] integer john_bet
+	 * 
+	 * John's bet 0 ≤ john_bet ≤ scores[2]. [output] integer
+	 * 
+	 * Answer to the task. CODE
+	 */
+	int trivia_game(int[] scores, int jessica_bet, int john_bet) {
+		return 0;
+	}
+	
+	 /**
+	   * A digital root is a positive single-digit integer which is obtained by
+	   * adding digits of the initial number and repeating this process while it has
+	   * more than one digit.
+	   * 
+	   * Given a positive integer as a string, return its digital root.
+	   * 
+	   * Example
+	   * 
+	   * For n = "24" the result is 2 + 4 ==> 6. For n = "39" the result is 3 + 9
+	   * ==> 12 ==> 1 + 2 ==> 3. For n = "999" the result is 9 + 9 + 9 ==> 27 ==> 2
+	   * + 7 ==> 9.
+	   * 
+	   * [input] string n The input number, can contain up to 100 digits, n > 0
+	   * 
+	   * [output] integer The digital root. Method documentation to be filled TODO
+	   * 
+	   * @param n
+	   * @return
+	   */
+	  static int digitalroot (String n)
+	  {
+	    BigDecimal i = new BigDecimal (n);
+	    if (i.compareTo (BigDecimal.ZERO) > 0)
+	    {
+	      BigDecimal[] r = i.divideAndRemainder (BigDecimal.TEN);
+	      int a = (r[1].intValueExact () + digitalroot ((r[0].toPlainString ())));
+	      if (a > 9)
+	      {
+	        return digitalroot ("" + a + "");
+	      }
+	      return (int)a;
+
+	    }
+	    return 0;
+	  }
+
+
+
+	  /**
+	   * 
+	   Find the reversed number from the given one.
+	   * 
+	   * Example: For n = 6587 the answer is 7856. Note: For n = 20 the answer is 2.
+	   * 
+	   * [input] integer n
+	   * 
+	   * [output] integer
+	   */
+	  static int reverse_number (int n)
+	  {
+
+	    int r = 0;
+	    while (n > 0)
+	    {
+	      r += n % 10;
+	      n /= 10;
+	      r *= 10;
+	      
+	    }
+	    return r/10;
+	  }
 
 }
