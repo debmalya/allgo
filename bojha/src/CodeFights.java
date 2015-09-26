@@ -902,68 +902,101 @@ public class CodeFights {
 	int trivia_game(int[] scores, int jessica_bet, int john_bet) {
 		return 0;
 	}
-	
-	 /**
-	   * A digital root is a positive single-digit integer which is obtained by
-	   * adding digits of the initial number and repeating this process while it has
-	   * more than one digit.
-	   * 
-	   * Given a positive integer as a string, return its digital root.
-	   * 
-	   * Example
-	   * 
-	   * For n = "24" the result is 2 + 4 ==> 6. For n = "39" the result is 3 + 9
-	   * ==> 12 ==> 1 + 2 ==> 3. For n = "999" the result is 9 + 9 + 9 ==> 27 ==> 2
-	   * + 7 ==> 9.
-	   * 
-	   * [input] string n The input number, can contain up to 100 digits, n > 0
-	   * 
-	   * [output] integer The digital root. Method documentation to be filled TODO
-	   * 
-	   * @param n
-	   * @return
-	   */
-	  static int digitalroot (String n)
-	  {
-	    BigDecimal i = new BigDecimal (n);
-	    if (i.compareTo (BigDecimal.ZERO) > 0)
-	    {
-	      BigDecimal[] r = i.divideAndRemainder (BigDecimal.TEN);
-	      int a = (r[1].intValueExact () + digitalroot ((r[0].toPlainString ())));
-	      if (a > 9)
-	      {
-	        return digitalroot ("" + a + "");
-	      }
-	      return (int)a;
 
-	    }
-	    return 0;
-	  }
+	/**
+	 * A digital root is a positive single-digit integer which is obtained by
+	 * adding digits of the initial number and repeating this process while it
+	 * has more than one digit.
+	 * 
+	 * Given a positive integer as a string, return its digital root.
+	 * 
+	 * Example
+	 * 
+	 * For n = "24" the result is 2 + 4 ==> 6. For n = "39" the result is 3 + 9
+	 * ==> 12 ==> 1 + 2 ==> 3. For n = "999" the result is 9 + 9 + 9 ==> 27 ==>
+	 * 2 + 7 ==> 9.
+	 * 
+	 * [input] string n The input number, can contain up to 100 digits, n > 0
+	 * 
+	 * [output] integer The digital root. Method documentation to be filled TODO
+	 * 
+	 * @param n
+	 * @return
+	 */
+	static int digitalroot(String n) {
+		BigDecimal i = new BigDecimal(n);
+		if (i.compareTo(BigDecimal.ZERO) > 0) {
+			BigDecimal[] r = i.divideAndRemainder(BigDecimal.TEN);
+			int a = (r[1].intValueExact() + digitalroot((r[0].toPlainString())));
+			if (a > 9) {
+				return digitalroot("" + a + "");
+			}
+			return (int) a;
 
+		}
+		return 0;
+	}
 
+	/**
+	 * 
+	 Find the reversed number from the given one.
+	 * 
+	 * Example: For n = 6587 the answer is 7856. Note: For n = 20 the answer is
+	 * 2.
+	 * 
+	 * [input] integer n
+	 * 
+	 * [output] integer
+	 */
+	static int reverse_number(int n) {
 
-	  /**
-	   * 
-	   Find the reversed number from the given one.
-	   * 
-	   * Example: For n = 6587 the answer is 7856. Note: For n = 20 the answer is 2.
-	   * 
-	   * [input] integer n
-	   * 
-	   * [output] integer
-	   */
-	  static int reverse_number (int n)
-	  {
+		int r = 0;
+		while (n > 0) {
+			r += n % 10;
+			n /= 10;
+			r *= 10;
 
-	    int r = 0;
-	    while (n > 0)
-	    {
-	      r += n % 10;
-	      n /= 10;
-	      r *= 10;
-	      
-	    }
-	    return r/10;
-	  }
+		}
+		return r / 10;
+	}
 
+	/**
+	 * the length of the maximum non-decreasing contiguous subarray of the
+	 * studying days, to study as much before his current exams.
+	 * 
+	 * Example:
+	 * 
+	 * For n = 6 and a = [2,2,1,3,4,1] the answer is 3.
+	 * 
+	 * [input] integer n
+	 * 
+	 * The number of days. [input] array.integer a
+	 * 
+	 * The number of hours he studied each day. [output] integer
+	 * 
+	 * The length of the maximum non-decreasing contiguous subarray.
+	 * 
+	 * @param n - number of days
+	 * @param a - array containing integers.
+	 * @return The length of the maximum non-decreasing contiguous subarray.
+	 */
+	static int StudyingHours(int n, int[] a) {
+		int r = 0;
+		int m = 1;
+		for (int i = 0; i < a.length; i++) {
+			
+			int p = 0;
+			for (int j = i; j < i + n && j  < a.length; j++) {
+				
+				if (j > i && p <= a[j]) {
+					m++;
+				} else {
+					r = Math.max(r,m);
+					m = 1;
+				}
+				p = a[j];
+			}
+		}
+		return Math.max(r,m);
+	}
 }
