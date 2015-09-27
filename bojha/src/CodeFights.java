@@ -976,27 +976,133 @@ public class CodeFights {
 	 * 
 	 * The length of the maximum non-decreasing contiguous subarray.
 	 * 
-	 * @param n - number of days
-	 * @param a - array containing integers.
+	 * @param n
+	 *            - number of days
+	 * @param a
+	 *            - array containing integers.
 	 * @return The length of the maximum non-decreasing contiguous subarray.
 	 */
 	static int StudyingHours(int n, int[] a) {
 		int r = 0;
 		int m = 1;
 		for (int i = 0; i < a.length; i++) {
-			
+
 			int p = 0;
-			for (int j = i; j < i + n && j  < a.length; j++) {
-				
+			for (int j = i; j < i + n && j < a.length; j++) {
+
 				if (j > i && p <= a[j]) {
 					m++;
 				} else {
-					r = Math.max(r,m);
+					r = Math.max(r, m);
 					m = 1;
 				}
 				p = a[j];
 			}
 		}
-		return Math.max(r,m);
+		return Math.max(r, m);
+	}
+
+	/**
+	 * The Vigenère cipher is a method of encrypting alphabetic text by using a
+	 * series of different Caesar (see here) ciphers based on the letters of a
+	 * keyword. The Vigenère cipher (see here) consists of several Caesar
+	 * ciphers performed consequently with different shift values.
+	 * 
+	 * Character by character:
+	 * 
+	 * Loop the keyword into a string of the same length as the message to
+	 * encrypt; Encode each character of the keyword: a = 00, b = 01, c = 02, d
+	 * = 03, ... z = 25; Shift letters of the original message by the folowing
+	 * formula: d[i] = (c[i] + k[i]) % 26 ; where d: characters of the encrypted
+	 * message. c: characters of the original message. k: keyword encoding.
+	 * 
+	 * Given a message and a keyword, write a program to encode it. Note: both
+	 * message and keyword are in lowercase and have only characters in range
+	 * ['a'..'z'] and spaces (' '). When encoding, skip the space but still keep
+	 * it in your result. Good luck.
+	 * 
+	 * Example:
+	 * 
+	 * For message = "when the leaves fall" and keyword = "autumn" the result is
+	 * "wbxh fue fxuhrs ztfx" For message = "when the leaves fall" and keyword =
+	 * "a utu mn" the result is still "wbxh fue fxuhrs ztfx"
+	 * 
+	 * Explaination: Codes of the message: 22070413 190704 110400210418 05001111
+	 * Keyword loop: "autumnautumnautumn....." Codes of the keyword: 00201920
+	 * 121300 201920121300 20192012
+	 * 
+	 * New codes of the message:
+	 * 
+	 * d[0] = (22 + 00) % 26 = 22 d[1] = (07 + 20) % 26 = 01 d[2] = (04 + 19) %
+	 * 26 = 23 ... Finally, we have: 22012307 052004 052320071718 25190523 New
+	 * message is: "wbxh fue fxuhrs ztfx".
+	 * 
+	 * [input] string message
+	 * 
+	 * Content of the message that you need to encode. [input] string keyword
+	 * 
+	 * A keyword that you can use to encode the message. [output] string
+	 * 
+	 * Encoded message.
+	 * 
+	 * @param message
+	 *            to be encrypted.
+	 * @param keyword
+	 *            keyword to be used for encryption.
+	 * @return encrypted message.
+	 */
+	static String vigenere_encode(String message, String keyword) {
+		int c = 0;		
+		
+		keyword = keyword.replace(" ", "");
+		int l = keyword.length();
+		StringBuilder m = new StringBuilder();
+
+		while (keyword.length() < message.length()) {
+			keyword += keyword.charAt(c++ % l);
+		}		
+
+		c = 0;
+		int k = 0;
+		
+		while (c < message.length()) {
+			char d = message.charAt(c);
+			if (d != ' ') {
+				m.append((char)((d - 'a'+keyword.charAt(k++) - 'a')%26+'a'));
+			}
+			else {
+				m.append(' ');
+			}
+			c++;
+		}
+
+		return m.toString();
+	}
+	static String vigenere_encode0(String message, String keyword) {
+		int c = 0;		
+		
+		keyword = keyword.replace(" ", "");
+		int l = keyword.length();
+		StringBuilder m = new StringBuilder();
+
+		while (keyword.length() < message.length()) {
+			keyword += keyword.charAt(c++ % l);
+		}		
+
+		c = 0;
+		int k = 0;
+		
+		while (c < message.length()) {
+			char d = message.charAt(c);
+			if (d != ' ') {
+				m.append((char)((d - 'a'+keyword.charAt(k++) - 'a')%26+'a'));
+			}
+			else {
+				m.append(' ');
+			}
+			c++;
+		}
+
+		return m.toString();
 	}
 }

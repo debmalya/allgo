@@ -179,4 +179,29 @@ public class CodeFightsTest {
 		Assert.assertFalse(CodeFights.correct_parentheses("("));		
 		Assert.assertFalse(CodeFights.correct_parentheses("[]]"));
 	}
+	
+	@Test
+	public void test_StudyingHours(){
+		int actual = CodeFights.StudyingHours(6, new int[]{2,2,1,3,4,1});
+		Assert.assertEquals(3, actual);
+		
+		actual = CodeFights.StudyingHours(3, new int[]{2,2,9});
+		Assert.assertEquals(3, actual);
+	}
+	
+	@Test
+	public void test_encryption() {
+		String actual = CodeFights.vigenere_encode("when the leaves fall", "autumn");
+		Assert.assertEquals("wbxh fue fxuhrs ztfx",actual);
+		
+		actual = CodeFights.vigenere_encode("adinvy","a");
+		Assert.assertEquals("adinvy",actual);
+		
+		actual = CodeFights.vigenere_encode("facebook","fb");
+		Assert.assertEquals("kbhfgptl",actual);
+		
+		actual = CodeFights.vigenere_encode("when the leaves fall", "a u tumn");
+		Assert.assertEquals("wbxh fue fxuhrs ztfx",actual);
+	}
+	
 }
