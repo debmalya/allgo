@@ -3,7 +3,6 @@
  */
 package hr;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -30,12 +29,15 @@ public class InsertionSort {
 
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
-		int s = in.nextInt();
-		int[] ar = new int[s];
-		for (int i = 0; i < s; i++) {
-			ar[i] = in.nextInt();
-		}
-		insertionSortPart2(ar);
+        int numberOfElementsToBeSorted = in.nextInt();
+        
+        int[] ar = new int[numberOfElementsToBeSorted];
+        in.nextLine();
+        String[] values = in.nextLine().split(" ");
+        for(int i=0;i<numberOfElementsToBeSorted;i++){
+           ar[i]=Integer.parseInt(values[i]); 
+        }
+        System.out.println(insertionSort(ar));
 
 	}
 
@@ -85,6 +87,26 @@ public class InsertionSort {
 			printArray(arr);
 		}
 	}
+
+	 public static int insertionSort(int[] A){
+		 	int numberOfInversions = 0;
+	        for(int i = 1; i < A.length; i++){
+	            int value = A[i];
+	            int j = i - 1;
+	            while(j > -1 && A[j] > value){
+	                A[j + 1] = A[j];
+	                j = j - 1;	 
+	                numberOfInversions++;
+	            }
+	            A[j + 1] = value;
+
+	        }
+
+//	        printArray(A);
+	        return numberOfInversions;
+	    }
+
+	
 
 
 }
