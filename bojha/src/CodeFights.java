@@ -1,5 +1,7 @@
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Stack;
 
 /**
@@ -918,7 +920,7 @@ public class CodeFights {
 	 * 
 	 * [input] string n The input number, can contain up to 100 digits, n > 0
 	 * 
-	 * [output] integer The digital root. Method documentation to be filled TODO
+	 * [output] integer The digital root.
 	 * 
 	 * @param n
 	 * @return
@@ -1052,25 +1054,24 @@ public class CodeFights {
 	 * @return encrypted message.
 	 */
 	static String vigenere_encode(String message, String keyword) {
-		int c = 0;		
-		
+		int c = 0;
+
 		keyword = keyword.replace(" ", "");
 		int l = keyword.length();
 		StringBuilder m = new StringBuilder();
 
 		while (keyword.length() < message.length()) {
 			keyword += keyword.charAt(c++ % l);
-		}		
+		}
 
 		c = 0;
 		int k = 0;
-		
+
 		while (c < message.length()) {
 			char d = message.charAt(c);
 			if (d != ' ') {
-				m.append((char)((d - 'a'+keyword.charAt(k++) - 'a')%26+'a'));
-			}
-			else {
+				m.append((char) ((d - 'a' + keyword.charAt(k++) - 'a') % 26 + 'a'));
+			} else {
 				m.append(' ');
 			}
 			c++;
@@ -1078,31 +1079,90 @@ public class CodeFights {
 
 		return m.toString();
 	}
+
 	static String vigenere_encode0(String message, String keyword) {
-		int c = 0;		
-		
+		int c = 0;
+
 		keyword = keyword.replace(" ", "");
 		int l = keyword.length();
 		StringBuilder m = new StringBuilder();
 
 		while (keyword.length() < message.length()) {
 			keyword += keyword.charAt(c++ % l);
-		}		
+		}
 
 		c = 0;
 		int k = 0;
-		
+
 		while (c < message.length()) {
 			char d = message.charAt(c);
 			if (d != ' ') {
-				m.append((char)((d - 'a'+keyword.charAt(k++) - 'a')%26+'a'));
-			}
-			else {
+				m.append((char) ((d - 'a' + keyword.charAt(k++) - 'a') % 26 + 'a'));
+			} else {
 				m.append(' ');
 			}
 			c++;
 		}
 
 		return m.toString();
+	}
+
+	/**
+	 * Given a string S, your task is to find its substring that occurs most
+	 * often in S. Among all such substrings you must find the one which has the
+	 * maximum length. As a result return only one integer - the length of the
+	 * answer.
+	 * 
+	 * Example:
+	 * 
+	 * For S = "abab" the output should be 2.
+	 * 
+	 * [input] string S
+	 * 
+	 * 2 ≤ s.length ≤ 200 [output] integer
+	 * 
+	 * 
+	 * @param S
+	 * @return
+	 */
+	static int strings(String S) {
+		Set<Character> u = new HashSet<Character>();
+
+		int j = 0;
+		int m = 0;
+		int d = 0;
+		char p = ' ';
+		String r = "";
+
+		for (int i = 0; i < S.length(); i++) {
+			char c = S.charAt(i);
+			if (!u.add(c)) {
+				if (i - j == 1) {
+					d++;
+					r += c;
+					String f = S.replace(r, "");
+					if (S.length() - f.length() >= 2 * r.length()) {
+						m = Math.max(m, d);
+						
+					} else {
+						d = 0;
+						r = "";
+					}
+
+				} else {
+					d = 1;
+					r += c;
+					m = Math.max(m, d);
+				}
+				j = i;
+				p = c;
+
+			} else {
+				d = 0;
+				r = "";
+			}
+		}
+		return m;
+
 	}
 }
