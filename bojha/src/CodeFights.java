@@ -1,6 +1,10 @@
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 
@@ -145,12 +149,12 @@ public class CodeFights {
 	public int minBoxes(int[] objects) {
 
 		int l = objects.length;
-		int r = l;
-		int i, j;
+//		int r = l;
+		int i;
 		int[] c = new int[l];
 
 		int t = 0;
-		boolean[] o = new boolean[l];
+//		boolean[] o = new boolean[l];
 		for (i = 0; i < l; i++) {
 			c[i] = 10 - objects[i];
 			t += objects[i];
@@ -158,7 +162,7 @@ public class CodeFights {
 
 		int b = t / 10 + t % 10 > 0 ? 1 : 0;
 
-		return r;
+		return b;
 	}
 
 	/**
@@ -1165,4 +1169,195 @@ public class CodeFights {
 		return m;
 
 	}
+	
+	/**
+	   * 
+	   You have N unsorted arrays, find their intersection. Return a sorted array
+	   * of unique items. An element is a part of the intersection if and only if
+	   * it's present in all arrays, the same number of times in each array. It is a
+	   * guaranteed that there is at least one element in the resulting array.
+	   * 
+	   * Example
+	   * 
+	   * For arrays = [[2, 1, 5, 3, 5], [3, 5, 5]] the output should be [3, 5].
+	   * 
+	   * Number 3 appears once in each array. Number 5 appears twice in each array.
+	   * 
+	   * [input] array.array.integer arrays 2 ≤ arrays.size ≤ 10.
+	   * 
+	   * [output] array.integer A sorted array of unique elements.
+	   * 
+	   * 
+	   * 
+	   * 
+	   * @param arrays
+	   * @return
+	   */
+	  static int[] intersection (int[][] arrays)
+	  {
+
+	    Set<Integer> s = new HashSet<Integer> ();
+	    Map<Integer, Map<Integer, Integer>> l = new HashMap<Integer, Map<Integer, Integer>> ();
+	    for (int i = 0; i < arrays.length; i++)
+	    {
+	      for (int j = 0; j < arrays[i].length; j++)
+	      {
+	        Map<Integer, Integer> a = l.get (arrays[i][j]);
+	        if (a == null)
+	        {
+	          a = new HashMap<Integer, Integer> ();
+	        }
+	        Integer v = a.get (i);
+	        if (v == null)
+	        {
+	          v = 0;
+	        }
+	        v++;
+	        a.put (i, v);
+	        l.put (arrays[i][j], a);
+	        s.add (arrays[i][j]);
+	      }
+	    }
+
+	    Integer[] e = s.toArray (new Integer[0]);
+
+	    List<Integer> f = new ArrayList<Integer> ();
+	    for (int i : e)
+	    {
+
+	      if (l.get (i).size () == arrays.length)
+	      {
+	        // in all arrays it should equal number of occurrences.
+	        int o = 0;
+	        boolean tbd = true;
+
+	        Map<Integer, Integer> oc = l.get (i);
+	        for (int k = 0; k < arrays.length; k++)
+	        {
+	          if (k > 0 && o != oc.get (k))
+	          {
+	            tbd = false;
+	            break;
+	          }
+	          o = oc.get (k);
+	        }
+
+	        if (tbd)
+	        {
+	          f.add (i);
+	        }
+	      }
+	    }
+
+	    int[] r = new int[f.size ()];
+	    for (int i = 0; i < f.size (); i++)
+	    {
+	      r[i] = f.get (i);
+	    }
+	    Arrays.sort (r);
+
+
+	    return r;
+	  }
+
+
+	
+	/**
+	   * 
+	   * You're given n numbers.
+	   * 
+	   * Return the sum of digits of all prime numbers among the given numbers.
+	   * 
+	   * Example
+	   * 
+	   * For n = 3 and a = [11, 21, 54] the output should be 2. For n = 4 and a =
+	   * [22, 7, 121, 17] the output should be 15.
+	   * 
+	   * [input] integer n 1 ≤ n < 26.
+	   * 
+	   * [input] array.integer a 1 ≤ a[i] < 27.
+	   * 
+	   * [output] integer
+	   * 
+	   * @param n
+	   * @param a
+	   * @return
+	   */
+	  
+	  
+	  static int sumofprimenumbers(int n, int[] a)
+	  {
+	    int r = 0;
+	    
+
+	    for (int i = 0; i < n; i++)
+	    {
+	      boolean p = true && a[i] != 1;
+	      
+	      for (int j = 2; j <= Math.sqrt(a[i]); j++) {
+	    	  if (a[i]% j == 0) {
+	    		  p = false;
+	    		  break;
+	    	  }
+	      }
+	      
+	      if (p)
+	      {
+	        
+	        while (a[i] > 0)
+	        {
+	          r += a[i] % 10;
+	          a[i] /= 10;
+	        }
+	       
+	      }
+	    }
+
+	    return r;
+	  }
+	
+	public static boolean isPrime (int n, List<Integer> p)
+	  {
+	    int l = 0;
+
+	    if (n == 1)
+	    {
+	      return false;
+	    }
+
+	    if (p.contains (n))
+	    {
+	      return true;
+	    }
+	    for (int i = 0; i < p.size (); i++)
+	    {
+	      if (n % p.get (i) == 0)
+	      {
+	        return false;
+	      }
+	      l = p.get (i);
+	    }
+
+	    for (int i = l + 1; i <= Math.sqrt (n); i++)
+	    {
+	      if (n % i == 0)
+	      {
+	        return false;
+	      }
+	    }
+
+	    p.add (n);
+	    System.out.println(p);
+	    return true;
+	  }
+	
+	String myConcat(String[] arguments, String separator) {
+
+		  String result = "";
+		  for (int i = 1; i < arguments.length; i++) {
+		    result += arguments[i];
+		    result += separator;
+		  }
+		  return result;
+		}
 }

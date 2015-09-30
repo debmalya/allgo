@@ -204,4 +204,83 @@ public class CodeFightsTest {
 		Assert.assertEquals("wbxh fue fxuhrs ztfx",actual);
 	}
 	
+	@Test
+	public void test_strings() {
+		int actual = CodeFights.strings("abab");
+		Assert.assertEquals(2, actual);
+		
+		actual = CodeFights.strings("acbab");
+		Assert.assertEquals(1, actual);
+		
+		actual = CodeFights.strings("abbb");
+		Assert.assertEquals(1, actual);
+		
+		
+		actual = CodeFights.strings("abababaaaaaaaaa");
+		Assert.assertEquals(4, actual);
+		
+		actual = CodeFights.strings("raju");
+		Assert.assertEquals(0, actual);
+		
+		actual = CodeFights.strings("rajur");
+		Assert.assertEquals(1, actual);
+		
+		actual = CodeFights.strings("rajuru");
+		Assert.assertEquals(1, actual);
+		
+		actual = CodeFights.strings("rajurua");
+		Assert.assertEquals(1, actual);
+		
+		actual = CodeFights.strings("sandipan");
+		Assert.assertEquals(2, actual);
+	}
+	
+	
+	@Test
+	  public void test_sumofprimenumbers() {
+	    int actual = CodeFights.sumofprimenumbers (3, new int[]{11, 21, 54});
+	    Assert.assertEquals(2,actual);
+	    
+	    actual = CodeFights.sumofprimenumbers (4, new int[]{22, 7, 121, 17});
+	    Assert.assertEquals(15,actual);
+	    
+	    actual = CodeFights.sumofprimenumbers (2, new int[]{2,3});
+	    Assert.assertEquals(5,actual);
+	    
+	    actual = CodeFights.sumofprimenumbers (2, new int[]{1,2});
+	    Assert.assertEquals(2,actual);
+	    
+	    actual = CodeFights.sumofprimenumbers (2, new int[]{1,0});
+	    Assert.assertEquals(0,actual);
+	    
+	    actual = CodeFights.sumofprimenumbers (4, new int[]{1,2,3,5});
+	    Assert.assertEquals(10,actual);
+	    
+	    actual = CodeFights.sumofprimenumbers (5, new int[]{1,2,3,5,6});
+	    Assert.assertEquals(10,actual);
+	    
+	    actual = CodeFights.sumofprimenumbers (5, new int[]{1,2,3,5,7});
+	    Assert.assertEquals(17,actual);
+	    
+	    actual = CodeFights.sumofprimenumbers (4, new int[]{1,2,3,5,7});
+	    Assert.assertEquals(10,actual);
+	    
+	    actual = CodeFights.sumofprimenumbers (3, new int[]{1,2,47});
+	    Assert.assertEquals(13,actual);
+	    
+	    actual = CodeFights.sumofprimenumbers (1, new int[]{5});
+	    Assert.assertEquals(5,actual);
+	    
+	    actual = CodeFights.sumofprimenumbers (1, new int[]{6});
+	    Assert.assertEquals(0,actual);
+	    
+	    actual = CodeFights.sumofprimenumbers (2, new int[]{101,103});
+	    Assert.assertEquals(6,actual);
+	    
+	    actual = CodeFights.sumofprimenumbers (26, new int[]{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26});
+	    Assert.assertEquals(46,actual);
+	    
+	    
+	    
+	  }
 }
