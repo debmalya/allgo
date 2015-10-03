@@ -283,4 +283,45 @@ public class CodeFightsTest {
 	    
 	    
 	  }
+	
+	@Test
+	public void testReversePrime(){
+		int actual = CodeFights.ReversePrime(2, 7);
+		Assert.assertEquals(4, actual);
+		
+		actual = CodeFights.ReversePrime(1, 2);
+		Assert.assertEquals(1, actual);
+		
+		actual = CodeFights.ReversePrime(3, 11);
+		Assert.assertEquals(4, actual);
+		
+		actual = CodeFights.ReversePrime(3, 5);
+		Assert.assertEquals(2, actual);
+		
+		actual = CodeFights.ReversePrime(4, 5);
+		Assert.assertEquals(4, actual);
+		
+		actual = CodeFights.ReversePrime(2, 5);
+		Assert.assertEquals(3, actual);
+		
+		actual = CodeFights.ReversePrime(2, 7);
+		Assert.assertEquals(4, actual);
+		
+		actual = CodeFights.ReversePrime(3, 7);
+		Assert.assertEquals(5, actual);
+		
+		actual = CodeFights.ReversePrime(4, 7);
+		Assert.assertEquals(2, actual);
+		
+		actual = CodeFights.ReversePrime(5, 7);
+		Assert.assertEquals(3, actual);
+		
+		actual = CodeFights.ReversePrime(6, 7);
+		Assert.assertEquals(6, actual);
+		
+		for (int i = 1; i < 11; i++) {
+			actual = CodeFights.ReversePrime(i, 11);
+			System.out.println(i+" "+actual);
+		}
+	}
 }

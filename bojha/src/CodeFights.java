@@ -149,12 +149,12 @@ public class CodeFights {
 	public int minBoxes(int[] objects) {
 
 		int l = objects.length;
-//		int r = l;
+		// int r = l;
 		int i;
 		int[] c = new int[l];
 
 		int t = 0;
-//		boolean[] o = new boolean[l];
+		// boolean[] o = new boolean[l];
 		for (i = 0; i < l; i++) {
 			c[i] = 10 - objects[i];
 			t += objects[i];
@@ -1147,7 +1147,7 @@ public class CodeFights {
 					String f = S.replace(r, "");
 					if (S.length() - f.length() >= 2 * r.length()) {
 						m = Math.max(m, d);
-						
+
 					} else {
 						d = 0;
 						r = "";
@@ -1169,195 +1169,267 @@ public class CodeFights {
 		return m;
 
 	}
-	
+
 	/**
-	   * 
-	   You have N unsorted arrays, find their intersection. Return a sorted array
-	   * of unique items. An element is a part of the intersection if and only if
-	   * it's present in all arrays, the same number of times in each array. It is a
-	   * guaranteed that there is at least one element in the resulting array.
-	   * 
-	   * Example
-	   * 
-	   * For arrays = [[2, 1, 5, 3, 5], [3, 5, 5]] the output should be [3, 5].
-	   * 
-	   * Number 3 appears once in each array. Number 5 appears twice in each array.
-	   * 
-	   * [input] array.array.integer arrays 2 ≤ arrays.size ≤ 10.
-	   * 
-	   * [output] array.integer A sorted array of unique elements.
-	   * 
-	   * 
-	   * 
-	   * 
-	   * @param arrays
-	   * @return
-	   */
-	  static int[] intersection (int[][] arrays)
-	  {
+	 * 
+	 You have N unsorted arrays, find their intersection. Return a sorted
+	 * array of unique items. An element is a part of the intersection if and
+	 * only if it's present in all arrays, the same number of times in each
+	 * array. It is a guaranteed that there is at least one element in the
+	 * resulting array.
+	 * 
+	 * Example
+	 * 
+	 * For arrays = [[2, 1, 5, 3, 5], [3, 5, 5]] the output should be [3, 5].
+	 * 
+	 * Number 3 appears once in each array. Number 5 appears twice in each
+	 * array.
+	 * 
+	 * [input] array.array.integer arrays 2 ≤ arrays.size ≤ 10.
+	 * 
+	 * [output] array.integer A sorted array of unique elements.
+	 * 
+	 * 
+	 * 
+	 * 
+	 * @param arrays
+	 * @return
+	 */
+	static int[] intersection(int[][] arrays) {
 
-	    Set<Integer> s = new HashSet<Integer> ();
-	    Map<Integer, Map<Integer, Integer>> l = new HashMap<Integer, Map<Integer, Integer>> ();
-	    for (int i = 0; i < arrays.length; i++)
-	    {
-	      for (int j = 0; j < arrays[i].length; j++)
-	      {
-	        Map<Integer, Integer> a = l.get (arrays[i][j]);
-	        if (a == null)
-	        {
-	          a = new HashMap<Integer, Integer> ();
-	        }
-	        Integer v = a.get (i);
-	        if (v == null)
-	        {
-	          v = 0;
-	        }
-	        v++;
-	        a.put (i, v);
-	        l.put (arrays[i][j], a);
-	        s.add (arrays[i][j]);
-	      }
-	    }
+		Set<Integer> s = new HashSet<Integer>();
+		Map<Integer, Map<Integer, Integer>> l = new HashMap<Integer, Map<Integer, Integer>>();
+		for (int i = 0; i < arrays.length; i++) {
+			for (int j = 0; j < arrays[i].length; j++) {
+				Map<Integer, Integer> a = l.get(arrays[i][j]);
+				if (a == null) {
+					a = new HashMap<Integer, Integer>();
+				}
+				Integer v = a.get(i);
+				if (v == null) {
+					v = 0;
+				}
+				v++;
+				a.put(i, v);
+				l.put(arrays[i][j], a);
+				s.add(arrays[i][j]);
+			}
+		}
 
-	    Integer[] e = s.toArray (new Integer[0]);
+		Integer[] e = s.toArray(new Integer[0]);
 
-	    List<Integer> f = new ArrayList<Integer> ();
-	    for (int i : e)
-	    {
+		List<Integer> f = new ArrayList<Integer>();
+		for (int i : e) {
 
-	      if (l.get (i).size () == arrays.length)
-	      {
-	        // in all arrays it should equal number of occurrences.
-	        int o = 0;
-	        boolean tbd = true;
+			if (l.get(i).size() == arrays.length) {
+				// in all arrays it should equal number of occurrences.
+				int o = 0;
+				boolean tbd = true;
 
-	        Map<Integer, Integer> oc = l.get (i);
-	        for (int k = 0; k < arrays.length; k++)
-	        {
-	          if (k > 0 && o != oc.get (k))
-	          {
-	            tbd = false;
-	            break;
-	          }
-	          o = oc.get (k);
-	        }
+				Map<Integer, Integer> oc = l.get(i);
+				for (int k = 0; k < arrays.length; k++) {
+					if (k > 0 && o != oc.get(k)) {
+						tbd = false;
+						break;
+					}
+					o = oc.get(k);
+				}
 
-	        if (tbd)
-	        {
-	          f.add (i);
-	        }
-	      }
-	    }
+				if (tbd) {
+					f.add(i);
+				}
+			}
+		}
 
-	    int[] r = new int[f.size ()];
-	    for (int i = 0; i < f.size (); i++)
-	    {
-	      r[i] = f.get (i);
-	    }
-	    Arrays.sort (r);
+		int[] r = new int[f.size()];
+		for (int i = 0; i < f.size(); i++) {
+			r[i] = f.get(i);
+		}
+		Arrays.sort(r);
 
+		return r;
+	}
 
-	    return r;
-	  }
-
-
-	
 	/**
-	   * 
-	   * You're given n numbers.
-	   * 
-	   * Return the sum of digits of all prime numbers among the given numbers.
-	   * 
-	   * Example
-	   * 
-	   * For n = 3 and a = [11, 21, 54] the output should be 2. For n = 4 and a =
-	   * [22, 7, 121, 17] the output should be 15.
-	   * 
-	   * [input] integer n 1 ≤ n < 26.
-	   * 
-	   * [input] array.integer a 1 ≤ a[i] < 27.
-	   * 
-	   * [output] integer
-	   * 
-	   * @param n
-	   * @param a
-	   * @return
-	   */
-	  
-	  
-	  static int sumofprimenumbers(int n, int[] a)
-	  {
-	    int r = 0;
-	    
+	 * 
+	 * You're given n numbers.
+	 * 
+	 * Return the sum of digits of all prime numbers among the given numbers.
+	 * 
+	 * Example
+	 * 
+	 * For n = 3 and a = [11, 21, 54] the output should be 2. For n = 4 and a =
+	 * [22, 7, 121, 17] the output should be 15.
+	 * 
+	 * [input] integer n 1 ≤ n < 26.
+	 * 
+	 * [input] array.integer a 1 ≤ a[i] < 27.
+	 * 
+	 * [output] integer
+	 * 
+	 * @param n
+	 * @param a
+	 * @return
+	 */
 
-	    for (int i = 0; i < n; i++)
-	    {
-	      boolean p = true && a[i] != 1;
-	      
-	      for (int j = 2; j <= Math.sqrt(a[i]); j++) {
-	    	  if (a[i]% j == 0) {
-	    		  p = false;
-	    		  break;
-	    	  }
-	      }
-	      
-	      if (p)
-	      {
-	        
-	        while (a[i] > 0)
-	        {
-	          r += a[i] % 10;
-	          a[i] /= 10;
-	        }
-	       
-	      }
-	    }
+	static int sumofprimenumbers(int n, int[] a) {
+		int r = 0;
 
-	    return r;
-	  }
-	
-	public static boolean isPrime (int n, List<Integer> p)
-	  {
-	    int l = 0;
+		for (int i = 0; i < n; i++) {
+			boolean p = true && a[i] != 1;
 
-	    if (n == 1)
-	    {
-	      return false;
-	    }
+			for (int j = 2; j <= Math.sqrt(a[i]); j++) {
+				if (a[i] % j == 0) {
+					p = false;
+					break;
+				}
+			}
 
-	    if (p.contains (n))
-	    {
-	      return true;
-	    }
-	    for (int i = 0; i < p.size (); i++)
-	    {
-	      if (n % p.get (i) == 0)
-	      {
-	        return false;
-	      }
-	      l = p.get (i);
-	    }
+			if (p) {
 
-	    for (int i = l + 1; i <= Math.sqrt (n); i++)
-	    {
-	      if (n % i == 0)
-	      {
-	        return false;
-	      }
-	    }
+				while (a[i] > 0) {
+					r += a[i] % 10;
+					a[i] /= 10;
+				}
 
-	    p.add (n);
-	    System.out.println(p);
-	    return true;
-	  }
-	
+			}
+		}
+
+		return r;
+	}
+
+	public static boolean isPrime(int n, List<Integer> p) {
+		int l = 0;
+
+		if (n == 1) {
+			return false;
+		}
+
+		if (p.contains(n)) {
+			return true;
+		}
+		for (int i = 0; i < p.size(); i++) {
+			if (n % p.get(i) == 0) {
+				return false;
+			}
+			l = p.get(i);
+		}
+
+		for (int i = l + 1; i <= Math.sqrt(n); i++) {
+			if (n % i == 0) {
+				return false;
+			}
+		}
+
+		p.add(n);
+		System.out.println(p);
+		return true;
+	}
+
 	String myConcat(String[] arguments, String separator) {
 
-		  String result = "";
-		  for (int i = 1; i < arguments.length; i++) {
-		    result += arguments[i];
-		    result += separator;
-		  }
-		  return result;
+		String result = "";
+		for (int i = 1; i < arguments.length; i++) {
+			result += arguments[i];
+			result += separator;
 		}
+		return result;
+	}
+
+	/**
+	 * Say hello to Invoker, the most versatile hero in the game Defense of the
+	 * Ancients (DotA)
+	 * 
+	 * Invoker combines 3 basic elements: (Q)uas, (W)ex and (E)xort to create 10
+	 * different powerful skills:
+	 * 
+	 * WWW => (E)MP WWQ => (T)ornado WWE => (A)lacrity QQW => (G)host Walk QQQ
+	 * => (C)old Snap QQE => (I)ce Wall EEQ => (F)orge Spirit EEE => (S)un
+	 * Strike EEW => Chaos (M)eteor QWE => (D)eafening Blast For example, to use
+	 * Ice Wall, a player has to prepare 2 Quas and 1 Exort, then hit R to
+	 * activate it. Note that the order of the element is not important, i.e.
+	 * "QQE" is the same as "QEQ" or "EQQ".
+	 * 
+	 * Invoker can have only 3 elements prepared at a time. For example, if he
+	 * had had "EQQ" prepared before the player hit "W" (a hotkey for Wex), he
+	 * would carry "QQW". The new element pushed the oldest one out. Hitting R
+	 * does not change the prepared elements, only activates the corespondent
+	 * skill.
+	 * 
+	 * Serin is having trouble controlling Invoker. He wants to know the least
+	 * number of keystrokes required to activate a certain list of skills.
+	 * 
+	 * Given the skills Serin wants to perform in the exact order, return the
+	 * least number of keystrokes required to activate them.
+	 * 
+	 * 1 ≤ |skills| ≤ 10 skills contains only the following characters: 'E',
+	 * 'T', 'A', 'G', 'C', 'I', 'F', 'S', 'M', 'D' Since a skill has to be
+	 * cooled down after one use, Serin will not attempt to activate any skill
+	 * twice in a combo. That is to say, each of the above characters appears at
+	 * most once in skills. Examples:
+	 * 
+	 * For skills = "D" the output should be 4. Serin wants to perform
+	 * (D)eafening Blast. The sequence of key strokes can be "QWER", "QEWR",
+	 * "WQER", "WEQR", "EQWR" or "EWQR" For skills = "ET" the output should be
+	 * 6. This sequence is "WWWRQR" For skills = "ECS" the output should be 12.
+	 * The only way is "WWWRQQQREEER" For skills = "DMIETAG" the output should
+	 * be 22. The key strokes are "QWERERQQRWWWRQRWEWRQQR" IMPORTANT NOTE: Mind
+	 * the time limit!
+	 * 
+	 * [input] string skills
+	 * 
+	 * A string represents the skills Serin wants to perform, in order. [output]
+	 * integer
+	 * 
+	 * The least possible number of keystrokes to create that combo.
+	 * 
+	 * @param skills
+	 * @return
+	 */
+	int Invoke(String skills) {
+		return 0;
+	}
+
+	/**
+	 * You are given two positive integers x and p. Find a modular inverse for x
+	 * mod p, where p is prime.
+	 * 
+	 * Note: the modular inverse of x mod p is the y value that makes (x * y) %
+	 * p = 1.
+	 * 
+	 * Example:
+	 * 
+	 * For x = 2 and p = 7 the output is 4.
+	 * 
+	 * [input] integer x
+	 * 
+	 * A positive integer. [input] integer p
+	 * 
+	 * A prime number, 1 ≤ x
+	 * < p
+	 * ≤ 109 + 7. [output] integer
+	 * 
+	 * A modular inverse for x (mod p).
+	 * 
+	 * @param x
+	 * @param p
+	 * @return
+	 */
+	static int ReversePrime(int x, int p) {
+		int i = p;
+		p = 1;
+		while (p % x != 0) {
+			p += i;
+		}
+		return p / x;
+
+	}
+
+	static int ReversePrime0(int x, int p) {
+		return x % p == 1 ? 1 : (p + 1) / x;
+
+	}
+
+	
+
 }
