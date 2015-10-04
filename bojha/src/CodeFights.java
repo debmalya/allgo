@@ -1407,7 +1407,7 @@ public class CodeFights {
 	 * 
 	 * A prime number, 1 ≤ x
 	 * < p
-	 * ≤ 109 + 7. [output] integer
+	 * ≤ 10**9 + 7. [output] integer
 	 * 
 	 * A modular inverse for x (mod p).
 	 * 
@@ -1415,6 +1415,18 @@ public class CodeFights {
 	 * @param p
 	 * @return
 	 */
+	static int ReversePrime1(int x, int p) {
+		int i = p;
+		p = 1;
+
+		while (p % x != 0)
+			// p++;
+			p += i;
+
+		return p / x;
+
+	}
+
 	static int ReversePrime(int x, int p) {
 		int i = p;
 		p = 1;
@@ -1425,11 +1437,211 @@ public class CodeFights {
 
 	}
 
+	static int ReversePrime3(int x, int p) {
+		int y = 0;
+		while ((x * y) % p != 1) {
+			y++;
+		}
+		return y;
+
+	}
+
+	static int ReversePrime4(int x, int p) {
+		if (x == 1)
+			return 1;
+		int y = p / x;
+		while ((x * y) % p != 1)
+			y++;
+
+		return y;
+
+	}
+
 	static int ReversePrime0(int x, int p) {
 		return x % p == 1 ? 1 : (p + 1) / x;
 
 	}
 
-	
+	/**
+	 * You are given N coins. The ith coin has a value of ai. How many ways are
+	 * there to get a sum equal to S using the coins you have?
+	 * 
+	 * Exapmle
+	 * 
+	 * For N = 5, S = 8 and a = [2,5,3,3,2] the answer should be 4. The possible
+	 * combinations are [1,3,4], [2,3], [2,4] and [3,4,5] (here a number denotes
+	 * 1-based index of the coin to take).
+	 * 
+	 * The first method explanation: [1,3,4] a[1] = 2, a[3] = 3, a[4] = 3, a[1]
+	 * + a[3] + a[4] = 8
+	 * 
+	 * [input] integer N
+	 * 
+	 * 1 ≤ N ≤ 22. [input] integer S
+	 * 
+	 * 1 ≤ S ≤ 10000. [input] array.integer a
+	 * 
+	 * 1 ≤ ai ≤ 100. [output] integer
+	 * 
+	 * The number of ways to get S. CODE
+	 * 
+	 * @param N
+	 * @param S
+	 * @param a
+	 * @return
+	 */
+	static int coins0(int N, int S, int[] a) {
+		Arrays.sort(a);
+		int r = 0;
+		Map<Integer, Integer> c = new HashMap<Integer, Integer>();
+		for (int i = 0; i < a.length; i++) {
+			Integer o = c.get(a[i]);
+			if (o == null) {
+				o = 0;
+			}
+			o++;
+			c.put(a[i], o);
+		}
+
+		return r;
+	}
+
+	static int coins(int N, int S, int[] a) {
+		if (a.length == 1 && a[0] == S) {
+			return 1;
+		}
+		int r = 0;
+		int[] pa = new int[a.length];
+		int[] sa = new int[a.length];
+		for (int i = 0; i < a.length; i++) {
+			pa[i] += a[i];
+			sa[i] += a[a.length - i - 1];
+			if (i > 0) {
+				pa[i] += pa[i - 1];
+				sa[i] += sa[i - 1];
+			}
+		}
+
+		for (int i = 0; i < a.length; i++) {
+
+			if (sa[i] == S) {
+				r++;
+			}
+			if (pa[i] == S) {
+				r++;
+			}
+			for (int j = i + 1; j < a.length; j++) {
+				if (j < a.length) {
+
+					if (pa[j] - pa[i] == S) {
+						r++;
+					}
+					if (sa[j] - sa[i] == S) {
+						r++;
+					}
+
+				} else {
+					break;
+				}
+			}
+		}
+
+		return r;
+	}
+
+	/**
+	 * If you write numbers from 1 to N next to each other, how many digits will
+	 * be written?
+	 * 
+	 * Given number N, return the total number of digits written.
+	 * 
+	 * Examples
+	 * 
+	 * For N = 10 the answer should be 11, because [12345678910] has 11 digits.
+	 * 
+	 * [input] integer N
+	 * 
+	 * 1 ≤ N ≤ 10**8. [output] integer
+	 * 
+	 * The total number of digits.
+	 * 
+	 * @param N
+	 * @return
+	 */
+	static int CountingDigits(int N) {
+		StringBuilder sb = new StringBuilder();
+
+		while (N > 0) {
+			sb.append(N % 9);
+			N /= 9;
+		}
+		return Integer.parseInt(sb.reverse().toString());
+	}
+
+	/**
+	 * A number whose biggest prime factor doesn't exceed 5 is called a Hamming
+	 * number. The Hamming number sequence starts with 1, 2, 3, 4, 5, 6, 8, 9,
+	 * 10, 12, 15,... .
+	 * 
+	 * Let K-Hamming number be a number whose largest prime factor doesn't
+	 * exceed K. So any Hamming number is actually 5-Hamming number.
+	 * 
+	 * Find the number of K-Hamming numbers that are not greater than N.
+	 * 
+	 * Example:
+	 * 
+	 * Hamming_number_part1("10", 5) = 9 as there're 9 numbers that satisfy the
+	 * given conditions: 1, 2, 3, 4, 5, 6, 8, 9, 10.
+	 * 
+	 * [input] string N
+	 * 
+	 * 1 ≤ N < 2**52. [input] integer K
+	 * 
+	 * 2 ≤ K ≤ 100. [output] integer
+	 * 
+	 * 
+	 * @param N
+	 * @param K
+	 * @return
+	 */
+	int Hamming_number_part1(String N, int K) {
+		List<Integer> f = new ArrayList<Integer>();
+		f.add(2);
+		List<Integer> p = new ArrayList<Integer>();
+		if (K >= 1) {
+			p.add(1);
+		}
+		if (K >= 2) {
+			p.add(2);
+		}
+		int m = Integer.parseInt(N);
+		for (int i = 3; i <= m; i++) {
+			// get largest prime factor
+			boolean d = false;
+			int lp = 0;
+			for (int j = 0; j < f.size(); j++){
+				if (i % f.get(j) == 0) {
+					d = true;
+					lp = Math.max(f.get(j),lp);
+				}
+			}
+			
+			if (!d) {
+				f.add(i);
+				if (K >= i) {
+					p.add(i);
+				}
+			}
+			
+			if (lp <= K) {
+				p.add(i);
+			}
+			
+			
+		
+
+		}
+		return p.size();
+	}
 
 }

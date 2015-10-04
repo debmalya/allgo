@@ -321,7 +321,33 @@ public class CodeFightsTest {
 		
 		for (int i = 1; i < 11; i++) {
 			actual = CodeFights.ReversePrime(i, 11);
-			System.out.println(i+" "+actual);
+			
 		}
+		
+		int i = (int)Math.pow(10, 9) + 7;
+		
+		
+		Assert.assertEquals(1, CodeFights.ReversePrime(1, i));
+		Assert.assertEquals(500000004, CodeFights.ReversePrime(2, i));
+		
+		Assert.assertEquals(489,CodeFights.ReversePrime(2, 977));
+	}
+	
+	@Test
+	public void test_coins() {
+		int actual = CodeFights.coins(5, 8, new int[]{2,5,3,3,2});
+		Assert.assertEquals(4,actual);
+		
+		actual = CodeFights.coins(5, 7, new int[]{2,5,3,3,2});
+		Assert.assertEquals(2,actual);
+		
+		actual = CodeFights.coins(1, 1, new int[]{1});
+		Assert.assertEquals(1,actual);
+	}
+	
+	@Test
+	public void test_CountingDigits(){
+		Assert.assertEquals(11,CodeFights.CountingDigits(10));
+		Assert.assertEquals(13,CodeFights.CountingDigits(11));
 	}
 }
