@@ -1618,30 +1618,63 @@ public class CodeFights {
 		for (int i = 3; i <= m; i++) {
 			// get largest prime factor
 			boolean d = false;
-			int lp = 0;
-			for (int j = 0; j < f.size(); j++){
+			for (int j = 0; j < f.size(); j++) {
 				if (i % f.get(j) == 0) {
 					d = true;
-					lp = Math.max(f.get(j),lp);
+					break;
 				}
 			}
-			
+
 			if (!d) {
 				f.add(i);
 				if (K >= i) {
 					p.add(i);
 				}
+			} else {
+				d = false;
+				for (int j = K; j < i; j++) {
+					if (i % j == 0) {
+						d = true;
+						break;
+					}
+				}
+
+				if (!d) {
+					p.add(i);
+				}
 			}
-			
-			if (lp <= K) {
-				p.add(i);
-			}
-			
-			
-		
 
 		}
 		return p.size();
+	}
+
+	/**
+	 * A well-ordered number is a number where each digit is greater than the
+	 * previous one.
+	 * 
+	 * Given a number, find out whether it's well-ordered or not.
+	 * 
+	 * [input] integer n
+	 * 
+	 * The number to check. [output] boolean
+	 * 
+	 * true if the given number is well-ordered, false otherwise.
+	 * 
+	 * @param n
+	 * @return
+	 */
+	static boolean wellOrderedNumber(int n) {
+		int p = -1, r = 0;
+		while (n > 0) {
+			r = n % 10;
+			if (r > p &&  p != -1)  {
+				return false;
+			}
+			n /= 10;
+			p = r;
+		}
+
+		return true;
 	}
 
 }

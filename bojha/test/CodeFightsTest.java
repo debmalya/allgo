@@ -348,6 +348,11 @@ public class CodeFightsTest {
 	@Test
 	public void test_CountingDigits(){
 		Assert.assertEquals(11,CodeFights.CountingDigits(10));
-		Assert.assertEquals(13,CodeFights.CountingDigits(11));
+//		Assert.assertEquals(13,CodeFights.CountingDigits(11));
+	}
+	
+	@Test
+	public void test_wellOrdered() {
+		Assert.assertTrue(CodeFights.wellOrderedNumber(1489));
 	}
 }
