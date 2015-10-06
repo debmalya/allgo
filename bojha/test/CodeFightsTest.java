@@ -354,5 +354,17 @@ public class CodeFightsTest {
 	@Test
 	public void test_wellOrdered() {
 		Assert.assertTrue(CodeFights.wellOrderedNumber(1489));
+		Assert.assertFalse(CodeFights.wellOrderedNumber(4189));
+		Assert.assertFalse(CodeFights.wellOrderedNumber(4198));
 	}
+	
+	@Test
+	  public void test_wellOrderedNumber() {
+		Assert.assertFalse (CodeFights.wellOrderedNumber (132));
+		Assert.assertTrue (CodeFights.wellOrderedNumber (1567));
+		Assert.assertTrue (CodeFights.wellOrderedNumber (1));
+		Assert.assertTrue (CodeFights.wellOrderedNumber (12));
+		Assert.assertFalse (CodeFights.wellOrderedNumber (1234567890));
+		Assert.assertTrue (CodeFights.wellOrderedNumber (123456789));
+	  }
 }

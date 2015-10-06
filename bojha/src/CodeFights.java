@@ -1664,17 +1664,49 @@ public class CodeFights {
 	 * @return
 	 */
 	static boolean wellOrderedNumber(int n) {
-		int p = -1, r = 0;
-		while (n > 0) {
-			r = n % 10;
-			if (r > p &&  p != -1)  {
-				return false;
-			}
-			n /= 10;
-			p = r;
+		String s = Integer.toString (n);
+	    for (int i = 1; i < s.length (); i++)
+	    {
+	      int r = s.charAt (i) - s.charAt (i - 1);
+	      if (r <= 0)
+	      {
+	        return false;
+	      }
+	    }
+
+	    return true;
+	}
+	/**
+	 *
+	 * You're given an integer N.
+	 *
+	 * Your task is to return "1234...N...4321".
+	 *
+	 * Example:
+	 *
+	 * For N = 5, the output is "123454321". For N = 8, the output is
+	 * "123456787654321".
+	 *
+	 * [input] integer N 0 < N < 10
+	 *
+	 * [output] string
+	 *
+	 * @param N
+	 * @return
+	 */
+	static String Palindromic_Number(int N) {
+		StringBuilder s = new StringBuilder();
+		int i = 0;
+		while (i < N) {
+			s.append(++i);
 		}
 
-		return true;
+		while (i > 1) {
+			s.append(--i);
+		}
+
+		return s.toString();
+
 	}
 
 }
