@@ -1664,18 +1664,17 @@ public class CodeFights {
 	 * @return
 	 */
 	static boolean wellOrderedNumber(int n) {
-		String s = Integer.toString (n);
-	    for (int i = 1; i < s.length (); i++)
-	    {
-	      int r = s.charAt (i) - s.charAt (i - 1);
-	      if (r <= 0)
-	      {
-	        return false;
-	      }
-	    }
+		String s = Integer.toString(n);
+		for (int i = 1; i < s.length(); i++) {
+			int r = s.charAt(i) - s.charAt(i - 1);
+			if (r <= 0) {
+				return false;
+			}
+		}
 
-	    return true;
+		return true;
 	}
+
 	/**
 	 *
 	 * You're given an integer N.
@@ -1709,4 +1708,41 @@ public class CodeFights {
 
 	}
 
+	/**
+	 * You're given an array of two strings, [s1, s2]. You have to find weather
+	 * s2 is a rotation of s1.
+	 * 
+	 * String s2 is a rotation of string s1 if it's possible to make them equal
+	 * by shifting characters in s2 clockwise or counterclockwise.
+	 * 
+	 * If s2 is a rotation of s1, return "YES", otherwise return "NO".
+	 * 
+	 * Examples:
+	 * 
+	 * For Array = ["codefights","fightscode"] the output should be "YES". For
+	 * Array = ["code", "odec"] the output should be "YES". For Array =
+	 * ["butter", "tterub"] the output should be "NO".
+	 * 
+	 * In the second example if you rotate s2 clockwise, 'c' will move in front
+	 * of the modified string, so it will become code. Thus the answer is "YES".
+	 * 
+	 * [input] array.string Array
+	 * 
+	 * An array of length 2, 1 ≤ Array[i] ≤ 100. Each character is a lowercase
+	 * Latin letter. [output] string
+	 * 
+	 * "YES" or "NO".
+	 * 
+	 * @param Array
+	 * @return
+	 */
+	String stringRotation(String[] Array) {
+		String f = Array[0] + Array[0];;
+String s = f.replace (Array[1], "");
+int d = f.length () - s.length ();
+return d == 0 ? "NO" : d % Array[0].length () == 0 ? "YES" : "NO";
+	}
+
+
+	
 }
