@@ -1737,12 +1737,65 @@ public class CodeFights {
 	 * @return
 	 */
 	String stringRotation(String[] Array) {
-		String f = Array[0] + Array[0];;
-String s = f.replace (Array[1], "");
-int d = f.length () - s.length ();
-return d == 0 ? "NO" : d % Array[0].length () == 0 ? "YES" : "NO";
+		String f = Array[0] + Array[0];
+		int d = f.length() - f.replace(Array[1], "").length();
+		return d == 0 ? "NO" : d % Array[0].length() == 0 ? "YES" : "NO";
 	}
 
+	String findAndReplace(String originalString, String stringToFind,
+			String stringToReplace) {
+		return originalString.replace(stringToFind, stringToReplace);
+	}
 
-	
+	/**
+	 * Determine the state of a deck of cards after the given number of riffle
+	 * shuffles.
+	 * 
+	 * You are given an array of 2 * n cards representing the initial state of
+	 * the cards from top to bottom, and a number of shuffles to perform over
+	 * this deck.
+	 * 
+	 * Assume that every shuffle is done perfectly starting with the lower half
+	 * of the cards.
+	 * 
+	 * Shuffle examples:
+	 * 
+	 * [1,2,3,4] => divide in halves [1,2],[3,4] => combine [1,3,2,4]
+	 * 
+	 * The second shuffle:
+	 * 
+	 * [1,3,2,4] => divide in halves [1,3],[2,4] => combine [1,2,3,4]
+	 * 
+	 * Examples:
+	 * 
+	 * Input: [1,2,3,4], 2 Output: [1,2,3,4]
+	 * 
+	 * Input: [1,2,3,4], 1 Output: [1,3,2,4]
+	 * 
+	 * Input:
+	 * [3,4,7,3,4,6,4,2,2,3,4,5,7,8,9,5,4,3,3,5,6,7,8,8,6,5,4,3,5,6,7,8,5,
+	 * 6,3,5,7,8], 17 Output:
+	 * [3,5,6,8,6,3,5,8,7,5,3,5,8,5,3,2,6,3,4,7,3,5,7,5,4,
+	 * 6,8,6,3,4,9,7,4,2,4,4,7,8]
+	 * 
+	 * Note that the first and the last elements are always the same.
+	 * 
+	 * [input] array.integer deck
+	 * 
+	 * Array representing cards from top to bottom. 2 ≤ |deck| ≤ 100 1 ≤ deck[i]
+	 * ≤ 9 It is guaranteed that |deck| is always an even number. [input]
+	 * integer numberOfRiffleShuffles
+	 * 
+	 * The number of shuffles, 0 ≤ numberOfRiffleShuffles ≤ 100. [output]
+	 * array.integer
+	 * 
+	 * The state of the deck of cards after the given number of shuffles. CODE
+	 * 
+	 * @param deck
+	 * @param numberOfRiffleShuffles
+	 * @return
+	 */
+	int[] shuffleState(int[] deck, int numberOfRiffleShuffles) {
+		return null;
+	}
 }
