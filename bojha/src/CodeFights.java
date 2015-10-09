@@ -1798,4 +1798,41 @@ public class CodeFights {
 	int[] shuffleState(int[] deck, int numberOfRiffleShuffles) {
 		return null;
 	}
+
+	/**
+	 * Rank of Array Element
+	 * 
+	 * Given an array A, find the rank of the element at the ith position.
+	 * 
+	 * The rank of the A[i] is a value equal to the number of elements less than
+	 * or equal to A[i] standing before A[i], plus the number of elements less
+	 * than A[i] standing after A[i].
+	 * 
+	 * [input] array.integer A
+	 * 
+	 * An array of integers, |A| < 15. [input] integer i
+	 * 
+	 * Index of the element whose rank is to be found. [output] integer
+	 * 
+	 * Rank of the element at the ith position.
+	 * 
+	 * @param A
+	 * @param i
+	 * @return
+	 */
+	static int RankOfElement(int[] A, int i) {
+
+		int r = 0;
+		for (int j = 0; j < A.length; j++)
+			// value equal to the number of elements less than or equal to A[i]
+			// standing before A[i]
+			if (A[j] <= A[i] && j < i)
+				r++;
+			// number of elements less than A[i] standing after A[i]
+			else if (A[j] < A[i] && j > i)
+				r++;
+
+		return r;
+
+	}
 }

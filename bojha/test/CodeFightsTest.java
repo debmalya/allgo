@@ -367,4 +367,16 @@ public class CodeFightsTest {
 		Assert.assertFalse (CodeFights.wellOrderedNumber (1234567890));
 		Assert.assertTrue (CodeFights.wellOrderedNumber (123456789));
 	  }
+	
+	@Test
+	public void test_rank() {
+		
+		int[] ar = new int[]{3,2,3,4,1};
+		int actual = CodeFights.RankOfElement(ar, 0);
+		Assert.assertEquals(2, actual);
+		
+		ar = new int[]{3,2,3,4,1};
+		actual = CodeFights.RankOfElement(ar, 1);
+		Assert.assertEquals(1, actual);
+	}
 }
