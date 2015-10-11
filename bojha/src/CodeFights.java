@@ -6,7 +6,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.SortedMap;
 import java.util.Stack;
+import java.util.TreeMap;
 
 /**
  * 
@@ -1843,12 +1845,12 @@ public class CodeFights {
 			for (int j = 0; j < N; j++) {
 				r[i][j] = (i == 0 || j == 0 || i == N - 1 || j == N - 1) ? 1
 						: i < N / 2 + N % 2 ? (i + 1) : 0;
-				r[N -i -1][j] = r[i][j];
+				r[N - i - 1][j] = r[i][j];
 			}
 		}
 
-		if (N%2 == 1 && N > 1) {
-			r[N/2][N/2] = N - 1;
+		if (N % 2 == 1 && N > 1) {
+			r[N / 2][N / 2] = N - 1;
 		}
 		return r;
 	}
@@ -1866,4 +1868,90 @@ public class CodeFights {
 		return r;
 	}
 
+	/**
+	 * You are given a string containing a valid mathematical expression. This
+	 * expression is given in Roman notation: digits and numbers inside it are
+	 * not decimal numerals, but Roman Numerals .
+	 * 
+	 * Your challenge is to return the integer value of that expression in the
+	 * decimal system.
+	 * 
+	 * The expression can contain the following symbols:
+	 * 
+	 * operators: '+', '/', '-', '*', '=', '(' and ')'; numerals: 'C', 'D', 'I',
+	 * 'M', 'V' and 'X'. Examples:
+	 * 
+	 * RomanExpression("V+V=") = 10, as 5 + 5 = 10 RomanExpression("IX=") = 9,
+	 * as 9 = 9 RomanExpression("(III+VI)*CM=") = 8100, as (3 + 6) * 900 = 8100
+	 * [input] string expression
+	 * 
+	 * A valid mathematical expression to solve. [output] integer
+	 * 
+	 * Expression value.
+	 * 
+	 * @param expression
+	 * @return
+	 */
+	int RomanExpression(String expression) {
+		Map<String, Integer> m = new HashMap<String, Integer>();
+		m.put("I", 1);
+		m.put("II", 2);
+		m.put("L", 50);
+		m.put("C", 100);
+		m.put("D", 500);
+		m.put("M", 1000);
+
+		Stack<Character> operator = new Stack<Character>();
+
+		String o1 = "";
+		String o2 = "";
+
+		for (int i = 0; i < expression.length(); i++) {
+
+		}
+		return 0;
+	}
+
+	/**
+	 * You are given two integers L and R. What single digit occurs the most
+	 * often in all the numbers between them (inclusive)? If there is more than
+	 * one solution, return the smallest one.
+	 * 
+	 * [input] integer L
+	 * 
+	 * 1 ≤ L ≤ 10**7. [input] integer R
+	 * 
+	 * 1 ≤ L ≤ R ≤ 107. [output] integer
+	 * 
+	 * The digit which occurs most often.
+	 * 
+	 * @param L
+	 * @param R
+	 * @return
+	 */
+	static int digit(int L, int R) {
+		
+		int[] c = new int[10];
+		int r = 0;
+		int m = 10;
+		for (int i = L; i <= R; i++) {
+			int j = i;
+			while (j > 0) {
+				int k = j % 10;
+				c[k]++;	
+				r = Math.max(r, c[k]);
+				j /= 10;
+			}
+		}
+		
+		for (int i = 0; i < 10;i++) {
+			if (c[i] == r) {
+				return i;
+			}
+		}
+		
+		return m;
+		
+
+	}
 }

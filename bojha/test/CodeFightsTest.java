@@ -413,8 +413,18 @@ public class CodeFightsTest {
 		
 		actuals = CodeFights.pyramidMatrix(100);
 		actuals = CodeFights.pyramidMatrix(99);
-		printArray(actuals);
+//		printArray(actuals);
 
+	}
+	
+	
+	@Test
+	public void test_digits() {
+		int actual = CodeFights.digit(20, 22);
+		Assert.assertEquals(2, actual);
+		
+		actual = CodeFights.digit(29, 30);
+		Assert.assertEquals(0, actual);
 	}
 	
 	private void printArray(int[][] actuals) {
