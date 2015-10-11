@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -378,5 +380,54 @@ public class CodeFightsTest {
 		ar = new int[]{3,2,3,4,1};
 		actual = CodeFights.RankOfElement(ar, 1);
 		Assert.assertEquals(1, actual);
+	}
+	
+	
+	@Test
+	public void testPyramidMatrix() {
+		int[][] actuals = CodeFights.pyramidMatrix(1);
+		int[][] expecteds = new int[][]{{1}};
+		
+		checkArrays(actuals, expecteds);
+		
+		actuals = CodeFights.pyramidMatrix(2);		
+		expecteds = new int[][]{{1,1},{1,1}};
+		checkArrays(actuals, expecteds);
+		
+//		printArray(actuals);
+		
+		actuals = CodeFights.pyramidMatrix(3);		
+		expecteds = new int[][]{{1,1,1},{1,2,1},{1,1,1}};
+		checkArrays(actuals, expecteds);
+//		printArray(actuals);
+		
+		actuals = CodeFights.pyramidMatrix(4);
+		expecteds = new int[][]{{1,1,1,1},{1,2,2,1},{1,2,2,1},{1,1,1,1}};
+		checkArrays(actuals, expecteds);
+//		printArray(actuals);
+		
+		actuals = CodeFights.pyramidMatrix(5);
+		expecteds = new int[][]{{1,1,1,1,1},{1,2,2,2,1},{1,3,4,3,1},{1,2,2,2,1},{1,1,1,1,1}};
+		checkArrays(actuals, expecteds);
+//		printArray(actuals);
+		
+		actuals = CodeFights.pyramidMatrix(100);
+		actuals = CodeFights.pyramidMatrix(99);
+		printArray(actuals);
+
+	}
+	
+	private void printArray(int[][] actuals) {
+		System.out.println("==================================");
+		for (int i = 0; i < actuals.length; i++) {
+			System.out.println(Arrays.toString(actuals[i]));
+		}
+	}
+
+	private void checkArrays(int[][] actuals, int[][] expecteds) {
+		
+		for (int i = 0; i < expecteds.length; i++) {
+			Assert.assertArrayEquals(expecteds[i], actuals[i]);
+		}
 	}
 }

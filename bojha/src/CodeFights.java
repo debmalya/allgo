@@ -1835,4 +1835,35 @@ public class CodeFights {
 		return r;
 
 	}
+
+	static int[][] pyramidMatrix(int N) {
+		int[][] r = new int[N][N];
+
+		for (int i = 0; i < N / 2 + N % 2; i++) {
+			for (int j = 0; j < N; j++) {
+				r[i][j] = (i == 0 || j == 0 || i == N - 1 || j == N - 1) ? 1
+						: i < N / 2 + N % 2 ? (i + 1) : 0;
+				r[N -i -1][j] = r[i][j];
+			}
+		}
+
+		if (N%2 == 1 && N > 1) {
+			r[N/2][N/2] = N - 1;
+		}
+		return r;
+	}
+
+	static int[][] pyramidMatrix0(int N) {
+		int[][] r = new int[N][N];
+
+		for (int i = 0; i < N; i++) {
+			for (int j = 0; j < N; j++) {
+				r[i][j] = (i == 0 || j == 0 || i == N - 1 || j == N - 1) ? 1
+						: i < N / 2 + N % 2 ? (i + 1) : 0;
+			}
+		}
+
+		return r;
+	}
+
 }
