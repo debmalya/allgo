@@ -1930,7 +1930,7 @@ public class CodeFights {
 	 * @return
 	 */
 	static int digit(int L, int R) {
-		
+
 		int[] c = new int[10];
 		int r = 0;
 		int m = 10;
@@ -1938,20 +1938,76 @@ public class CodeFights {
 			int j = i;
 			while (j > 0) {
 				int k = j % 10;
-				c[k]++;	
+				c[k]++;
 				r = Math.max(r, c[k]);
 				j /= 10;
 			}
 		}
-		
-		for (int i = 0; i < 10;i++) {
+
+		for (int i = 0; i < 10; i++) {
 			if (c[i] == r) {
 				return i;
 			}
 		}
-		
-		return m;
-		
 
+		return m;
+
+	}
+
+	/**
+	 * TwoPrimes
+	 * 
+	 * Write a function which returns true if and only if both input numbers are
+	 * prime, otherwise return false.
+	 * 
+	 * [input] integer a
+	 * 
+	 * [input] integer b
+	 * 
+	 * [output] boolean
+	 * 
+	 * true if both numbers are prime, false otherwise.
+	 * 
+	 * @param a
+	 * @param b
+	 * @return
+	 */
+	static boolean TwoPrimes(int a, int b) {
+
+		if (a == 1 || b == 1) {
+			return false;
+		}
+		for (int i = 2; i < Math.sqrt(Math.max(a, b)); i++) {
+			if (a % i == 0 || b % i == 0) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * You are given a string S representing a number in the roman numeral
+	 * system. Check if the string S contains a correctly written roman number
+	 * and if so return this number as an integer, otherwise return -1.
+	 * 
+	 * For reference on how roman numerals work:
+	 * https://en.wikipedia.org/wiki/Roman_numerals
+	 * 
+	 * For this challenge we assume that there is no restriction on maximum
+	 * number that can be written in roman numerals.
+	 * 
+	 * [input] string s
+	 * 
+	 * A string S consisting of characters I, V, X, L, C, D, M. 1 ≤ |S| ≤ 100.
+	 * [output] integer
+	 * 
+	 * The integer value of the given roman number or -1 if the input doesn't
+	 * contain a correct roman numeral.
+	 * 
+	 * @param s
+	 * @return
+	 */
+	int RomanNumerals(String s) {
+		return 0;
 	}
 }

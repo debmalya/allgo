@@ -427,6 +427,11 @@ public class CodeFightsTest {
 		Assert.assertEquals(0, actual);
 	}
 	
+	@Test
+	public void testTwoPrimes() {
+		Assert.assertTrue(CodeFights.TwoPrimes(2, 3));
+	}
+	
 	private void printArray(int[][] actuals) {
 		System.out.println("==================================");
 		for (int i = 0; i < actuals.length; i++) {
