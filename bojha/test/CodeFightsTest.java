@@ -428,6 +428,75 @@ public class CodeFightsTest {
 	}
 	
 	@Test
+	public void testRomanNumerals() {
+		int actual = CodeFights.RomanNumerals("I");
+		Assert.assertEquals(1, actual);
+		
+		actual = CodeFights.RomanNumerals("V");
+		Assert.assertEquals(5, actual);
+		
+		actual = CodeFights.RomanNumerals("X");
+		Assert.assertEquals(10, actual);
+		
+		actual = CodeFights.RomanNumerals("L");
+		Assert.assertEquals(50, actual);
+		
+		actual = CodeFights.RomanNumerals("C");
+		Assert.assertEquals(100, actual);
+		
+		actual = CodeFights.RomanNumerals("D");
+		Assert.assertEquals(500, actual);
+		
+		actual = CodeFights.RomanNumerals("M");
+		Assert.assertEquals(1000, actual);
+		
+		actual = CodeFights.RomanNumerals("II");
+		Assert.assertEquals(2, actual);
+		
+		actual = CodeFights.RomanNumerals("IIA");
+		Assert.assertEquals(-1, actual);
+		
+		actual = CodeFights.RomanNumerals("XIV");
+		Assert.assertEquals(14, actual);
+		
+		actual = CodeFights.RomanNumerals("XVI");
+		Assert.assertEquals(16, actual);
+		
+		actual = CodeFights.RomanNumerals("XX");
+		Assert.assertEquals(20, actual);
+		
+		actual = CodeFights.RomanNumerals("CMD");
+		Assert.assertEquals(1400, actual);
+		
+		actual = CodeFights.RomanNumerals("CD");
+		Assert.assertEquals(400, actual);
+		
+		actual = CodeFights.RomanNumerals("MCMIV");
+		Assert.assertEquals(1904, actual);
+		
+		actual = CodeFights.RomanNumerals("MCMLIV");
+		Assert.assertEquals(1954, actual);
+		
+		actual = CodeFights.RomanNumerals("MCMXC");
+		Assert.assertEquals(1990, actual);
+		
+		actual = CodeFights.RomanNumerals("MMXIV");
+		Assert.assertEquals(2014, actual);
+		
+		actual = CodeFights.RomanNumerals("MMXV");
+		Assert.assertEquals(2015, actual);
+		
+		actual = CodeFights.RomanNumerals("MCMLXXI");
+		Assert.assertEquals(1971, actual);
+		
+		actual = CodeFights.RomanNumerals("MMMCCCXXXIII");
+		Assert.assertEquals(3333, actual);
+		
+		actual = CodeFights.RomanNumerals("MMMMCMXCIX");
+		Assert.assertEquals(4999, actual);
+	}
+	
+	@Test
 	public void testTwoPrimes() {
 		Assert.assertTrue(CodeFights.TwoPrimes(2, 3));
 	}
@@ -445,4 +514,6 @@ public class CodeFightsTest {
 			Assert.assertArrayEquals(expecteds[i], actuals[i]);
 		}
 	}
+	
+	
 }

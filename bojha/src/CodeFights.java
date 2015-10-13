@@ -1986,28 +1986,102 @@ public class CodeFights {
 	}
 
 	/**
+	 *
 	 * You are given a string S representing a number in the roman numeral
 	 * system. Check if the string S contains a correctly written roman number
 	 * and if so return this number as an integer, otherwise return -1.
-	 * 
+	 *
 	 * For reference on how roman numerals work:
 	 * https://en.wikipedia.org/wiki/Roman_numerals
-	 * 
+	 *
 	 * For this challenge we assume that there is no restriction on maximum
 	 * number that can be written in roman numerals.
-	 * 
-	 * [input] string s
-	 * 
-	 * A string S consisting of characters I, V, X, L, C, D, M. 1 ≤ |S| ≤ 100.
-	 * [output] integer
-	 * 
-	 * The integer value of the given roman number or -1 if the input doesn't
-	 * contain a correct roman numeral.
-	 * 
+	 *
+	 * [input] string s A string S consisting of characters I, V, X, L, C, D, M.
+	 * 1 ≤ |S| ≤ 100.
+	 *
+	 * [output] integer The integer value of the given roman number or -1 if the
+	 * input doesn't contain a correct roman numeral.
+	 *
+	 *
 	 * @param s
 	 * @return
 	 */
-	int RomanNumerals(String s) {
-		return 0;
+	static int RomanNumerals(String s) {
+		Map<Character, Integer> rm = new HashMap<Character, Integer>();
+		rm.put('I', 1);
+		rm.put('V', 5);
+		rm.put('X', 10);
+		rm.put('L', 50);
+		rm.put('D', 500);
+		rm.put('C', 100);
+		rm.put('M', 1000);
+
+		Stack<Integer> o = new Stack<Integer>();
+		int r = 0;
+		Integer v = 0;
+
+		for (int i = 0; i < s.length(); i++) {
+			char c = s.charAt(i);
+			v = rm.get(c);
+			if (v == null) {
+				return -1;
+			}
+			o.push(v);
+		}
+
+		int p = o.peek();
+		while (!o.isEmpty()) {
+			v = o.pop();
+			if (v < p) {
+				r -= v;
+			} else {
+				r += v;
+			}
+			p = v;
+		}
+
+		return r;
 	}
+
+	static int RomanNumerals0(String s) {
+		Map<Character, Integer> rm = new HashMap<Character, Integer>();
+		rm.put('I', 1);
+		rm.put('V', 5);
+		rm.put('X', 10);
+		rm.put('L', 50);
+		rm.put('D', 500);
+		rm.put('C', 100);
+		rm.put('M', 1000);
+
+		Stack<Integer> o = new Stack<Integer>();
+		int r = 0;
+
+		for (int i = 0; i < s.length(); i++) {
+			char c = s.charAt(i);
+			Integer v = rm.get(c);
+			if (v == null) {
+				return -1;
+			}
+			if (!o.isEmpty()) {
+				int b = o.pop();
+				if (b < v) {
+					r += (v - b);
+				} else {
+					r += (v + b);
+				}
+
+			} else {
+				o.push(v);
+			}
+
+		}
+
+		if (!o.isEmpty()) {
+			r += o.pop();
+		}
+
+		return r;
+	}
+
 }
