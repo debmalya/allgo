@@ -2084,4 +2084,53 @@ public class CodeFights {
 		return r;
 	}
 
+	/**
+	 * Tomorrow is SAIB Egyptian Super Cup, match between El_Zamalek :) and
+	 * Alahly -_-. Given a string of lowercase latin letters, return "win" if
+	 * Zamalek wins. Otherwise return "loss". Zamalek wins if in the given
+	 * string the last element of subsequence "z", "a", "m", "a", "l", "e", "k"
+	 * appears before the last element of subsequense "a", "l", "a", "h", "l",
+	 * "y". It is guaranteed that both subsequences are present in the given
+	 * string.
+	 * 
+	 * Example:
+	 * 
+	 * SuperCup("zaqlaqmaqlehkly") = "win"
+	 * 
+	 * Lets mark letters from word "zamalek" in bold, and letters from word
+	 * "alahly" in italic. z a q l a q m a q l e h k l y. Zamalek finishes
+	 * before Alahly, so Zamalek wins.
+	 * 
+	 * [input] string s
+	 * 
+	 * A string of lowercase Latin letters with two aforementioned subsequences.
+	 * |s| < 50. [output] string
+	 * 
+	 * Either "win" or "loss". CODE
+	 * 
+	 * @param s
+	 * @return
+	 */
+	static String SuperCup(String s) {
+		String f = "zamalek";
+		String n = "alahly";
+
+		int a = 0;
+		int b = 0;
+
+		for (int i = 0; i < s.length(); i++) {
+			char c = s.charAt(i);
+			if (c == f.charAt(a))
+				a++;
+			if (c == n.charAt(b))
+				b++;
+			if (a == f.length() - 1 && b < n.length() - 1)
+				return "win";
+            if (b == n.length() - 1)
+              	return "loss";
+
+		}
+		return "loss";
+	}
+
 }

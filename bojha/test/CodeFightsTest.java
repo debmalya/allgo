@@ -497,6 +497,20 @@ public class CodeFightsTest {
 	}
 	
 	@Test
+	public void testSuperCup() {
+		String actual = CodeFights.SuperCup("zaqlaqmaqlehkly");
+		Assert.assertTrue("win".equals(actual));
+		
+		actual = CodeFights.SuperCup("alahly");
+		Assert.assertTrue("loss".equals(actual));
+		
+		actual = CodeFights.SuperCup("zamalek");
+		Assert.assertTrue("win".equals(actual));
+		
+		actual = CodeFights.SuperCup("zaqlaqmaqlehklyzamalek");
+		Assert.assertTrue("win".equals(actual));
+	}
+	@Test
 	public void testTwoPrimes() {
 		Assert.assertTrue(CodeFights.TwoPrimes(2, 3));
 	}
@@ -514,6 +528,7 @@ public class CodeFightsTest {
 			Assert.assertArrayEquals(expecteds[i], actuals[i]);
 		}
 	}
+	
 	
 	
 }
