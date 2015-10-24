@@ -235,7 +235,7 @@ public class StringUtility {
 	public Character getFristUniqueCharacter(String value) {
 		List<Character> uniqueuCharacters = new ArrayList<Character>();
 		if (value != null) {
-//			value = value.toLowerCase();
+			// value = value.toLowerCase();
 			Set<Character> characters = new HashSet<Character>();
 			uniqueuCharacters = new ArrayList<Character>();
 
@@ -249,7 +249,7 @@ public class StringUtility {
 					uniqueuCharacters.remove(eachChar);
 				}
 			}
-			
+
 		}
 
 		if (!uniqueuCharacters.isEmpty()) {
@@ -465,6 +465,35 @@ public class StringUtility {
 		// System.out.println(matcherForInt.group());
 
 		return isInt && !isAll;
+	}
+
+	/**
+	 * You are given two arguments mainString and findString. Your task it to
+	 * find the number of occurrences of the findString in the mainString
+	 * (occurrences may overlap).
+	 * 
+	 * Example
+	 * 
+	 * FindString("banana", "a") = 3.
+	 * 
+	 * [input] string mainString
+	 * 
+	 * [input] string findString
+	 * 
+	 * [output] integer
+	 * 
+	 * @param mainString
+	 * @param findString
+	 * @return
+	 */
+	int FindString(String mainString, String findString) {
+		int r = 0, i = 0;
+
+		while ((i = mainString.substring(i).indexOf(findString)) > -1) {
+			mainString = mainString.substring(i + 1);
+			r++;
+		}
+		return r;
 	}
 
 }
