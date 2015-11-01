@@ -13,7 +13,7 @@ public class FolderStory {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		System.out.println(Math.round(0.4));
 
 	}
 
@@ -54,4 +54,7 @@ public class FolderStory {
 		return "New Folder" + (c > 0 ? " (" + c + ")" : "");
 	}
 
+	double perfectCity(double[] departure, double[] destination) {
+	    return 0.00d;
+	}	
 }
