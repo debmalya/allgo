@@ -11,6 +11,15 @@ import org.junit.Test;
  *
  */
 public class MatrixTest {
+	
+	@Test
+	public final void testGRID() {
+		String actual = Matrix.GRID(2, 2);		
+		Assert.assertEquals("L",actual);
+		
+		actual = Matrix.GRID(3, 3);		
+		Assert.assertEquals("R",actual);
+	}
 
 	/**
 	 * Test method for {@link deb.codefights.Matrix#SpiralMatrix(int)}.
