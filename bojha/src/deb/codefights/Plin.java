@@ -5,6 +5,8 @@ package deb.codefights;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 
 /**
  * @author debmalyajash
@@ -16,8 +18,8 @@ public class Plin {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		System.out.println(Math.ceil(0.9) - 0.9);
-		System.out.println(Math.ceil(0.4) - 0.4);
+		System.out.println(Math.floor(0.9));
+		System.out.println(Math.floor(0.4));
 
 	}
 
@@ -376,5 +378,187 @@ public class Plin {
 
 		return bestNumber;
 	}
+
+	/**
+	 * Define a word as a sequence of consecutive letters. Find the longest word
+	 * from the given string.
+	 * 
+	 * Example
+	 * 
+	 * longestWord("Ready, steady, go!") = "steady"
+	 * 
+	 * [input] string text
+	 * 
+	 * [output] string
+	 * 
+	 * The longest word from text. It's guaranteed that there is a unique output
+	 * 
+	 * @param text
+	 * @return
+	 */
+	String longestWord(String text) {
+
+		char[] chars = text.toCharArray();
+		String answer = "";
+		StringBuilder current = new StringBuilder();
+
+		for (int i = 0; i < chars.length; i++) {
+			if ('a' <= chars[i] && chars[i] <= 'z' || 'A' <= chars[i]
+					&& chars[i] <= 'Z') {
+				current.append(chars[i]);
+				if (current.length() > answer.length()) {
+					answer = current.toString();
+				}
+			} else {
+				current = new StringBuilder();
+			}
+		}
+
+		return answer;
+	}
+
+	/**
+	 * Given an array of distinct integers, find its k-th greatest element.
+	 * 
+	 * Example
+	 * 
+	 * For array = [19, 32, 11, 23] and k = 3, the output should be 19.
+	 * 
+	 * [input] array.integer inputArray
+	 * 
+	 * An array of distinct integers. [input] integer k
+	 * 
+	 * A positive integer not exceeding array length. [output] integer
+	 * 
+	 * k-th greatest element of array.
+	 * 
+	 * @param inputArray
+	 * @param k
+	 * @return
+	 */
+	static int arrayKthGreatestQuick(int[] inputArray, int k) {
+
+		class Helper {
+			int[] listToArray(List<Integer> data) {
+				int[] res = new int[data.size()];
+				for (int i = 0; i < data.size(); i++) {
+					res[i] = data.get(i);
+				}
+				return res;
+			}
+		}
+		;
+
+		int pos = (new Random()).nextInt(inputArray.length);
+		List<Integer> left = new ArrayList<>();
+		List<Integer> right = new ArrayList<>();
+
+		if (inputArray.length == 1) {
+			return inputArray[0];
+		}
+
+		for (int i = 0; i < inputArray.length; i++) {
+			if (inputArray[i] <= inputArray[pos]) {
+				left.add(inputArray[i]);
+			} else {
+				right.add(inputArray[i]);
+			}
+		}
+
+		Helper h = new Helper();
+
+		if (right.size() >= k) {
+			return right.get(k - 1);
+		}
+		return arrayKthGreatestQuick(h.listToArray(left), k - right.size());
+	}
+	
+	/**
+	 * Given array of integers, find the maximal possible sum of some of its k
+	 * consecutive elements.
+	 * 
+	 * Example
+	 * 
+	 * for array = [2, 3, 5, 1, 6], k = 2 output should be 8
+	 * 
+	 * [input] array.integer inputArray
+	 * 
+	 * array of positive integers [input] integer k
+	 * 
+	 * an integer (not greater than the length of inputArray) [output] integer
+	 * 
+	 * the maximal possible sum
+	 * 
+	 * @param inputArray
+	 * @param k
+	 * @return
+	 */
+	int arrayMaxConsecutiveSum(int[] inputArray, int k) {
+
+		int result = 0, currentSum = 0;
+
+		for (int i = 0; i < k - 1; i++) {
+			currentSum += inputArray[i];
+		}
+		for (int i = k - 1; i < inputArray.length; i++) {
+			currentSum += inputArray[i];
+			if (currentSum > result) {
+				result = currentSum;
+			}
+			currentSum -= inputArray[i - k + 1];
+		}
+
+		return result;
+	}
+
+	/**
+	 * A spider is standing at the origin (0, 0) of a Cartesian plane and wants
+	 * to move to the point (X,Y). At each step, the spider can only move one
+	 * square in two of the four directions: U(up), D(down,), L(left), R(right),
+	 * depending on where it is heading:
+	 * 
+	 * if X ≥ 0, Y ≥ 0. The spider can only go U or R. if X ≥ 0, Y ≤ 0. The
+	 * spider can only go D or R. if X ≤ 0, Y ≥ 0. The spider can only go U or
+	 * L. if X ≤ 0, Y ≤ 0. The spider can only go D or L. Find the number of
+	 * ways for the spider to get to the given point (X, Y).
+	 * 
+	 * Example
+	 * 
+	 * With (X, Y) = (2, -2), there are only 6 ways:
+	 * 
+	 * RRDD RDRD RDDR DRRD DRDR DDRR With (X,Y) = (-3, 0), there is only one
+	 * way:
+	 * 
+	 * LLL For (0, 0), the answer is defined to be 1.
+	 * 
+	 * [input] integer X
+	 * 
+	 * [input] integer Y
+	 * 
+	 * [output] integer
+	 * 
+	 * 
+	 * @param X
+	 * @param Y
+	 * @return
+	 */
+	int spiderMove(int X, int Y) {
+
+		X = Math.abs(X);
+		Y = Math.abs(Y);
+
+		int[] n = new int[X + 1];
+		for (int i = 0; i < X + 1; i++) {
+			n[i] = 1;
+		}
+
+		for (int i = 0; i < Y; i++) {
+			for (int j = 1; j < X + 1; j++) {
+				n[j] = n[j - 1] + n[j];
+			}
+		}
+		return n[X];
+	}
+
 
 }
