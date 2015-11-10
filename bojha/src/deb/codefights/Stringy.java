@@ -54,17 +54,17 @@ public class Stringy {
 	 * @return
 	 */
 	static String FindTheSame(String s) {
-		
+
 		for (int i = 0; i < s.length(); i++) {
 			char c = s.charAt(i);
-			if (s.lastIndexOf(c) > i) 
-				return s.replaceAll("[^"+c+"]", "");
-			
+			if (s.lastIndexOf(c) > i)
+				return s.replaceAll("[^" + c + "]", "");
+
 		}
 
-		
 		return "";
 	}
+
 	static String FindTheSame0(String s) {
 		HashMap<Character, Integer> o = new HashMap<>();
 		for (int i = 0; i < s.length(); i++) {
@@ -82,10 +82,52 @@ public class Stringy {
 		while (oei.hasNext()) {
 			Entry<Character, Integer> nextEntry = oei.next();
 			if (nextEntry.getValue() > 0) {
-				return s.replaceAll("[^"+nextEntry.getKey()+"]", "");
+				return s.replaceAll("[^" + nextEntry.getKey() + "]", "");
 			}
 		}
 		return "";
 	}
 
+	/**
+	 * You are given a string. Your task is to find the number of vowels that
+	 * are places between two consonants. The following letters are vowels: 'a',
+	 * 'e', 'i', 'o', 'u' (and their uppercase versions).
+	 * 
+	 * Example:
+	 * 
+	 * PlayfulVowel("How are you?") = 1
+	 * 
+	 * The only vowel between two consonants is 'o' at the 1st position
+	 * (0-based).
+	 * 
+	 * [input] string characters
+	 * 
+	 * [output] integer
+	 * 
+	 * @param characters
+	 * @return
+	 */
+	int PlayfulVowel(String characters) {
+		characters = characters.toLowerCase();
+
+		int r = 0;
+		for (int i = 1; i < characters.length(); i++) {
+			char c = characters.charAt(i);
+			if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u') {
+				if (i + 1 < characters.length()) {
+					char p = characters.charAt(i - 1);
+					char n = characters.charAt(i + 1);
+					if (p != 'a' && p != 'e' && p != 'o' && p != 'i'
+							&& p != 'u' && n != 'a' && n != 'e' && n != 'o'
+							&& n != 'i' && n != 'u' && n != ' ' && p != ' ') {
+
+						r++;
+					}
+				}
+
+			}
+		}
+		return r;
+
+	}
 }
