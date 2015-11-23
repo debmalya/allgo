@@ -32,6 +32,7 @@ public class OctoAmazeTest {
 		List<Job> scheduledJobs = adam.schedule(jobList);
 		Assert.assertNotNull(scheduledJobs);
 		Assert.assertTrue(scheduledJobs.size() == 5);
+		System.out.println(scheduledJobs);
 	}
 
 	@Test
