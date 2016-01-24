@@ -157,20 +157,20 @@ public class BotasanaBot {
 				int e = html.indexOf(">");
 				String t = html.substring(b + 1, e).toUpperCase();
 				if (t.startsWith("/")) {
-					t = t.substring(1);
+					t = t.substring(1).trim();
 					if (s.peek().equals(t)) {
 						t = "]";
 					}
-				} else {
-					t = t.replace("/", "{})");
-					l += t;
-				}
-				if ("DIV".equals(t) || "P".equals(t) || "B".equals(t)
+				} else if ("DIV".equals(t) || "P".equals(t) || "B".equals(t)
 						|| "IMG".equals(t)) {
 					l += t;
 					l += "([";
 					s.push(t);
+				} else {
+					t = t.replace("/", "{})");
+					l += t;
 				}
+
 				html = html.substring(e + 1);
 			}
 		}
