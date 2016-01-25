@@ -163,7 +163,7 @@ public class CFBot {
 
 				if (each.contains(challengeId+"//")) {
 					li.remove(li.get(li.size() - 1));
-					each = each.replaceAll("//DB", "");
+					each = each.replaceAll("//DB ", "");
 					each = each.replaceAll(challengeId+"//", "");
 					li.add(each);
 				}
