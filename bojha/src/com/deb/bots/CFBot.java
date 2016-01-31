@@ -4,7 +4,9 @@
 package com.deb.bots;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * @author debmalyajash
@@ -16,11 +18,12 @@ public class CFBot {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		 String[] code1 = new String[]{ "def is_even_sum(a, b):", 
-		                                    "    return (a + b) % 2 == 0"};
-		 String[] code2 = new String[]{ "def is_even_sum(summand_1, summand_2):", 
-				 "    return (summand_1 + summand_2) % 2 == 0"};
-		 System.out.println(plagiarismCheck(code1,code2));
+		String[] code1 = new String[] { "def is_even_sum(a, b):",
+				"    return (a + b) % 2 == 0" };
+		String[] code2 = new String[] {
+				"def is_even_sum(summand_1, summand_2):",
+				"    return (summand_1 + summand_2) % 2 == 0" };
+		System.out.println(plagiarismCheck(code1, code2));
 
 	}
 
@@ -153,18 +156,17 @@ public class CFBot {
 	 */
 	public static String[] taskMaker(String[] source, int challengeId) {
 		List<String> li = new ArrayList<>();
-		
-		
+
 		for (String each : source) {
 			if (!each.contains("//DB")) {
 				li.add(each);
 
 			} else {
 
-				if (each.contains(challengeId+"//")) {
+				if (each.contains(challengeId + "//")) {
 					li.remove(li.get(li.size() - 1));
 					each = each.replaceAll("//DB ", "");
-					each = each.replaceAll(challengeId+"//", "");
+					each = each.replaceAll(challengeId + "//", "");
 					li.add(each);
 				}
 
@@ -228,7 +230,7 @@ public class CFBot {
 	 */
 	static boolean plagiarismCheck(String[] code1, String[] code2) {
 		int e = 0;
-		// Number of lines do not match 
+		// Number of lines do not match
 		if (code1.length != code2.length) {
 			return false;
 		}
@@ -237,11 +239,11 @@ public class CFBot {
 		for (int i = 0; i < code1.length; i++) {
 			remove(code1, i);
 			remove(code2, i);
-			if (code1[i].equals(code2[i])){
+			if (code1[i].equals(code2[i])) {
 				e++;
 			}
 		}
-		if (e==code1.length) {
+		if (e == code1.length) {
 			return true;
 		}
 		return false;
@@ -250,9 +252,102 @@ public class CFBot {
 	private static void remove(String[] code1, int i) {
 		int b = code1[i].indexOf("(");
 		if (code1[i].indexOf("(") > -1) {
-			code1[i] = code1[i].substring(0, b+1)+code1[i].substring(code1[i].indexOf(")"));
+			code1[i] = code1[i].substring(0, b + 1)
+					+ code1[i].substring(code1[i].indexOf(")"));
 			b = code1[i].indexOf("(");
 		}
 	}
 
+	int lineUp(String commands) {
+		int r = 0;
+		char prev = ' ';
+		boolean s = false;
+		commands = commands.toUpperCase();
+		for (int i = 0; i < commands.length(); i++) {
+			char c = commands.charAt(i);
+			if ((c == 'L' || c == 'R') && (prev == 'L' || prev == 'R') && !s) {
+				r++;
+				s = true;
+			} else if ((s && c == 'A') || (prev == ' ' && c == 'A')) {
+				r++;
+				s = true;
+			} else {
+				s = false;
+			}
+			prev = c;
+		}
+
+		return r;
+
+	}
+
+	/**
+	 * A noob programmer was given two simple tasks: sum and sort the elements
+	 * of the given array
+	 * 
+	 * a = [a1, a2, ..., an]. He started with summing and did it easily, but
+	 * decided to store the sum he found in some random position of the original
+	 * array which was a bad idea. Now he needs to cope with the second task,
+	 * sorting the original array a, and it's giving him trouble since he
+	 * modified it.
+	 * 
+	 * Given the array shuffled, consisting of elements a1, a2, ..., an, a1 + a2
+	 * + ... + an in random order, return the sorted array of original elements
+	 * a1, a2, ..., an.
+	 * 
+	 * Example
+	 * 
+	 * shuffledArray([1, 12, 3, 6, 2]) = [1, 2, 3, 6]
+	 * 
+	 * 1 + 3 + 6 + 2 = 12, which means that 1, 3, 6 and 2 are original elements
+	 * of the array.
+	 * 
+	 * shuffledArray([1, -3, -5, 7, 2]) = [-5, -3, 2, 7]
+	 * 
+	 * [input] array.integer shuffled
+	 * 
+	 * Array of at least two integers. It is guaranteed that there is an index i
+	 * such that shuffled[i] = shuffled[0] + ... + shuffled[i - 1] + shuffled[i
+	 * + 1] + ... + shuffled[n]. [output] array.integer
+	 * 
+	 * A sorted array of shuffled.length - 1 elements.
+	 * 
+	 * @param shuffled
+	 * @return
+	 */
+	static int[] shuffledArray(int[] shuffled) {
+		int l = shuffled.length;
+		int[] r = new int[l - 1];
+		int[] s = new int[l];
+		Arrays.sort(shuffled);
+		int ns = 0;
+		int ni = -1;
+		for (int i = 0; i < s.length; i++) {
+			if (i > 0) {
+				s[i] +=  s[i - 1];
+			}
+			if (s[i] < 0) {
+				ns += s[i];
+				ni = i;
+			}
+			s[i] += shuffled[i];
+		}
+		
+		if (s[l - 1] == s[l -2] * 2) {
+			System.arraycopy(shuffled, 0, r, 0, l - 1);
+		} else {
+			int m = l / 2;
+			
+				for (int i = 0; i < l; i++) {
+					if (i < m + (l % 2 == 1 ? 0 : -1)) {
+						r[i] = shuffled[i];
+					} else if (i > m + (l % 2 == 1 ? 0 : -1)){
+						r[i - 1] = shuffled[i];
+					}
+				}
+			
+		}
+		
+		return r;
+	}
 }
