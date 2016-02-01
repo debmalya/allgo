@@ -262,6 +262,10 @@ public class CFBot {
 		int r = 0;
 		char prev = ' ';
 		boolean s = false;
+		
+		if (commands.trim().length() == 0) {
+			return 1;
+		}
 		commands = commands.toUpperCase();
 		for (int i = 0; i < commands.length(); i++) {
 			char c = commands.charAt(i);
