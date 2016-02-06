@@ -6,7 +6,8 @@ package com.deb.bots;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.regex.Pattern;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 /**
  * @author debmalyajash
@@ -262,7 +263,7 @@ public class CFBot {
 		int r = 0;
 		char prev = ' ';
 		boolean s = false;
-		
+
 		if (commands.trim().length() == 0) {
 			return 1;
 		}
@@ -328,7 +329,7 @@ public class CFBot {
 		int ni = -1;
 		for (int i = 0; i < s.length; i++) {
 			if (i > 0) {
-				s[i] +=  s[i - 1];
+				s[i] += s[i - 1];
 			}
 			if (s[i] < 0) {
 				ns += s[i];
@@ -336,22 +337,195 @@ public class CFBot {
 			}
 			s[i] += shuffled[i];
 		}
-		
-		if (s[l - 1] == s[l -2] * 2) {
+
+		if (s[l - 1] == s[l - 2] * 2) {
 			System.arraycopy(shuffled, 0, r, 0, l - 1);
 		} else {
 			int m = l / 2;
-			
-				for (int i = 0; i < l; i++) {
-					if (i < m + (l % 2 == 1 ? 0 : -1)) {
-						r[i] = shuffled[i];
-					} else if (i > m + (l % 2 == 1 ? 0 : -1)){
-						r[i - 1] = shuffled[i];
-					}
+
+			for (int i = 0; i < l; i++) {
+				if (i < m + (l % 2 == 1 ? 0 : -1)) {
+					r[i] = shuffled[i];
+				} else if (i > m + (l % 2 == 1 ? 0 : -1)) {
+					r[i - 1] = shuffled[i];
 				}
-			
+			}
+
 		}
-		
+
 		return r;
 	}
+
+	/**
+	 * In CodeFights marathons, each task score is calculated independently. For
+	 * a specific task, you get some amount of points if you solve it correctly,
+	 * or you get a 0. Here is how the exact number of points is calculated:
+	 * 
+	 * If you solve a task on your first attempt within the first minute, you
+	 * get maxScore points. Each additional minute you spend on the task adds a
+	 * penalty of (maxScore / 2) * (1 / marathonLength) to your final score.
+	 * Each unsuccessful attempt adds a penalty of 10 to your final score. After
+	 * all the penalties are deducted, if the score is less than maxScore / 2,
+	 * you still get maxScore / 2 points. Implement an algorithm that calculates
+	 * this score given some initial parameters.
+	 * 
+	 * Example
+	 * 
+	 * For marathonLength = 100, maxScore = 400, submissions = 4,
+	 * successfulSubmissionTime = 30 the output should be:
+	 * marathonTaskScore(100, 400, 4, 30) = 310
+	 * 
+	 * Three unsuccessful attempts cost 10 * 3 = 30 points. 30 minutes adds 30 *
+	 * (400 / 2) * (1 / 100) = 60 more points to the total penalty. So the final
+	 * score is 400 - 30 - 60 = 310.
+	 * 
+	 * Keeping the same input parameters as above but changing the number of
+	 * attempts to 95 we get: marathonTaskScore(100, 400, 95, 30) = 200
+	 * 
+	 * 400 - 10 * 94 - 30 * (400 / 2) * (1 / 100) = -600. But the score for this
+	 * task cannot be less than 400 / 2 = 200, so the final score is 200 points.
+	 * 
+	 * For marathonLength = 100, maxScore = 400, submissions = 4,
+	 * successfulSubmissionTime = -1 the output should be:
+	 * marathonTaskScore(100, 400, 95, -1) = 0
+	 * 
+	 * The task wasn't solved, so it doesn't give any points.
+	 * 
+	 * [input] integer marathonLength
+	 * 
+	 * A positive integer representing the length of the marathon in minutes.
+	 * [input] integer maxScore
+	 * 
+	 * A positive integer. It is guaranteed that maxScore is divisible by 2 *
+	 * marathonLength. [input] integer submissions
+	 * 
+	 * A positive integer equal to the number of submissions made by the user
+	 * for the specific task. [input] integer successfulSubmissionTime
+	 * 
+	 * An integer equal to the time of successful submission in minutes since
+	 * the beginning of the marathon (for example, if a successful submission
+	 * was made on the first minute then successfulSubmissionTime = 0). If all
+	 * submissions were unsuccessful then successfulSubmissionTime = -1.
+	 * successfulSubmissionTime < marathonLength
+	 * 
+	 * [output] integer
+	 * 
+	 * The final score for the task.
+	 * 
+	 * @param marathonLength
+	 * @param maxScore
+	 * @param submissions
+	 * @param successfulSubmissionTime
+	 * @return
+	 * 
+	 */
+	int marathonTaskScore(int marathonLength, int maxScore, int submissions,
+			int successfulSubmissionTime) {
+		if (successfulSubmissionTime == 1) {
+			return maxScore;
+		} else {
+			int p = (10 * (submissions - 1));
+			int q = (maxScore / 2) * (1 / marathonLength);
+			int t = maxScore - p - q;
+
+			if (t < (maxScore / 2)) {
+				return maxScore / 2;
+			}
+			return t;
+
+		}
+	}
+
+	/**
+	 * When you click the VS Fight button on CodeFights, the system tries to
+	 * match you with the best opponent possible. The matching algorithm has
+	 * become more complex over time,but initially it was a simple search for
+	 * someone whose XP is as close to yours as possible.
+	 * 
+	 * The easiest way to understand how it used to conduct the search is as
+	 * follows:
+	 * 
+	 * 
+	 * 
+	 * Imagine that each user looking for an opponent is standing at the center
+	 * of a search circle on a horizontal XP axis. All the search circles have
+	 * the same radius (the search radius), and initially search radius is equal
+	 * to 0. At each step, the search radius is increased by 1. A match is found
+	 * as soon as two search circles intersect. These circles are then removed
+	 * immediately. For the sake of simplicity, assume that on each step no more
+	 * than one pair of circles can intersect. Given a list of requests as user
+	 * XPs, match them up using the algorithm described above.
+	 * 
+	 * Example
+	 * 
+	 * opponentMatching([200, 100, 70, 130, 100, 800, 810]) = [[1, 4], [5, 6],
+	 * [2, 3]]
+	 * 
+	 * Initially, search ranges for users 1 and 4 (these are their IDs equal to
+	 * 0-based indices) coincide, so they form the first pair. After 5 steps
+	 * search circles of users 5 and 6 intersect. Thus, they form the second
+	 * pair. After 25 more steps search circles of users 2 and 3 intersect.
+	 * Thus, they form the third pair. Finally, user 0 remains without an
+	 * opponent. [input] array.integer XP
+	 * 
+	 * Array of positive integers.
+	 * 
+	 * XP[i] equals XP points earned by the user with ID = i.
+	 * 
+	 * XP[i] ≤ 109 [output] array.array.integer
+	 * 
+	 * Array of pairs of opponents. Pairs should be stored in the same order as
+	 * they were formed by the above-described algorithm. Elements in pairs
+	 * should be sorted according to their IDs.
+	 * 
+	 * @param XP
+	 * @return
+	 */
+	int[][] opponentMatching(int[] XP) {
+		int[][] r = new int[XP.length][XP.length];
+		SortedMap<Integer, List<Integer>> m = new TreeMap<>();
+
+		for (int i = 0; i < XP.length; i++) {
+			List<Integer> v = m.get(XP[i]);
+			if (v == null) {
+				v = new ArrayList<>();
+			}
+			v.add(i);
+			m.put(XP[i], v);
+		}
+		return r;
+	}
+
+	/**
+	 * 
+	 * @param source
+	 * @return
+	 */
+
+	int shortestSolutionLength(String[] source) {
+		int r = 0;
+		boolean ig = false;
+		for (String e : source) {
+
+			for (int i = 0; i < e.length(); i++) {
+				if (e.charAt(i) == '/' && i < e.length() && e.charAt(i) == '*') {
+					ig = true;
+					i++;
+				} else if (e.charAt(i) != ' ' && !ig) {
+					r++;
+				} else if (e.charAt(i) == '*' && i < e.length()
+						&& e.charAt(i) == '\\') {
+					ig = false;
+					i++;
+				} else if (e.charAt(i) == '/' && i < e.length()
+						&& e.charAt(i) == '/') {
+					continue;
+				}
+			}
+			
+		}
+		return r;
+	}
+	
+	
 }
