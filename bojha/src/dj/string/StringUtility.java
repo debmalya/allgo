@@ -1,6 +1,7 @@
 package dj.string;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -494,6 +495,29 @@ public class StringUtility {
 			r++;
 		}
 		return r;
+	}
+	
+	/**
+	 * 
+	 * @param Number
+	 * @return
+	 */
+	static String[] theTree(int Number) {
+	    String[] v = new String[Number];
+	    int b =  1 + (Number - 1) * 2;
+	    char[] c = new char[b];
+	    Arrays.fill(c, '*');
+	    int j = -1;
+	    for (int i = Number - 1; i > -1; i--) {
+	    	if (j > -1){
+	    		c[j] = ' ';
+	    		c[b - 1 - j] = ' ';
+	    	}
+	    	j++;
+	    	v[i] = String.valueOf(c);
+	    }
+	    
+	    return v;
 	}
 
 }

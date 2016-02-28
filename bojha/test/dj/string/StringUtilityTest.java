@@ -142,5 +142,12 @@ public class StringUtilityTest
 	  Assert.assertFalse(utility.isInt("DEB:A0000001:123"));
 	  
   }
+  
+  @Test
+  public void testTree() {
+	  String[] expecteds = new String[]{"    *    ","   ***   ","  *****  "," ******* ","*********"};
+	  String[] actuals = StringUtility.theTree(5);
+	  Assert.assertArrayEquals(expecteds, actuals);
+  }
 }
 
