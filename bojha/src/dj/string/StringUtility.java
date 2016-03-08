@@ -2,12 +2,15 @@ package dj.string;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -496,28 +499,103 @@ public class StringUtility {
 		}
 		return r;
 	}
-	
+
 	/**
 	 * 
 	 * @param Number
 	 * @return
 	 */
 	static String[] theTree(int Number) {
-	    String[] v = new String[Number];
-	    int b =  1 + (Number - 1) * 2;
-	    char[] c = new char[b];
-	    Arrays.fill(c, '*');
-	    int j = -1;
-	    for (int i = Number - 1; i > -1; i--) {
-	    	if (j > -1){
-	    		c[j] = ' ';
-	    		c[b - 1 - j] = ' ';
-	    	}
-	    	j++;
-	    	v[i] = String.valueOf(c);
-	    }
-	    
-	    return v;
+		String[] v = new String[Number];
+		int b = 1 + (Number - 1) * 2;
+		char[] c = new char[b];
+		Arrays.fill(c, '*');
+		int j = -1;
+		for (int i = Number - 1; i > -1; i--) {
+			if (j > -1) {
+				c[j] = ' ';
+				c[b - 1 - j] = ' ';
+			}
+			j++;
+			v[i] = String.valueOf(c);
+		}
+
+		return v;
+	}
+
+	/**
+	 * You're given a sentence, where each word has different length. Swap the
+	 * longest word with the shortest one, the 2nd shortest word with the 2nd
+	 * longest one, and so on.
+	 * 
+	 * Note that the resulting sentence should be correct, i.e. it should be
+	 * capitalized and all words but the first one should contain only lowercase
+	 * letters (except the word "I").
+	 * 
+	 * Examples:
+	 * 
+	 * replaceWords("I am the best") = "Best the am I"
+	 * replaceWords("I am better than him") = "Better than I am him" [input]
+	 * string sentence
+	 * 
+	 * A string of English letters and whitespace characters, 0 <
+	 * sentence.length < 200. [output] string
+	 * 
+	 * Correct sentence with words replaced as described above.
+	 * 
+	 * @param sentence
+	 * @return transformed sentence
+	 */
+	static String replaceWords(String sentence) {
+		String[] all = sentence.toLowerCase().split(" ");
+		List<String> stringList = Arrays.asList(all);
+		Collections.sort(stringList, new StringComparator());
+		StringBuilder fp = new StringBuilder();
+		Stack<String> lp = new Stack<String>();
+		for (int i = 0; i < stringList.size() / 2; i++) {
+			String value = stringList.get(stringList.size() - 1 - i);
+			if ("i".equals(value)) {
+				value = value.toUpperCase();
+			}
+			if (i == 0) {
+				value = value.substring(0, 1).toUpperCase()
+						+ value.substring(1);
+			}
+			fp.append(value);
+			fp.append(" ");
+			value = stringList.get(i);
+			if ("i".equals(value)){
+				value = value.toUpperCase();
+			}
+			lp.push(value);
+			
+		}
+		
+		while (!lp.isEmpty()) {
+			fp.append(lp.pop());
+			fp.append(" ");
+		}
+		return fp.toString().trim();
+
+	}
+
+	static class StringComparator implements Comparator<String> {
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
+		 */
+		@Override
+		public int compare(String o1, String o2) {
+			if (o1.length() > o2.length()) {
+				return 1;
+			} else if (o1.length() < o2.length()) {
+				return -1;
+			}
+			return 0;
+		}
+
 	}
 
 }
